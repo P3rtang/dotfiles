@@ -8,6 +8,8 @@ require("p3rtang.set")
 require("p3rtang.nvim-cmp")
 require("p3rtang.keybinds")
 require("p3rtang.telescope")
+require("p3rtang.luasnip")
+require("p3rtang.commands")
 
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>

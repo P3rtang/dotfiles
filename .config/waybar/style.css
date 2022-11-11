@@ -1,10 +1,25 @@
+@define-color background rgba(100, 114, 125, 1);
+@define-color blue rgba(139, 233, 253, 1);
+@define-color green rgba(80, 250, 123, 1);
+@define-color orange rgba(255, 184, 108, 1);
+@define-color magenta rgba(255, 121, 198, 1);
+@define-color bright-red rgba(255, 149, 128, 1);
+@define-color yellow rgba(241, 250, 140, 1);
+@define-color purple rgba(189, 147, 249, 1);
+
 * {
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: "DejaVu Sans Mono", "Font Awesome 6 Pro Solid";
     font-size: 18px;
-    border-radius: 18;
+    border-radius: 24;
     margin: 2px;
     margin-top: 2px;
+    padding: 0px;
+    border: 0px;
+}
+*:hover {
+    box-shadow: inherit;
+    text-shadow: inherit;
 }
 
 window#waybar {
@@ -59,9 +74,8 @@ window#waybar.chromium {
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
     background: transparent;
+    color: @magenta;
     border: transparent;
-    box-shadow: inherit;
-    text-shadow: inherit;
 }
 
 #workspaces button.focused {
@@ -120,6 +134,10 @@ window#waybar.chromium {
     padding-left: 10px;
     color: #8be9fd;
     background-color: #64727D;
+}
+#clock:hover {
+    color: @background;
+    background: @blue;
 }
 
 /* If workspaces is the rightmost module, omit right margin */
@@ -197,6 +215,11 @@ label:focus {
     color: #bd93f9;
     background-color: #64727D;
 }
+#network:hover {
+    color: @background;
+    background: @purple;
+}
+
 #network.speedup {
     margin-left: 0px;
     margin-right: 3px;
@@ -226,6 +249,10 @@ label:focus {
     padding-left: 10px;
     color: #50fa7b;
     background-color: #64727D;
+}
+#pulseaudio:hover {
+    color: @background;
+    background: @green;
 }
 
 #pulseaudio.muted {
@@ -327,6 +354,10 @@ label:focus {
     padding-left: 10px;
     color: #50fa7b;
     background-color: #64727D;
+}
+#custom-play-pause:hover {
+    color: @background;
+    background: @green;
 }
 
 #custom-audio {

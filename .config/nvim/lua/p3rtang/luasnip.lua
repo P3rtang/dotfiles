@@ -19,8 +19,8 @@ snippet_collection.clear_snippets "rust"
 ls.add_snippets('rust', {
     ls.s(
         "fn", 
-        fmt("fn {}({}{}) {} {{\n\t{}\n}}", 
-        { i(1, "name"), c(2, {t "", t "&self", t "&mut self"}), c(3, {t "", t "-> "}), i(4), i(0, "body") })
+        fmt("fn {}({}{}){}{} {{\n\t{}\n}}", 
+        { i(1, "name"), c(2, {t "", t "&self", t "&mut self"}), i(3), c(4, {t "", t " -> "}), i(5), i(0, "todo!()") })
     ),
 })
 

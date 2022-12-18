@@ -10,6 +10,7 @@ require("p3rtang.keybinds")
 require("p3rtang.telescope")
 require("p3rtang.luasnip")
 require("p3rtang.commands")
+require("p3rtang.rust")
 -- require("p3rtang.lsp")
 
 local on_attach = function(client, bufnr)

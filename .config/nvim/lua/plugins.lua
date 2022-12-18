@@ -4,11 +4,20 @@ return require('packer').startup(function(use)
     use 'dracula/vim'
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
-    use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
 
+    -- Configurations for Nvim LSP
+    use 'neovim/nvim-lspconfig'    
+
+    -- Mason
     use 'williamboman/mason.nvim'    
     use 'williamboman/mason-lspconfig.nvim'
-    
+
+    use 'simrat39/rust-tools.nvim'
+
+    -- Debugging
+    use 'nvim-lua/plenary.nvim'
+    use 'mfussenegger/nvim-dap'   
+
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
@@ -20,7 +29,7 @@ return require('packer').startup(function(use)
     
     use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
-    use "nvim-lua/plenary.nvim"
+
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
         requires = { {'nvim-lua/plenary.nvim'} }

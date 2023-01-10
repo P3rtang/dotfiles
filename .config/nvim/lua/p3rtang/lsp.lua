@@ -1,6 +1,7 @@
 local keymap = vim.keymap.set
 local saga = require('lspsaga')
 
+require("mason").setup()
 saga.init_lsp_saga()
 
 -- Lsp finder find the symbol definition implement reference

@@ -2,6 +2,7 @@ vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
 local cmp = require('cmp')
 local luasnip = require('luasnip')
+local clippy = require('cmp_clippy')
 
 local select_opts = {behavior = cmp.SelectBehavior.Select}
 
@@ -17,6 +18,13 @@ cmp.setup({
     {name = 'buffer', keyword_length = 2},
     {name = 'luasnip', keyword_length = 2},
     {name = 'nvim_lua', keyword_length = 2},
+    --{ name = 'cmp_clippy',
+    --  option = {
+    --    model = "EleutherAI/gpt-neo-2.7B", -- check code clippy vscode repo for options
+    --    key = "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", -- huggingface.co api key
+    --  },
+    --  keyword_length = 1
+    --}
   },
   window = {
     documentation = cmp.config.window.bordered()
@@ -29,6 +37,7 @@ cmp.setup({
         luasnip = '⋗',
         buffer = 'Ω',
         path = '🖫',
+        clippy = '>>',
       }
 
       item.menu = menu_icon[entry.source.name]

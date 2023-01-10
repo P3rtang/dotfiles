@@ -4,11 +4,20 @@ return require('packer').startup(function(use)
     use 'dracula/vim'
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
-    use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
 
+    -- Configurations for Nvim LSP
+    use 'neovim/nvim-lspconfig'    
+
+    -- Mason
     use 'williamboman/mason.nvim'    
     use 'williamboman/mason-lspconfig.nvim'
-    
+
+    use 'simrat39/rust-tools.nvim'
+
+    -- Debugging
+    use 'nvim-lua/plenary.nvim'
+    use 'mfussenegger/nvim-dap'   
+
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
@@ -20,7 +29,7 @@ return require('packer').startup(function(use)
     
     use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
-    use "nvim-lua/plenary.nvim"
+
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
         requires = { {'nvim-lua/plenary.nvim'} }
@@ -35,16 +44,8 @@ return require('packer').startup(function(use)
         "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
     }
-    use({
-    "glepnir/lspsaga.nvim",
-    branch = "main",
-    config = function()
-        local saga = require("lspsaga")
-
-        saga.init_lsp_saga({
-            -- your configuration
-        })
-    end,
-})
-    -- You add plugins here  
+    use "lambdalisue/suda.vim"
+    use 'vappolinario/cmp-clippy'
+    use { "catppuccin/nvim", as = "catppuccin" }
+    use { 'dracula/vim', as = 'dracula' }
 end)

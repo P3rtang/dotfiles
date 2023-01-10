@@ -10,6 +10,7 @@ require("p3rtang.keybinds")
 require("p3rtang.telescope")
 require("p3rtang.luasnip")
 require("p3rtang.commands")
+require("p3rtang.rust")
 -- require("p3rtang.lsp")
 
 local on_attach = function(client, bufnr)
@@ -45,12 +46,4 @@ require('lspconfig')['pyright'].setup{
 require('lspconfig')['tsserver'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
-}
-require('lspconfig')['rust_analyzer'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-    -- Server-specific settings...
-    settings = {
-      ["rust-analyzer"] = {}
-    }
 }

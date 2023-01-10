@@ -44,16 +44,8 @@ return require('packer').startup(function(use)
         "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
     }
-    use({
-    "glepnir/lspsaga.nvim",
-    branch = "main",
-    config = function()
-        local saga = require("lspsaga")
-
-        saga.init_lsp_saga({
-            -- your configuration
-        })
-    end,
-})
-    -- You add plugins here  
+    use "lambdalisue/suda.vim"
+    use 'vappolinario/cmp-clippy'
+    use { "catppuccin/nvim", as = "catppuccin" }
+    use { 'dracula/vim', as = 'dracula' }
 end)

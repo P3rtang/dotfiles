@@ -11,20 +11,13 @@
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: "DejaVu Sans Mono", "Font Awesome 6 Pro Solid";
     font-size: 18px;
-<<<<<<< Updated upstream
-    border-radius: 24;
     margin: 2px;
     margin-top: 2px;
-    padding: 0px;
-    border: 0px;
-}
-=======
     border-radius: 18;
     padding: 0px;
     border: 0px;
 }
 
->>>>>>> Stashed changes
 *:hover {
     box-shadow: inherit;
     text-shadow: inherit;
@@ -39,7 +32,6 @@ window#waybar {
     transition-duration: .5s;
 }
 window > box {
-    padding: 4px;
     margin: 4px;
     margin-bottom: 0px;
     background: rgba(40, 42, 54, 0.9);    
@@ -89,10 +81,7 @@ window#waybar.chromium {
 #workspaces button:hover {
     background: transparent;
     color: @magenta;
-<<<<<<< Updated upstream
     border: transparent;
-=======
->>>>>>> Stashed changes
 }
 
 #workspaces button.focused {

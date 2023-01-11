@@ -43,12 +43,12 @@ output * bg ~/Pictures/wallpapers/factorio.jpg fill
 #
 # Example configuration:
 #
-exec swayidle -w \
-          timeout 300 'swaylock -f -i $HOME/Pictures/wallpapers/factorio.jpg' \
-          timeout 300 'swaymsg "output * dpms off"' \
-          resume 'swaymsg "output * dpms on"' \
-          timeout 600 'systemctl suspend' \
-          before-sleep 'swaylock -f -i $HOME/Pictures/wallpapers/factorio.jpg' \
+# exec swayidle -w \
+#           timeout 300 'swaylock -f -i $HOME/Pictures/wallpapers/factorio.jpg' \
+#           timeout 300 'swaymsg "output * dpms off"' \
+#           resume 'swaymsg "output * dpms on"' \
+#           timeout 600 'systemctl suspend' \
+#           before-sleep 'swaylock -f -i $HOME/Pictures/wallpapers/factorio.jpg' \
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when

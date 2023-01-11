@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 /*
  * vim: ft=less
  */
-=======
->>>>>>> f82ed98 (style.css readded)
 @define-color background rgba(100, 114, 125, 1);
 @define-color blue rgba(139, 233, 253, 1);
 @define-color green rgba(80, 250, 123, 1);
@@ -17,7 +14,6 @@
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: "DejaVu Sans Mono", "Font Awesome 6 Pro Solid";
     font-size: 18px;
-<<<<<<< HEAD
     margin: 1px;
     margin-right: 0px;
     margin-left: 2px;
@@ -25,12 +21,6 @@
     padding: 0px;
     padding-top: 1px;
     margin-bottom: 1px;
-=======
-    margin: 2px;
-    margin-top: 2px;
-    border-radius: 18;
-    padding: 0px;
->>>>>>> f82ed98 (style.css readded)
     border: 0px;
 }
 
@@ -41,10 +31,7 @@
 
 window#waybar {
     margin: 0px;
-<<<<<<< HEAD
     padding: 0px;
-=======
->>>>>>> f82ed98 (style.css readded)
     background-color: rgba(40, 42, 54, 0);
     border: 4px solid rgba(100, 114, 125, 0);
     color: #ffffff;
@@ -52,13 +39,8 @@ window#waybar {
     transition-duration: .5s;
 }
 window > box {
-<<<<<<< HEAD
     padding: 0px;
     margin: 4px;
-    padding-bottom: 1px;
-=======
-    margin: 4px;
->>>>>>> f82ed98 (style.css readded)
     margin-bottom: 0px;
     background: rgba(40, 42, 54, 0.9);    
     color: white;
@@ -86,7 +68,6 @@ window#waybar.chromium {
     border: none;
 }
 
-<<<<<<< HEAD
 #workspaces button {
     margin: 0px;
     margin-top: 0px;
@@ -95,16 +76,6 @@ window#waybar.chromium {
     margin-right: 8px;
     padding-right: 4px;
     padding-left: 2px;
-=======
-#workspaces {
-    padding-left: 8px;
-}
-
-#workspaces button {
-    margin: 0px;
-    margin-top: 2px;
-    padding-right: 18px;
->>>>>>> f82ed98 (style.css readded)
     background-color: transparent;
     color: #8be9fd;
     /* Use box-shadow instead of border so the text isn't offset */
@@ -122,19 +93,11 @@ window#waybar.chromium {
 }
 
 #workspaces button.focused {
-<<<<<<< HEAD
     color: @magenta;
 }
 
 #workspaces button.urgent {
     color: @bright-red;
-=======
-    color: #ff79c6;
-}
-
-#workspaces button.urgent {
-    background-color: #eb4d4b;
->>>>>>> f82ed98 (style.css readded)
 }
 
 #mode {
@@ -143,15 +106,10 @@ window#waybar.chromium {
 }
 
 #window {
-<<<<<<< HEAD
     margin-bottom: 0px;
     padding: 0px;
     padding-right: 100px;
     font-size: 12px;
-=======
-    padding-right: 100px;
-    font-size: 13;
->>>>>>> f82ed98 (style.css readded)
     color: #b8b8b2;
 }
 
@@ -183,11 +141,7 @@ window#waybar.chromium {
 
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
-<<<<<<< HEAD
     margin-left: 4px;
-=======
-    margin-left: 6;
->>>>>>> f82ed98 (style.css readded)
 }
 #clock {
     padding-right: 10px;
@@ -200,14 +154,6 @@ window#waybar.chromium {
     background: @blue;
 }
 
-<<<<<<< HEAD
-=======
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #clock {
-    margin-right: 20;
-}
-
->>>>>>> f82ed98 (style.css readded)
 #battery {
     padding-right: 10px;
     padding-left: 10px;

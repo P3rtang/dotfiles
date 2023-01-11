@@ -37,7 +37,16 @@ git_branch() {
     # -- Current branch is identified by an asterisk at the beginning
     # -- If not in a Git repository, error message goes to /dev/null and
     #    no output is produced
+<<<<<<< HEAD
     git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+=======
+    if [[ $(pwd) = "/home/p3rtang/.config" ]]
+    then
+        gitbare branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+    else
+        git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+    fi
+>>>>>>> master
 }
 
 git_status() {
@@ -59,6 +68,21 @@ git_status() {
     echo $output
 }
 
+<<<<<<< HEAD
+=======
+gitbare_status() {
+    local status="$(gitbare status --porcelain 2>/dev/null)"
+    local output=''
+    [[ -n $(grep -E '^[MADRC]' <<<"$status") ]] && output="$output+"
+    [[ -n $(grep -E '^.[MD]' <<<"$status") ]] && output="$output!"
+    [[ -n $(grep -E '^\?\?' <<<"$status") ]] && output="$output?"
+    [[ -n $(gitbare stash list) ]] && output="${output}S"
+    [[ -n $(gitbare log --branches --not --remotes) ]] && output="${output}P"
+    [[ -n $output ]] && output="|$output"  # separate from branch name
+    echo $output
+}
+
+>>>>>>> master
 git_color() {
     # Receives output of git_status as argument; produces appropriate color
     # code based on status of working directory:
@@ -86,7 +110,16 @@ git_prompt() {
     local branch=$(git_branch)
     # Empty output? Then we're not in a Git repository, so bypass the rest
     # of the function, producing no output
+<<<<<<< HEAD
     if [[ -n $branch ]]; then
+=======
+    if [[ $(pwd) = "/home/p3rtang/.config" ]]; then
+        local state=$(gitbare_status)
+        local color=$(git_color $state)
+        # Now output the actual code to insert the branch and status
+        echo -e " \x01$color\x02[ $branch$state]\x01\033[00m\x02"  # last bit resets color
+    elif [[ -n $branch ]]; then
+>>>>>>> master
         local state=$(git_status)
         local color=$(git_color $state)
         # Now output the actual code to insert the branch and status
@@ -94,7 +127,11 @@ git_prompt() {
     fi
 }
 
+<<<<<<< HEAD
 export PS1="\[\033[38;5;117m\]\u\[\033[38;5;229m\]@\[\033[38;5;212m\]\h \[\033[38;5;229m\]\w\[\033[80;250;123m\]\$(git_prompt)\$ \[\033[0m\]"
+=======
+export PS1="\[\033[38;5;117m\]\u\[\033[38;5;229m\]@\[\033[38;5;212m\]\h \[\033[38;5;229m\]\w\[\033[80;250;123m\]\$(git_prompt)\[\033[0m\]\n ╰─\$ "
+>>>>>>> master
 
 export HISTCONTROL=ignoreboth
 export EDITOR=vim

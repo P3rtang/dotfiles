@@ -37,7 +37,12 @@ git_branch() {
     # -- Current branch is identified by an asterisk at the beginning
     # -- If not in a Git repository, error message goes to /dev/null and
     #    no output is produced
-    git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+    if [[ $(pwd) = "/home/p3rtang/.config" ]]
+    then
+        gitbare branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+    else
+        git branch --no-color 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+    fi
 }
 
 git_status() {
@@ -55,6 +60,18 @@ git_status() {
     [[ -n $(grep -E '^\?\?' <<<"$status") ]] && output="$output?"
     [[ -n $(git stash list) ]] && output="${output}S"
     [[ -n $(git log --branches --not --remotes) ]] && output="${output}P"
+    [[ -n $output ]] && output="|$output"  # separate from branch name
+    echo $output
+}
+
+gitbare_status() {
+    local status="$(gitbare status --porcelain 2>/dev/null)"
+    local output=''
+    [[ -n $(grep -E '^[MADRC]' <<<"$status") ]] && output="$output+"
+    [[ -n $(grep -E '^.[MD]' <<<"$status") ]] && output="$output!"
+    [[ -n $(grep -E '^\?\?' <<<"$status") ]] && output="$output?"
+    [[ -n $(gitbare stash list) ]] && output="${output}S"
+    [[ -n $(gitbare log --branches --not --remotes) ]] && output="${output}P"
     [[ -n $output ]] && output="|$output"  # separate from branch name
     echo $output
 }
@@ -86,7 +103,12 @@ git_prompt() {
     local branch=$(git_branch)
     # Empty output? Then we're not in a Git repository, so bypass the rest
     # of the function, producing no output
-    if [[ -n $branch ]]; then
+    if [[ $(pwd) = "/home/p3rtang/.config" ]]; then
+        local state=$(gitbare_status)
+        local color=$(git_color $state)
+        # Now output the actual code to insert the branch and status
+        echo -e " \x01$color\x02[ $branch$state]\x01\033[00m\x02"  # last bit resets color
+    elif [[ -n $branch ]]; then
         local state=$(git_status)
         local color=$(git_color $state)
         # Now output the actual code to insert the branch and status

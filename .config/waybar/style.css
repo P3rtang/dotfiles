@@ -11,11 +11,11 @@
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: "DejaVu Sans Mono", "Font Awesome 6 Pro Solid";
     font-size: 18px;
-    margin: 2px;
+    margin: 1px;
     border-radius: 18px;
     padding: 0px;
     padding-top: 1px;
-    padding-bottom: 1px;
+    margin-bottom: 1px;
     border: 0px;
 }
 
@@ -36,6 +36,7 @@ window#waybar {
 window > box {
     padding: 0px;
     margin: 4px;
+    padding-bottom: 1px;
     margin-bottom: 0px;
     background: rgba(40, 42, 54, 0.9);    
     color: white;
@@ -69,7 +70,8 @@ window#waybar.chromium {
 
 #workspaces button {
     margin: 0px;
-    margin-top: 1px;
+    margin-top: 0px;
+    margin-bottom: 2px;
     padding-right: 18px;
     background-color: transparent;
     color: #8be9fd;

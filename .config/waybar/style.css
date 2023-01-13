@@ -41,6 +41,7 @@ window#waybar {
 window > box {
     padding: 0px;
     margin: 4px;
+    padding-bottom: 1px;
     margin-bottom: 0px;
     background: rgba(40, 42, 54, 0.9);    
     color: white;
@@ -66,6 +67,10 @@ window#waybar.termite {
 window#waybar.chromium {
     background-color: #000000;
     border: none;
+}
+
+#workspaces {
+    padding-left: 10px;
 }
 
 #workspaces button {

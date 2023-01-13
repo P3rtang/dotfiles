@@ -12,6 +12,8 @@
     font-family: "DejaVu Sans Mono", "Font Awesome 6 Pro Solid";
     font-size: 18px;
     margin: 1px;
+    margin-right: 0px;
+    margin-left: 2px;
     border-radius: 18px;
     padding: 0px;
     padding-top: 1px;
@@ -151,11 +153,6 @@ window#waybar.chromium {
     background: @blue;
 }
 
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #clock {
-    margin-right: 20;
-}
-
 #battery {
     padding-right: 10px;
     padding-left: 10px;
@@ -254,6 +251,7 @@ label:focus {
 
 #pulseaudio {
     border: 0px;
+    margin-left: 0px;
     margin-right: 0px;
     padding-right: 10px;
     padding-left: 10px;

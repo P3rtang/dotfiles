@@ -1,3 +1,4 @@
+local vim = vim
 local map = vim.api.nvim_set_keymap
 map('n', '<Space>', '', {})
 
@@ -23,6 +24,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
   vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
@@ -39,11 +41,28 @@ local lsp_flags = {
   -- This is the default in Nvim 0.7+
   debounce_text_changes = 150,
 }
-require('lspconfig')['pyright'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
+
+require("mason").setup()
+require("mason-lspconfig").setup {
+    ensure_installed = { "sumneko_lua", "rust_analyzer", "cssls", "cssmodules_ls", "pyright" },
 }
-require('lspconfig')['tsserver'].setup{
+
+require("lspconfig").cssls.setup({
     on_attach = on_attach,
-    flags = lsp_flags,
+    settings = {
+    css = {
+      lint = {
+        unknownAtRules = 'ignore',
+      },
+    },
+  },
+})
+require("lspconfig").pyright.setup{
+    on_attach = on_attach
+}
+require("lspconfig").sumneko_lua.setup{
+    on_attach = on_attach
+}
+require("lspconfig").cssmodules_ls.setup{
+    on_attach = on_attach
 }

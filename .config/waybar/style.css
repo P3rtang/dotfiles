@@ -1,3 +1,6 @@
+/*
+ * vim: ft=less
+ */
 @define-color background rgba(100, 114, 125, 1);
 @define-color blue rgba(139, 233, 253, 1);
 @define-color green rgba(80, 250, 123, 1);
@@ -66,15 +69,14 @@ window#waybar.chromium {
     border: none;
 }
 
-#workspaces {
-    padding-left: 10px;
-}
-
 #workspaces button {
     margin: 0px;
     margin-top: 0px;
     margin-bottom: 2px;
-    padding-right: 20px;
+    margin-left: 8px;
+    margin-right: 8px;
+    padding-right: 4px;
+    padding-left: 2px;
     background-color: transparent;
     color: #8be9fd;
     /* Use box-shadow instead of border so the text isn't offset */
@@ -92,11 +94,11 @@ window#waybar.chromium {
 }
 
 #workspaces button.focused {
-    color: #ff79c6;
+    color: @magenta;
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    color: @bright-red;
 }
 
 #mode {
@@ -140,7 +142,7 @@ window#waybar.chromium {
 
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
-    margin-left: 6px;
+    margin-left: 4px;
 }
 #clock {
     padding-right: 10px;
@@ -259,8 +261,8 @@ label:focus {
     background-color: #64727D;
 }
 #pulseaudio:hover {
-    color: @background;
     background: @green;
+    color: @background;
 }
 
 #pulseaudio.muted {
@@ -379,4 +381,24 @@ label:focus {
     padding-left: 10px;
     color: #bd93f9;
     background-color: #64727D;
+}
+#idle_inhibitor {
+    color: @orange;
+    background: @background;
+}
+#idle_inhibitor.activated {
+    color: @green;
+    background: @background;
+}
+#idle_inhibitor > box:hover {
+    color: @background;
+    background: @purple;
+}
+#custom-notification {
+    margin-left: 2px;
+    margin-right: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: @purple;
+    background: @background;
 }

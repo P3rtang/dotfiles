@@ -69,10 +69,6 @@ window#waybar.chromium {
     border: none;
 }
 
-#workspaces {
-    padding-left: 10px;
-}
-
 #workspaces button {
     margin: 0px;
     margin-top: 0px;

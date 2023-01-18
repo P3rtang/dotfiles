@@ -28,16 +28,6 @@
   background: transparent;
 }
 
-.notification-row:hover .notification .notification-default-action,
-.notification-row:hover .notification .notification-action {
-    color: @blue;
-    border: 3px solid @blue;
-}
-
-.notification-row:hover .notification .notification-action {
-    border-top: 0px solid @blue;
-}
-
 .notification {
     transition: all 200ms ease;
     border-radius: 12px;
@@ -129,7 +119,7 @@
 
 /* add bottom border radius to eliminate clipping */
 .notification-action:first-child {
-  border-bottom-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 .notification-action:last-child {
@@ -266,6 +256,10 @@
     margin: 12px;
     color: @blue;
     background: @background;
+}
+
+.widget-mpris-player:hover {
+    border: 2px solid @blue;
 }
 
 .widget-mpris button {

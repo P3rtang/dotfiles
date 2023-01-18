@@ -28,14 +28,14 @@
   background: transparent;
 }
 
-.notification-row:focus .notification .notification-default-action {
-    color: @blue;
-    border: 2px solid @blue;
-}
-
-.notification-row:hover .notification .notification-default-action {
+.notification-row:hover .notification .notification-default-action,
+.notification-row:hover .notification .notification-action {
     color: @blue;
     border: 3px solid @blue;
+}
+
+.notification-row:hover .notification .notification-action {
+    border-top: 0px solid @blue;
 }
 
 .notification {
@@ -98,12 +98,13 @@
   padding: 4px;
   margin: 0;
   border: 2px solid @purple;
+  background: @background;
   color: white;
 }
 
 .notification-default-action:hover,
 .notification-action:hover {
-    border: 3px solid @blue;
+    border: 2px solid @blue;
     color: @blue;
     background: transparent;
     box-shadow: inherit;
@@ -133,7 +134,7 @@
 
 .notification-action:last-child {
   border-bottom-right-radius: 10px;
-  border-right: 1px solid @noti-border-color;
+  border-right: 2px solid @purple;
 }
 
 .image {

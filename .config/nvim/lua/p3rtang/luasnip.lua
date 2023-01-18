@@ -18,8 +18,8 @@ ls.snippets = {
 snippet_collection.clear_snippets "rust"
 ls.add_snippets('rust', {
     ls.s(
-        "fn", 
-        fmt("fn {}({}{}){}{} {{\n\t{}\n}}", 
+        "fn",
+        fmt("fn {}({}{}){}{} {{\n\t{}\n}}",
         { i(1, "name"), c(2, {t "", t "&self", t "&mut self"}), i(3), c(4, {t "", t " -> "}), i(5), i(0, "todo!()") })
     ),
 })
@@ -50,7 +50,7 @@ ls.config.set_config {
 
 -- <c-k> is my expansion key
 -- this will expand the current item or jump to the next item within the snippet.
-vim.keymap.set({ "i", "s" }, "<c-k>", function()
+vim.keymap.set({ "i", "s" }, "<>", function()
   if ls.expand_or_jumpable() then
     ls.expand_or_jump()
   end

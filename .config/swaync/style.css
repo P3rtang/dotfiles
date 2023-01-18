@@ -28,16 +28,6 @@
   background: transparent;
 }
 
-.notification-row:hover .notification .notification-default-action,
-.notification-row:hover .notification .notification-action {
-    color: @blue;
-    border: 3px solid @blue;
-}
-
-.notification-row:hover .notification .notification-action {
-    border-top: 0px solid @blue;
-}
-
 .notification {
     transition: all 200ms ease;
     border-radius: 12px;

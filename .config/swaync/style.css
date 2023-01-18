@@ -1,0 +1,291 @@
+/*
+ * vim: ft=less
+ */
+@define-color cc-bg rgba(40, 42, 54, 0.94);
+
+@define-color noti-border-color rgba(255, 255, 255, 0.15);
+@define-color noti-bg rgb(48, 48, 48);
+@define-color noti-bg-hover rgb(56, 56, 56);
+@define-color noti-bg-focus rgba(68, 68, 68, 0.6);
+@define-color noti-close-bg rgba(255, 255, 255, 0.1);
+@define-color noti-close-bg-hover rgba(255, 255, 255, 0.15);
+
+@define-color bg-selected rgb(0, 128, 255);
+
+@define-color background rgba(100, 114, 125, 1);
+@define-color background-disabled rgba(78, 82, 85, 1);
+@define-color blue rgba(139, 233, 253, 1);
+@define-color green rgba(80, 250, 123, 1);
+@define-color orange rgba(255, 184, 108, 1);
+@define-color magenta rgba(255, 121, 198, 1);
+@define-color bright-red rgba(255, 149, 128, 1);
+@define-color yellow rgba(241, 250, 140, 1);
+@define-color purple rgba(189, 147, 249, 1);
+
+
+.notification-row {
+  outline: none;
+  background: transparent;
+}
+
+.notification {
+    transition: all 200ms ease;
+    border-radius: 12px;
+    margin: 6px 12px;
+    padding: 0;
+    background: @background;
+}
+
+/* Uncomment to enable specific urgency colors
+.low {
+  background: yellow;
+  padding: 6px;
+  border-radius: 12px;
+}
+
+.normal {
+  background: green;
+  padding: 6px;
+  border-radius: 12px;
+}
+
+.critical {
+  background: red;
+  padding: 6px;
+  border-radius: 12px;
+}
+*/
+
+.notification-content {
+    background: transparent;
+    border-radius: 12px;
+}
+
+.close-button {
+  background: @background;
+  color: @blue;
+  text-shadow: none;
+  padding: 0;
+  border-radius: 100%;
+  margin-top: 10px;
+  margin-right: 16px;
+  box-shadow: none;
+  border: none;
+  min-width: 24px;
+  min-height: 24px;
+}
+
+.close-button:hover {
+  box-shadow: none;
+  background: @blue;
+  color: @background;
+  transition: all 0.15s ease-in-out;
+  border: none;
+}
+
+.notification-default-action,
+.notification-action {
+  padding: 4px;
+  margin: 0;
+  border: 2px solid @purple;
+  background: @background;
+  color: white;
+}
+
+.notification-default-action:hover,
+.notification-action:hover {
+    border: 2px solid @blue;
+    color: @blue;
+    background: transparent;
+    box-shadow: inherit;
+}
+
+.notification-default-action {
+    background: transparent;
+    border-radius: 12px;
+}
+
+/* When alternative actions are visible */
+.notification-default-action:not(:only-child) {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.notification-action {
+  border-radius: 0px;
+  border-top: none;
+  border-right: none;
+}
+
+/* add bottom border radius to eliminate clipping */
+.notification-action:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+.notification-action:last-child {
+  border-bottom-right-radius: 10px;
+  border-right: 2px solid @purple;
+}
+
+.image {
+}
+
+.body-image {
+  margin-top: 6px;
+  background-color: white;
+  border-radius: 12px;
+}
+
+.summary {
+  font-size: 16px;
+  font-weight: bold;
+  background: transparent;
+  color: white;
+  text-shadow: none;
+}
+
+.time {
+  font-size: 16px;
+  font-weight: bold;
+  background: transparent;
+  color: white;
+  text-shadow: none;
+  margin-right: 18px;
+}
+
+.body {
+  font-size: 15px;
+  font-weight: normal;
+  background: transparent;
+  color: white;
+  text-shadow: none;
+}
+
+/* The "Notifications" and "Do Not Disturb" text widget */
+.top-action-title {
+    color: @background;
+    text-shadow: none;
+}
+
+.control-center {
+    animation-name: slide;
+    animation-duration: 0.5s;
+    border: 2px solid @purple;
+    box-shadow: none;
+    border-radius: 16px;
+    background: @cc-bg;
+}
+
+.control-center-list {
+  background: transparent;
+}
+
+.floating-notifications {
+  background: transparent;
+}
+
+/* Window behind control center and on all other monitors */
+.blank-window {
+    margin: 4px;
+    background: alpha(black, 0.25);
+}
+
+/*** Widgets ***/
+
+/* Title widget */
+.widget-title {
+    color: @blue;
+    margin: 20px;
+    font-size: 1.5rem;
+}
+.widget-title > button {
+  font-size: initial;
+  font-weight: bold;
+  color: @blue;
+  text-shadow: none;
+  background: @background;
+  border: 0px solid @blue;
+  box-shadow: none;
+  border-radius: 12px;
+}
+.widget-title > button:hover {
+  background: @blue;
+  color: @background;
+}
+
+/* DND widget */
+.widget-dnd {
+    color: @purple;
+    margin: 20px;
+    font-size: 1.1rem;
+}
+.widget-dnd > switch {
+    border: none;
+    font-size: initial;
+    border-radius: 12px;
+    background: @purple;
+}
+.widget-dnd > switch:checked {
+    border: none;
+    background: @orange;
+}
+.widget-dnd > switch slider {
+    background: @background;
+    border-radius: 12px;
+}
+
+/* Label widget */
+.widget-label {
+  margin: 8px;
+}
+.widget-label > label {
+  font-size: 1.1rem;
+}
+
+/* Mpris widget */
+.widget-mpris {
+    margin: 8px;
+    color: @blue;
+    box-shadow: none;
+}
+
+.widget-mpris-player {
+    border: 2px solid @purple;
+    border-radius: 12px;
+    padding: 8px;
+    margin: 12px;
+    color: @blue;
+    background: @background;
+}
+
+.widget-mpris-player:hover {
+    border: 2px solid @blue;
+}
+
+.widget-mpris button {
+    outline: transparent;
+    border: transparent;
+    box-shadow: inherit;
+    text-shadow: inherit;
+    color: @blue;
+}
+
+.widget-mpris button:hover {
+    background: @blue;
+    color: @background;
+}
+
+.widget-mpris button:disabled {
+    color: @background-disabled;
+}
+
+.widget-mpris-title {
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: @blue;
+}
+
+.widget-mpris-subtitle {
+  font-size: 1.1rem;
+  color: @purple;
+}

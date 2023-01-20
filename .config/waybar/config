@@ -1,3 +1,6 @@
+//
+// vim: ft=json
+//
 {
     // "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
@@ -7,7 +10,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces"],
     "modules-center": ["sway/window"],
-    "modules-right": ["media", "network", "network#speedup", "network#speeddown", "pulseaudio", "custom/play-pause", "cpu", "temperature", "memory", "battery", "clock", "tray"],
+    "modules-right": ["network", "network#speedup", "network#speeddown", "pulseaudio", "custom/play-pause", "cpu", "temperature", "memory", "battery", "clock", "idle_inhibitor", "custom/notification", "tray"],
     // Modules configuration
     "sway/workspaces": {
         "disable-scroll": true,
@@ -191,6 +194,22 @@
         "on-click": "$HOME/.config/waybar/sway-idle-toggle.py -t",
         "exec": "$HOME/.config/waybar/sway-idle-toggle.py -c",
         "exec-on-event": true,
-     }
+     },
+     "custom/notification": {
+            "tooltip": false,
+            "format": "{icon} {}",
+            "format-icons": {
+                 "notification": "",
+                 "none": "",
+                 "dnd-notification": "",
+                 "dnd-none": ""
+            },
+            "return-type": "json",
+            "exec-if": "which swaync-client",
+            "exec": "swaync-client -swb",
+            "on-click": "swaync-client -t -sw",
+            "on-click-right": "swaync-client -d -sw",
+            "escape": true
+    },
 }
 

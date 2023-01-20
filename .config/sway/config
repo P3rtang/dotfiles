@@ -43,12 +43,12 @@ output * bg ~/Pictures/wallpapers/factorio.jpg fill
 #
 # Example configuration:
 #
-exec swayidle -w \
-          timeout 300 'swaylock -f -i $HOME/Pictures/wallpapers/factorio.jpg' \
-          timeout 300 'swaymsg "output * dpms off"' \
-          resume 'swaymsg "output * dpms on"' \
-          timeout 600 'systemctl suspend' \
-          before-sleep 'swaylock -f -i $HOME/Pictures/wallpapers/factorio.jpg' \
+# exec swayidle -w \
+#           timeout 300 'swaylock -f -i $HOME/Pictures/wallpapers/factorio.jpg' \
+#           timeout 300 'swaymsg "output * dpms off"' \
+#           resume 'swaymsg "output * dpms on"' \
+#           timeout 600 'systemctl suspend' \
+#           before-sleep 'swaylock -f -i $HOME/Pictures/wallpapers/factorio.jpg' \
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -206,6 +206,15 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioStop exec playerctl stop
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+
 for_window [class=".*"] border pixel 2
 default_border pixel 2
 default_floating_border pixel 1
@@ -218,7 +227,8 @@ smart_borders on
 # Read `man 5 sway-bar` for more information about this section.r {
 
 input "type:keyboard" {
-        xkb_layout "gb"
+    xkb_layout "gb"
+    xkb_options caps:ctrl_modifier
 }
 
 input "1739:24385:Synaptics_TM2438-005" {
@@ -229,6 +239,14 @@ input "1739:24385:Synaptics_TM2438-005" {
     accel_profile "adaptive" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
     pointer_accel 0.1 # set mouse sensitivity (between -1 and 1)
 }
+
+# notifications:
+#
+# Notification Daemon
+exec swaync
+
+# Toggle control center
+bindsym $mod+Shift+n exec swaync-client -t -sw
 
 #bar {
 #    mode hide

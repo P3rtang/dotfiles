@@ -5,12 +5,10 @@ return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
-    -- Configurations for Nvim LSP
-    use 'neovim/nvim-lspconfig'    
-
     -- Mason
-    use 'williamboman/mason.nvim'    
-    use 'williamboman/mason-lspconfig.nvim'
+    use "williamboman/mason.nvim"
+    use "williamboman/mason-lspconfig.nvim"
+    use "neovim/nvim-lspconfig"
 
     use 'simrat39/rust-tools.nvim'
 
@@ -29,6 +27,7 @@ return require('packer').startup(function(use)
     
     use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
+    use 'tpope/vim-fugitive'
 
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
@@ -40,10 +39,7 @@ return require('packer').startup(function(use)
     use 'vim-airline/vim-airline'
     use 'vim-airline/vim-airline-themes'
     
-    use {
-        "windwp/nvim-autopairs",
-        config = function() require("nvim-autopairs").setup {} end
-    }
+    use "jiangmiao/auto-pairs" 
     use "lambdalisue/suda.vim"
     use 'vappolinario/cmp-clippy'
     use { "catppuccin/nvim", as = "catppuccin" }

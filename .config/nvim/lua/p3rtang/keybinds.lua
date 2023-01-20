@@ -1,8 +1,13 @@
+local vim = vim
 -- Vim keybinds
 vim.keymap.set('n', '<C-s>',      vim.cmd.wa,      {})
 vim.keymap.set('n', '<C-n>',      ":tabnew<CR>",   {})
 vim.keymap.set('n', '<esc>',      ":noh<CR>",      {})
 vim.keymap.set('n', '<C-m>',      vim.cmd.Make,    {})
+
+-- navigation
+vim.keymap.set('n', 'gt', vim.cmd.tabnext, {})
+vim.keymap.set('n', 'gT', vim.cmd.tabprevious, {})
 
 -- Telescope keybinds
 local builtin = require('telescope.builtin')
@@ -21,7 +26,6 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- Code action
-vim.keymap.set({"n","v"}, "<leader>ca", vim.cmd.RustCodeAction, { silent = true })
 
 -- Align text
 vim.cmd [[

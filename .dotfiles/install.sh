@@ -1,9 +1,14 @@
+#!/bin/bash
+#
 $HOME=$(pwd)
+alias config='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+
 sudo pacman -S gdm sway swaybg waybar git lsd kitty rofi firefox unzip ttf-dejavu cifs-utils tmux\
     npm base-devel
 sudo systemctl enable gdm
 mkdir .dotfiles
 git init --bare $HOME/.dotfiles
+
 gitbare config --local status.showUntrackedFiles no
 gitbare clone https://github.com/p3rtang/dotfiles
 cd .dotfiles

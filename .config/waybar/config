@@ -98,7 +98,7 @@
     },
     "temperature": {
         // "thermal-zone": 2,
-        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+        "hwmon-path": "/sys/class/hwmon/hwmon5/temp1_input",
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
@@ -140,12 +140,12 @@
     "network#speedup": {
         // "interface": "nm-bridge",
         "interval": 1,
-        "format-ethernet": "{bandwidthUpBits:>} ",
+        "format-ethernet": "{bandwidthUpBits:>} "
     },
     "network#speeddown": {
         // "interface": "nm-bridge",
         "interval": 1,
-        "format-ethernet": "{bandwidthDownBits:>} ",
+        "format-ethernet": "{bandwidthDownBits:>} "
     },
     "pulseaudio": {
         // "scroll-step": 5, // %, can be a float
@@ -179,7 +179,7 @@
         // "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
         "exec": "playerctl -a metadata --format '{\"text\": \"{{playerName}}: {{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
-        "on-click": "playerctl play-pause",
+        "on-click": "playerctl play-pause"
     },
     "custom/play-pause": {
         "interval": 1,
@@ -193,7 +193,7 @@
         "format": "{}",
         "on-click": "$HOME/.config/waybar/sway-idle-toggle.py -t",
         "exec": "$HOME/.config/waybar/sway-idle-toggle.py -c",
-        "exec-on-event": true,
+        "exec-on-event": true
      },
      "custom/notification": {
             "tooltip": false,
@@ -210,6 +210,6 @@
             "on-click": "swaync-client -t -sw",
             "on-click-right": "swaync-client -d -sw",
             "escape": true
-    },
+    }
 }
 

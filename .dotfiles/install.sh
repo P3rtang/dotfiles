@@ -25,24 +25,27 @@ sudo systemctl enable gdm3
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-mkdir -p $HOME/.dotfiles
-cd $HOME/.dotfiles
+mkdir -p .aur
+cd .aur
+git clone https://aur.archlinux.org/swaync.git
+cd swaync
+makepkg -si
+git clone https://aur.archlinux.org/fastfetch.git
+cd fastfetch
+makepkg -si
+
+mkdir -p .dotfiles
+cd .dotfiles
 git init --bare
 git remote add origin https://github.com/p3rtang/dotfiles
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch origin
-/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout -f desktop
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout -f master
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
-
-echo "setting up nvim"
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-
 cd
-mkdir -p ~/.local/share/fonts
+mkdir -p .local/share/fonts
 wget https://dtinth.github.io/comic-mono-font/ComicMono.ttf -P .local/share/fonts
-
-wget -O ~/.local/share/fonts https://use.fontawesome.com/releases/v6.3.0/fontawesome-free-6.3.0-desktop.zip
-unzip fontawesome-free-6.3.0-desktop.zip
-
+cd .local/share/fonts
+unzip fontawesome-free-5.15.4-desktop.zip
+cd ~
 mkdir -p Pictures/wallpapers
 wget -O ~/Pictures/wallpapers/factorio.jpg https://wallpapercave.com/wp/wp4616344.jpg
-wget -O ~/Pictures/wallpapers/nausicaa.jpg http://www.wallpapersin4k.org/wp-content/uploads/2017/04/Nausicaa-Wallpaper-10.jpg

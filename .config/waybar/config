@@ -10,7 +10,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces"],
     "modules-center": ["sway/window"],
-    "modules-right": ["network", "network#speedup", "network#speeddown", "pulseaudio", "custom/play-pause", "cpu", "temperature", "memory", "battery", "clock", "idle_inhibitor", "custom/notification", "tray"],
+    "modules-right": ["network", "network#speedup", "network#speeddown", "pulseaudio", "custom/play-pause", "cpu", "temperature", "memory", "battery", "idle_inhibitor", "custom/notification", "clock", "tray"],
     // Modules configuration
     "sway/workspaces": {
         "disable-scroll": true,

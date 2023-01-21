@@ -11,6 +11,13 @@ message () {
 
 set -e
 
+#
+$HOME=$(pwd)
+
+sudo pacman -S --needed gdm sway swaybg waybar git lsd kitty rofi firefox unzip ttf-dejavu cifs-utils tmux\
+    npm base-devel pavucontrol
+sudo systemctl enable gdm
+
 message "INSTALL" "dependencies"
 declare -A osInfo;
 osInfo[/etc/debian_version]=debian
@@ -38,7 +45,9 @@ do
         GDM_VERSION=
     fi
 done
-echo $INSTALL
+
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 sudo $INSTALL
 
@@ -136,5 +145,20 @@ unzip -qq -o ~/.local/share/fonts/fontawesome-free-6.3.0-desktop.zip -d $HOME/.l
 
 message "INSTALLING" "wallpapers"
 mkdir -p Pictures/wallpapers
+<<<<<<< HEAD
 curl https://wallpapercave.com/wp/wp4616344.jpg --create-dirs -o ~/Pictures/wallpapers/factorio.jpg
 curl https://i.imgur.com/Jj0zk7c.jpeg --create-dirs -o ~/Pictures/wallpapers/nausicaa.jpg
+=======
+wget -O ~/Pictures/wallpapers/factorio.jpg https://wallpapercave.com/wp/wp4616344.jpg
+wget -O ~/Pictures/wallpapers/nausicaa.jpg http://www.wallpapersin4k.org/wp-content/uploads/2017/04/Nausicaa-Wallpaper-10.jpg
+=======
+cd
+mkdir -p .local/share/fonts
+wget https://dtinth.github.io/comic-mono-font/ComicMono.ttf -P .local/share/fonts
+cd .local/share/fonts
+unzip fontawesome-free-5.15.4-desktop.zip
+cd ~
+mkdir -p Pictures/wallpapers
+wget -O ~/Pictures/wallpapers/factorio.jpg https://wallpapercave.com/wp/wp4616344.jpg
+>>>>>>> eb0854c (updated install script)
+>>>>>>> 8912b12 (updated install script)

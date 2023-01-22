@@ -8,6 +8,8 @@ vim.keymap.set('n', '<C-m>',      vim.cmd.Make,    {})
 -- navigation
 vim.keymap.set('n', 'gt', vim.cmd.tabnext, {})
 vim.keymap.set('n', 'gT', vim.cmd.tabprevious, {})
+vim.keymap.set('n', 'gb', vim.cmd.bn, {})
+vim.keymap.set('n', 'gB', vim.cmd.bp, {})
 
 -- Telescope keybinds
 local builtin = require('telescope.builtin')

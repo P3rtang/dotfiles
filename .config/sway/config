@@ -23,7 +23,7 @@ set $menu rofi -show drun
 exec waybar &
 exec dlauncher & 
 exec thunderbird &
-exec /home/p3rtang/IdeaProjects/swaymenu/target/debug/swaymenu
+exec /home/p3rtang/Projects/swaymenu/target/debug/swaymenu
 
 assign [class="thunderbird"] 5
 
@@ -92,7 +92,7 @@ exec swayidle -w \
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec ~/IdeaProjects/swaymenu/target/debug/swaymenu
+    bindsym $mod+Shift+e exec ~/Projects/swaymenu/target/debug/swaymenu
 #
 # Moving around:
 #

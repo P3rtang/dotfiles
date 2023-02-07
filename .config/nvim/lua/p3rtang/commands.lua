@@ -1,5 +1,3 @@
-vim.cmd[[command! Makerust ! cargo build]]
-
 local M = {}
 
 function M._echo_multiline(msg)

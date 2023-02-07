@@ -14,7 +14,7 @@ return require('packer').startup(function(use)
 
     -- Debugging
     use 'nvim-lua/plenary.nvim'
-    use 'mfussenegger/nvim-dap'   
+    use 'mfussenegger/nvim-dap'
 
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
@@ -24,10 +24,11 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-nvim-lua'
 
     use 'junegunn/vim-easy-align'
-    
+
     use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
     use 'tpope/vim-fugitive'
+    use 'tpope/vim-commentary'
 
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
@@ -35,11 +36,13 @@ return require('packer').startup(function(use)
     }
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     use { "nvim-telescope/telescope-file-browser.nvim" }
-    
+
+    use 'stevearc/dressing.nvim'
+
     use 'vim-airline/vim-airline'
     use 'vim-airline/vim-airline-themes'
-    
-    use "jiangmiao/auto-pairs" 
+
+    use "jiangmiao/auto-pairs"
     use "lambdalisue/suda.vim"
     use 'vappolinario/cmp-clippy'
     use { "catppuccin/nvim", as = "catppuccin" }

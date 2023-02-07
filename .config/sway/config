@@ -23,7 +23,7 @@ set $menu rofi -show drun
 exec waybar &
 exec dlauncher & 
 exec thunderbird &
-exec /home/p3rtang/IdeaProjects/swaymenu/target/debug/swaymenu
+exec /home/p3rtang/Projects/swaymenu/target/debug/swaymenu
 
 assign [class="thunderbird"] 5
 

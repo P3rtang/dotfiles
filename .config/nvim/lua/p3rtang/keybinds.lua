@@ -1,9 +1,9 @@
 local vim = vim
 -- Vim keybinds
-vim.keymap.set('n', '<C-s>',      vim.cmd.wa,      {})
-vim.keymap.set('n', '<C-n>',      ":tabnew<CR>",   {})
-vim.keymap.set('n', '<esc>',      ":noh<CR>",      {})
-vim.keymap.set('n', '<C-m>',      vim.cmd.Make,    {})
+vim.keymap.set('n', '<C-s>',      vim.cmd.wa,            {})
+vim.keymap.set('n', '<esc>',      ":noh<CR>",            {})
+vim.keymap.set('n', '<C-m>',      vim.cmd.make,          {})
+vim.keymap.set('n', '<C-n>',      "<cmd>make tests<CR>", {})
 
 -- navigation
 vim.keymap.set('n', 'gt', vim.cmd.tabnext, {})

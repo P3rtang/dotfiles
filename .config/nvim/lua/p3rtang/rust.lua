@@ -2,6 +2,14 @@ local vim = vim
 local rt = require("rust-tools")
 
 rt.setup({
+    tools = {
+		runnables = {
+			use_telescope = true,
+		},
+		autosethints = false,
+		inlay_hints = { show_parameter_hints = false },
+		hover_actions = { auto_focus = true }
+	},
   server = {
     on_attach = function(_, bufnr)
       -- Hover actions
@@ -11,6 +19,7 @@ rt.setup({
 
       -- Enable completion triggered by <c-x><c-o>
       vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+      rt.inlay_hints.disable()
 
       -- Mappings.
       -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -28,7 +37,9 @@ rt.setup({
       vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
       vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
       vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
-      vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+      vim.keymap.set('n', '<leader>ca', rt.code_action_group.code_action_group, bufopts)
+      vim.keymap.set('n', '<leader>ha', rt.hover_actions.hover_actions, bufopts)
+      vim.keymap.set('n', '<C-n>', rt.runnables.runnables, bufopts)
     end,
   },
 })

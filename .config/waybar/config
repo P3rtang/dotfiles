@@ -193,7 +193,7 @@
         "format": "{}",
         "on-click": "$HOME/.config/waybar/sway-idle-toggle.py -t",
         "exec": "$HOME/.config/waybar/sway-idle-toggle.py -c",
-        "exec-on-event": true
+        "exec-on-event": true,
      },
      "custom/notification": {
             "tooltip": false,

@@ -3,7 +3,7 @@
 $HOME=$(pwd)
 
 sudo pacman -S --needed gdm sway swaybg waybar git lsd kitty rofi firefox unzip ttf-dejavu cifs-utils tmux\
-    npm base-devel pavucontrol
+    npm base-devel pavucontrol ripgrep
 sudo systemctl enable gdm
 
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\

@@ -1,7 +1,5 @@
 #!/bin/bash
 #
-$HOME=$(pwd)
-
 sudo pacman -S --needed gdm sway swaybg waybar git lsd kitty rofi firefox unzip ttf-dejavu cifs-utils tmux\
     npm base-devel pavucontrol
 sudo systemctl enable gdm
@@ -25,7 +23,11 @@ git remote add origin https://github.com/p3rtang/dotfiles
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch origin
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout -f master
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
-cd
+
+wget -O $HOME/.local/bin/swaymenu https://github.com/P3rtang/swaymenu/releases/download/alpha/swaymenu
+chmod +x $HOME/.local/bin/swaymenu
+
+cd $HOME
 mkdir -p .local/share/fonts
 wget https://dtinth.github.io/comic-mono-font/ComicMono.ttf -P .local/share/fonts
 cd .local/share/fonts

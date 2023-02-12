@@ -9,8 +9,8 @@ sudo systemctl enable gdm
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-mkdir -p .aur
-cd .aur
+mkdir -p .packages
+cd .packages
 git clone https://aur.archlinux.org/swaync.git
 cd swaync
 makepkg -si
@@ -26,8 +26,13 @@ git remote add origin https://github.com/p3rtang/dotfiles
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout -f master
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
 
-wget -O $HOME/.local/bin/swaymenu https://github.com/P3rtang/swaymenu/releases/download/alpha/swaymenu
-chmod +x $HOME/.local/bin/swaymenu
+cd $HOME/.packages
+git clone https://github.com/p3rtang/swaymenu
+cd swaymenu
+make install
+
+echo "setting up nvim"
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 cd $HOME
 mkdir -p .local/share/fonts

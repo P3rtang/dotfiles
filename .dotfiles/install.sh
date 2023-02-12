@@ -23,6 +23,11 @@ cd fastfetch
 makepkg -si
 
 cd $HOME/.packages
+git clone https://aur.archlinux.org/wlr-randr.git
+cd wlr-randr
+makepkg -si
+
+cd $HOME/.packages
 git clone https://github.com/p3rtang/swaymenu
 cd swaymenu
 make install

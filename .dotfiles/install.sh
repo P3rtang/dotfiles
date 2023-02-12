@@ -4,7 +4,7 @@ $HOME=$(pwd)
 
 sudo pacman -Syu
 sudo pacman -S --needed --noconfirm gdm sway swaybg waybar git lsd kitty rofi firefox unzip ttf-dejavu cifs-utils tmux\
-    npm base-devel pavucontrol
+    npm base-devel pavucontrol ranger
 sudo systemctl enable gdm
 
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
@@ -49,8 +49,8 @@ mkdir -p .local/share/fonts
 wget https://dtinth.github.io/comic-mono-font/ComicMono.ttf -P .local/share/fonts
 
 cd $HOME/.local/share/fonts
-wget https://use.fontawesome.com/releases/v5.15.4/fontawesome-free-5.15.4-desktop.zip
-unzip fontawesome-free-5.15.4-desktop.zip
+wget https://use.fontawesome.com/releases/v6.3.0/fontawesome-free-6.3.0-desktop.zip
+unzip fontawesome-free-6.3.0-desktop.zip
 
 cd $HOME
 mkdir -p Pictures/wallpapers

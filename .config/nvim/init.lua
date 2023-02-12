@@ -44,7 +44,7 @@ local lsp_flags = {
 
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "sumneko_lua", "rust_analyzer", "cssls", "cssmodules_ls", "pyright" },
+    ensure_installed = { "lua_ls", "rust_analyzer", "cssls", "cssmodules_ls", "pyright" },
 }
 
 require("lspconfig").cssls.setup({
@@ -60,7 +60,7 @@ require("lspconfig").cssls.setup({
 require("lspconfig").pyright.setup{
     on_attach = on_attach
 }
-require("lspconfig").sumneko_lua.setup{
+require("lspconfig").lua_ls.setup{
     on_attach = on_attach
 }
 require("lspconfig").cssmodules_ls.setup{

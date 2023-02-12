@@ -21,13 +21,13 @@ set $term foot
 set $menu rofi -show drun
 
 exec waybar &
-exec dlauncher & 
+exec nm-applet --indicator &
 exec thunderbird &
-exec /home/p3rtang/IdeaProjects/swaymenu/target/debug/swaymenu
+exec swaymenu &
 
 assign [class="thunderbird"] 5
 
-output * bg ~/Pictures/wallpapers/factorio.jpg fill
+output * bg ~/Pictures/wallpapers/nausicaa.jpg fill
 
 ### Output configuration
 #
@@ -92,7 +92,7 @@ exec swayidle -w \
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec ~/IdeaProjects/swaymenu/target/debug/swaymenu
+    bindsym $mod+Shift+e exec swaymenu
 #
 # Moving around:
 #

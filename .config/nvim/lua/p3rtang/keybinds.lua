@@ -1,9 +1,9 @@
 local vim = vim
 -- Vim keybinds
-vim.keymap.set('n', '<C-s>',      vim.cmd.wa,      {})
-vim.keymap.set('n', '<C-n>',      ":tabnew<CR>",   {})
-vim.keymap.set('n', '<esc>',      ":noh<CR>",      {})
-vim.keymap.set('n', '<C-m>',      vim.cmd.Make,    {})
+vim.keymap.set('n', '<C-s>',      vim.cmd.wa,            {})
+vim.keymap.set('n', '<esc>',      ":noh<CR>",            {})
+vim.keymap.set('n', '<C-m>',      vim.cmd.make,          {})
+vim.keymap.set('n', '<C-n>',      "<cmd>make tests<CR>", {})
 
 -- navigation
 vim.keymap.set('n', 'gt', vim.cmd.tabnext, {})
@@ -15,6 +15,7 @@ vim.keymap.set('n', 'gB', vim.cmd.bp, {})
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fr', builtin.lsp_references, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>ft', require "telescope".extensions.file_browser.file_browser, {})

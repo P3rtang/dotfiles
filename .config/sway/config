@@ -24,6 +24,7 @@ exec waybar &
 exec nm-applet --indicator &
 exec thunderbird &
 exec swaymenu &
+exec protonmail-bridge &
 
 assign [class="thunderbird"] 5
 

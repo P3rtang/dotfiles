@@ -22,6 +22,8 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-cmdline'
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lua'
+    use 'hrsh7th/vim-vsnip'
+    use 'hrsh7th/vim-vsnip-integ'
 
     use 'junegunn/vim-easy-align'
 
@@ -29,6 +31,8 @@ return require('packer').startup(function(use)
     use 'saadparwaiz1/cmp_luasnip'
     use 'tpope/vim-fugitive'
     use 'tpope/vim-commentary'
+
+    use 'alvan/vim-closetag'
 
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',

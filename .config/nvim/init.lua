@@ -41,10 +41,9 @@ local lsp_flags = {
   -- This is the default in Nvim 0.7+
   debounce_text_changes = 150,
 }
-
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "sumneko_lua", "rust_analyzer", "cssls", "cssmodules_ls", "pyright" },
+    ensure_installed = { "lua_ls", "rust_analyzer", "cssls", "cssmodules_ls", "pyright", "gopls" },
 }
 
 require("lspconfig").cssls.setup({
@@ -57,12 +56,24 @@ require("lspconfig").cssls.setup({
     },
   },
 })
+
+require("lspconfig").gopls.setup{
+    on_attach = on_attach
+}
+
+require("lspconfig").html.setup{
+    on_attach = on_attach
+}
+
 require("lspconfig").pyright.setup{
     on_attach = on_attach
 }
-require("lspconfig").sumneko_lua.setup{
+require("lspconfig").lua_ls.setup{
     on_attach = on_attach
 }
 require("lspconfig").cssmodules_ls.setup{
+    on_attach = on_attach
+}
+require("lspconfig").tsserver.setup{
     on_attach = on_attach
 }

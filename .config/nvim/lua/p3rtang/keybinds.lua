@@ -2,7 +2,7 @@ local vim = vim
 -- Vim keybinds
 vim.keymap.set('n', '<C-s>',      vim.cmd.wa,            {})
 vim.keymap.set('n', '<esc>',      ":noh<CR>",            {})
-vim.keymap.set('n', '<C-m>',      vim.cmd.make,          {})
+-- vim.keymap.set('n', '<C-m>',      vim.cmd.make,          {})
 vim.keymap.set('n', '<C-n>',      "<cmd>make tests<CR>", {})
 
 -- navigation

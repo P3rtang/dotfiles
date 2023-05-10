@@ -23,8 +23,10 @@ set $menu rofi -show drun
 exec waybar &
 exec nm-applet --indicator &
 exec thunderbird &
-exec swaymenu &
+exec lxqt-policykit-agent &
+# exec swaymenu &
 exec protonmail-bridge &
+exec ~/Projects/NotificationHandler/main.py &
 
 assign [class="thunderbird"] 5
 
@@ -46,9 +48,7 @@ output * bg ~/Pictures/wallpapers/nausicaa.jpg fill
 #
 exec swayidle -w \
           timeout 300 'swaylock -f -i $HOME/Pictures/wallpapers/factorio.jpg' \
-          timeout 300 'swaymsg "output * dpms off"' \
           resume 'swaymsg "output * dpms on"' \
-          timeout 600 'systemctl suspend' \
           before-sleep 'swaylock -f -i $HOME/Pictures/wallpapers/factorio.jpg' \
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -81,6 +81,7 @@ exec swayidle -w \
 
     # Start your launcher
     bindsym $mod+d exec $menu
+    bindsym $mod+b exec rofi-bluetooth
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -93,7 +94,7 @@ exec swayidle -w \
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaymenu
+    bindsym $mod+Shift+e exec rofi -show power-menu -modi power-menu:"rofi-power-menu --no-symbols --choices suspend/lockscreen/logout/reboot/shutdown"
 #
 # Moving around:
 #
@@ -151,7 +152,7 @@ exec swayidle -w \
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+b splith
+    bindsym $mod+n splith
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles

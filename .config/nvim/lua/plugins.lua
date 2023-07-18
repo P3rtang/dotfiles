@@ -11,6 +11,7 @@ return require('packer').startup(function(use)
     use "neovim/nvim-lspconfig"
 
     use 'simrat39/rust-tools.nvim'
+    use 'ray-x/go.nvim'
 
     -- Debugging
     use 'nvim-lua/plenary.nvim'
@@ -24,6 +25,8 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-nvim-lua'
     use 'hrsh7th/vim-vsnip'
     use 'hrsh7th/vim-vsnip-integ'
+
+    use 'nvim-treesitter/nvim-treesitter'
 
     use 'junegunn/vim-easy-align'
 
@@ -50,6 +53,9 @@ return require('packer').startup(function(use)
     use "jiangmiao/auto-pairs"
     use "lambdalisue/suda.vim"
     use 'vappolinario/cmp-clippy'
+
+    use "kevinhwang91/nvim-bqf"
+
     use { "catppuccin/nvim", as = "catppuccin" }
     use { 'dracula/vim', as = 'dracula' }
 end)

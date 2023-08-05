@@ -62,7 +62,7 @@ local lsp_flags = {
 }
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "lua_ls", "rust_analyzer", "cssls", "cssmodules_ls", "pyright", "gopls" },
+    ensure_installed = { "rust_analyzer", "cssls", "cssmodules_ls", "pyright", "gopls" },
 }
 
 lspconfig.cssls.setup({

@@ -26,6 +26,7 @@ exec thunderbird &
 exec lxqt-policykit-agent &
 # exec swaymenu &
 exec protonmail-bridge &
+exec --no-startup-id gnome-keyring-daemon --start --components=pkcs11,secrets,ssh
 exec ~/Projects/NotificationHandler/main.py &
 
 assign [class="thunderbird"] 5

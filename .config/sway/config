@@ -18,11 +18,15 @@ set $term foot
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu rofi -show drun
+set $menu rofi -show drun -theme .config/rofi/launchers/type-1/style-14.rasi
 
+exec "echo $PATH >> ~/path.txt"
+
+exec distrobox-enter Arch &
 exec waybar &
 exec nm-applet --indicator &
-exec thunderbird &
+exec ~/.local/bin/thunderbird &
+exec ~/.appimages/Nextcloud.AppImage &
 exec lxqt-policykit-agent &
 # exec swaymenu &
 exec protonmail-bridge &
@@ -95,7 +99,7 @@ exec swayidle -w \
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec rofi -show power-menu -modi power-menu:"rofi-power-menu --no-symbols --choices suspend/lockscreen/logout/reboot/shutdown"
+    bindsym $mod+Shift+e exec rofi -show power-menu -modi power-menu:"rofi-power-menu --no-symbols --choices suspend/lockscreen/logout/reboot/shutdown" -theme .config/rofi/launchers/type-1/style-14.rasi
 #
 # Moving around:
 #
@@ -234,6 +238,7 @@ smart_borders on
 input "type:keyboard" {
     xkb_layout "gb"
     xkb_options caps:ctrl_modifier
+    xkb_numlock enabled
 }
 
 input "1739:24385:Synaptics_TM2438-005" {

@@ -20,18 +20,15 @@ set $term foot
 # on the original workspace that the command was run on.
 set $menu rofi -show drun -theme .config/rofi/launchers/type-1/style-14.rasi
 
-exec "echo $PATH >> ~/path.txt"
-
-exec distrobox-enter Arch &
+exec distrobox-enter arch &
 exec waybar &
 exec nm-applet --indicator &
-exec ~/.local/bin/thunderbird &
+exec distrobox-enter -T arch -- thunderbird
 exec ~/.appimages/Nextcloud.AppImage &
 exec lxqt-policykit-agent &
 # exec swaymenu &
 exec protonmail-bridge &
 exec --no-startup-id gnome-keyring-daemon --start --components=pkcs11,secrets,ssh
-exec ~/Projects/NotificationHandler/main.py &
 
 assign [class="thunderbird"] 5
 

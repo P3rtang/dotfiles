@@ -1,15 +1,21 @@
-local vim = vim
 -- Vim keybinds
 vim.keymap.set('n', '<C-s>',      vim.cmd.wa,            {})
 vim.keymap.set('n', '<esc>',      ":noh<CR>",            {})
 -- vim.keymap.set('n', '<C-m>',      vim.cmd.make,          {})
 vim.keymap.set('n', '<C-n>',      "<cmd>make tests<CR>", {})
 
+-- copy to clipboard
+vim.keymap.set('v', '<leader>y', '"+y', {noremap = true, remap = false})
+
 -- navigation
 vim.keymap.set('n', 'gt', vim.cmd.tabnext, {})
 vim.keymap.set('n', 'gT', vim.cmd.tabprevious, {})
 vim.keymap.set('n', 'gb', vim.cmd.bn, {})
 vim.keymap.set('n', 'gB', vim.cmd.bp, {})
+
+-- Editing
+vim.keymap.set('n', '<M-j>', "<cmd>m +1<CR>")
+vim.keymap.set('n', '<M-k>', "<cmd>m -2<CR>")
 
 -- Telescope keybinds
 local builtin = require('telescope.builtin')

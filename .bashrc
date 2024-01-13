@@ -10,9 +10,10 @@ alias ll='exa -la --header --icons --git --group-directories-first --tree --leve
 alias mv='mv -i'
 alias rm='rm -rf'
 alias clear='clear && fastfetch'
-alias vim='nvim'
 alias gitbare='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias cat='bat'
+alias cat='batcat'
+alias vim='nvim'
+alias vvim='bash -c vim'
 
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/p3rtang/.local/share/JetBrains/Toolbox/scripts:/home/p3rtang/local/bin:/home/p3rtang/.local/bin:/sbin:/snap/bin
 export TERM=kitty

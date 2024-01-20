@@ -38,6 +38,7 @@ vim.cmd.colorscheme "catppuccin"
 vim.cmd[[
     let g:airline#extensions#tabline#enabled = 1
     let g:airline_section_b = airline#section#create(['branch'])
+    let g:airline_theme = 'catppuccin'
 ]]
 
 vim.api.nvim_set_hl(0, 'LineNrAbove', {ctermfg='darkgrey'})

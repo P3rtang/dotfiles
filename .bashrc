@@ -5,13 +5,15 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='lsd -Al --color=auto'
-alias ll='lsd -Al --tree --depth=2'
+alias ls='exa -la --header --icons --git --group-directories-first --color=auto'
+alias ll='exa -la --header --icons --git --group-directories-first --tree --level=2'
 alias mv='mv -i'
 alias rm='rm -rf'
 alias clear='clear && fastfetch'
-alias vim='nvim'
 alias gitbare='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias cat='batcat'
+alias vim='nvim'
+alias vvim='bash -c vim'
 
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/p3rtang/.local/share/JetBrains/Toolbox/scripts:/home/p3rtang/local/bin:/home/p3rtang/.local/bin:/sbin:/snap/bin
 export TERM=kitty

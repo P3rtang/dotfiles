@@ -3,8 +3,8 @@
 $HOME=$(pwd)
 
 sudo pacman -Syu
-sudo pacman -S --needed gdm sway swaybg waybar git lsd kitty rofi firefox unzip ttf-dejavu cifs-utils tmux\
-    npm base-devel pavucontrol
+sudo pacman -S --needed --noconfirm gdm sway swaybg waybar git lsd kitty rofi firefox unzip ttf-dejavu cifs-utils tmux\
+    npm base-devel pavucontrol ranger
 sudo systemctl enable gdm
 
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
@@ -15,12 +15,17 @@ mkdir -p $HOME/.packages
 cd $HOME/.packages
 git clone https://aur.archlinux.org/swaync.git
 cd swaync
-makepkg -si
+makepkg -si --noconfirm
 
 cd $HOME/.packages
 git clone https://aur.archlinux.org/fastfetch.git
 cd fastfetch
-makepkg -si
+makepkg -si --noconfirm
+
+cd $HOME/.packages
+git clone https://aur.archlinux.org/wlr-randr.git
+cd wlr-randr
+makepkg -si --noconfirm
 
 cd $HOME/.packages
 git clone https://github.com/p3rtang/swaymenu
@@ -42,8 +47,12 @@ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 cd $HOME
 mkdir -p .local/share/fonts
 wget https://dtinth.github.io/comic-mono-font/ComicMono.ttf -P .local/share/fonts
-cd .local/share/fonts
-unzip fontawesome-free-5.15.4-desktop.zip
-cd ~
+
+cd $HOME/.local/share/fonts
+wget https://use.fontawesome.com/releases/v6.3.0/fontawesome-free-6.3.0-desktop.zip
+unzip fontawesome-free-6.3.0-desktop.zip
+
+cd $HOME
 mkdir -p Pictures/wallpapers
 wget -O ~/Pictures/wallpapers/factorio.jpg https://wallpapercave.com/wp/wp4616344.jpg
+wget -O ~/Pictures/wallpapers/nausicaa.jpg http://www.wallpapersin4k.org/wp-content/uploads/2017/04/Nausicaa-Wallpaper-10.jpg

@@ -16,3 +16,4 @@ keymap({"n","v"}, "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true 
 -- Rename
 keymap("n", "gr", "<cmd>Lspsaga rename<CR>", { silent = true })
 
+keymap('n', '<space>e', vim.diagnostic.open_float)

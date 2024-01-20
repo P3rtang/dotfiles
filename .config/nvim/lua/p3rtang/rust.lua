@@ -40,6 +40,7 @@ rt.setup({
       vim.keymap.set('n', '<leader>ca', rt.code_action_group.code_action_group, bufopts)
       vim.keymap.set('n', '<leader>ha', rt.hover_actions.hover_actions, bufopts)
       vim.keymap.set('n', '<C-n>', rt.runnables.runnables, bufopts)
+      vim.keymap.set('n', 'E', vim.diagnostic.open_float)
     end,
   },
 })

@@ -23,6 +23,9 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-cmdline'
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lua'
+
+    use "ray-x/lsp_signature.nvim"
+
     use 'hrsh7th/vim-vsnip'
     use 'hrsh7th/vim-vsnip-integ'
 
@@ -55,4 +58,7 @@ return require('packer').startup(function(use)
 
     use { "catppuccin/nvim", as = "catppuccin" }
     use { 'dracula/vim', as = 'dracula' }
+    use { "nomnivore/ollama.nvim", requires = "nvim-lua/plenary.nvim" }
+    use "lewis6991/gitsigns.nvim"
+    use "j-hui/fidget.nvim"
 end)

@@ -17,7 +17,8 @@ vim.opt.scrolloff = 12
 vim.opt.updatetime = 100
 
 vim.opt.colorcolumn = "100"
-
+vim.opt.termguicolors = true
+vim.opt.signcolumn = "yes"
 
 require("catppuccin").setup({
     flavour = "macchiato", -- latte, frappe, macchiato, mocha
@@ -44,3 +45,7 @@ vim.cmd[[
 vim.api.nvim_set_hl(0, 'LineNrAbove', {ctermfg='darkgrey'})
 vim.api.nvim_set_hl(0, 'LineNrBelow', {ctermfg='grey'})
 vim.api.nvim_set_hl(0, 'Normal', {ctermbg='none'})
+
+require("ollama").setup()
+require('gitsigns').setup()
+require('fidget').setup()

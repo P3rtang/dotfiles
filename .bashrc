@@ -1,9 +1,5 @@
-#
-# ~/.bashrc
-#
-# . /etc/.bashrc
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
+# Add this lines at the top of .bashrc:
+[[ $- == *i* ]] && source $HOME/ble.sh/out/ble.sh --noattach
 
 alias ls='exa -la --header --icons --git --group-directories-first --color=auto'
 alias ll='exa -la --header --icons --git --group-directories-first --tree --level=2'
@@ -16,11 +12,14 @@ alias vim='nvim'
 alias vvim='bash -c vim'
 alias go='grc go'
 alias cdf='cd $(find . 2>/dev/null -type d -print | fzf)'
+alias hist='atuin search -i'
 
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/p3rtang/.local/share/JetBrains/Toolbox/scripts:/home/p3rtang/local/bin:/home/p3rtang/.local/bin:/sbin:/snap/bin
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/p3rtang/.local/share/JetBrains/Toolbox/scripts:/home/p3rtang/local/bin:/home/p3rtang/.local/bin:/sbin:/snap/bin:$HOME/go/bin
 export TERM=kitty
 export HOME=/home/p3rtang
 export LIBVIRT_DEFAULT_URI=qemu:///system
+export HISTSIZE=
+export HISTFILESIZE=
 
 # Adds the current branch to the bash prompt when the working directory is
 # part of a Git repository. Includes color-coding and indicators to quickly
@@ -130,3 +129,11 @@ export EDITOR=vim
 
 fastfetch
 . "$HOME/.cargo/env"
+
+# [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
+# eval "$(atuin init bash)"
+# source ~/.local/share/blesh/ble.sh
+eval "$(atuin init bash)"
+
+# Add this line at the end of .bashrc:
+[[ ${BLE_VERSION-} ]] && ble-attach

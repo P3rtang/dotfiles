@@ -1,0 +1,15 @@
+bleopt default_keymap=vi
+
+function blerc/vim-mode-hook {
+    # clear line when pressing ctrl+c in insert/normal mode
+    ble-bind -m vi_imap -f C-c discard-line
+    ble-bind -m vi_nmap -f C-c discard-line
+
+    # set correct cursor type for the different modes
+    ble-bind -m vi_nmap --cursor 2
+    ble-bind -m vi_imap --cursor 5
+    ble-bind -m vi_omap --cursor 4
+    ble-bind -m vi_xmap --cursor 2
+    ble-bind -m vi_cmap --cursor 0
+}
+blehook/eval-after-load keymap_vi blerc/vim-mode-hook

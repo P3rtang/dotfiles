@@ -14,9 +14,27 @@ set -e
 #
 $HOME=$(pwd)
 
-sudo pacman -S --needed gdm sway swaybg waybar git lsd kitty rofi firefox unzip ttf-dejavu cifs-utils tmux\
-    npm base-devel pavucontrol
+set -e
+
+INSTALL=''
+declare -A osInfo;
+osInfo[/etc/debian_version]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol'
+osInfo[/etc/arch-release]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol'
+# osInfo[/etc/gentoo-release]=emerge
+# osInfo[/etc/SuSE-release]=zypp
+# osInfo[/etc/redhat-release]=yum
+# osInfo[/etc/alpine-release]=apk
+
+for f in ${!osInfo[@]}
+do
+    if [[ -f $f ]];then
+        INSTALL=${osInfo[$f]}
+    fi
+done
+
+sudo $INSTALL
 sudo systemctl enable gdm
+sudo systemctl enable gdm3
 
 message "INSTALL" "dependencies"
 declare -A osInfo;
@@ -145,13 +163,8 @@ unzip -qq -o ~/.local/share/fonts/fontawesome-free-6.3.0-desktop.zip -d $HOME/.l
 
 message "INSTALLING" "wallpapers"
 mkdir -p Pictures/wallpapers
-<<<<<<< HEAD
 curl https://wallpapercave.com/wp/wp4616344.jpg --create-dirs -o ~/Pictures/wallpapers/factorio.jpg
 curl https://i.imgur.com/Jj0zk7c.jpeg --create-dirs -o ~/Pictures/wallpapers/nausicaa.jpg
-=======
-wget -O ~/Pictures/wallpapers/factorio.jpg https://wallpapercave.com/wp/wp4616344.jpg
-wget -O ~/Pictures/wallpapers/nausicaa.jpg http://www.wallpapersin4k.org/wp-content/uploads/2017/04/Nausicaa-Wallpaper-10.jpg
-=======
 cd
 mkdir -p .local/share/fonts
 wget https://dtinth.github.io/comic-mono-font/ComicMono.ttf -P .local/share/fonts
@@ -160,5 +173,3 @@ unzip fontawesome-free-5.15.4-desktop.zip
 cd ~
 mkdir -p Pictures/wallpapers
 wget -O ~/Pictures/wallpapers/factorio.jpg https://wallpapercave.com/wp/wp4616344.jpg
->>>>>>> eb0854c (updated install script)
->>>>>>> 8912b12 (updated install script)

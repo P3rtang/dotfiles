@@ -49,3 +49,7 @@ unzip fontawesome-free-5.15.4-desktop.zip
 cd ~
 mkdir -p Pictures/wallpapers
 wget -O ~/Pictures/wallpapers/factorio.jpg https://wallpapercave.com/wp/wp4616344.jpg
+<<<<<<< HEAD
+=======
+wget -O ~/Pictures/wallpapers/nausicaa.jpg https://i.imgur.com/Jj0zk7c.jpeg
+>>>>>>> 4b36804 (fix: wallpaper link)

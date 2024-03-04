@@ -37,7 +37,7 @@ makepkg -si
 mkdir -p .dotfiles
 cd .dotfiles
 git init --bare
-git remote add origin https://github.com/p3rtang/dotfiles
+git remote add origin https://github.com/p3rtang/dotfiles || true
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch origin
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout -f master
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no

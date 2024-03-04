@@ -41,7 +41,7 @@ mkdir -p ~/.local/share/fonts
 wget https://dtinth.github.io/comic-mono-font/ComicMono.ttf -P .local/share/fonts
 
 curl https://use.fontawesome.com/releases/v6.3.0/fontawesome-free-6.3.0-desktop.zip -o ~/.local/share/fonts/fontawesome-free-6.3.0-desktop.zip
-unzip ~/.local/share/fonts/fontawesome-free-6.3.0-desktop.zip $HOME/.local/share/fonts
+unzip -o ~/.local/share/fonts/fontawesome-free-6.3.0-desktop.zip -d $HOME/.local/share/fonts
 
 mkdir -p Pictures/wallpapers
 curl https://wallpapercave.com/wp/wp4616344.jpg --create-dirs -o ~/Pictures/wallpapers/factorio.jpg

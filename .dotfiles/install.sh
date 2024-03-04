@@ -33,8 +33,7 @@ do
 done
 
 sudo $INSTALL
-sudo systemctl enable gdm
-sudo systemctl enable gdm3
+sudo systemctl enable gdm || sudo systemctl enable gdm3
 
 message "INSTALL" "dependencies"
 declare -A osInfo;

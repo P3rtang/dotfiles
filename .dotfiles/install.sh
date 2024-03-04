@@ -4,8 +4,8 @@ set -e
 
 INSTALL=''
 declare -A osInfo;
-osInfo[/etc/debian_version]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol neovim'
-osInfo[/etc/arch-release]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim'
+osInfo[/etc/debian_version]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol neovim curl'
+osInfo[/etc/arch-release]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl'
 # osInfo[/etc/gentoo-release]=emerge
 # osInfo[/etc/SuSE-release]=zypp
 # osInfo[/etc/redhat-release]=yum
@@ -53,6 +53,7 @@ wget -O ~/Pictures/wallpapers/factorio.jpg https://wallpapercave.com/wp/wp461634
 wget -O ~/Pictures/wallpapers/nausicaa.jpg https://i.imgur.com/Jj0zk7c.jpeg
 
 curl https://use.fontawesome.com/releases/v6.3.0/fontawesome-free-6.3.0-desktop.zip -o ~/.local/share/fonts
+curl https://use.fontawesome.com/releases/v6.3.0/fontawesome-free-6.3.0-desktop.zip -o ~/.local/share/fonts/fontawesome-free-6.3.0-desktop.zip
 unzip ~/.local/share/fonts/fontawesome-free-6.3.0-desktop.zip $HOME/.local/share/fonts
 
 mkdir -p Pictures/wallpapers

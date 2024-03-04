@@ -40,9 +40,9 @@ cd
 mkdir -p ~/.local/share/fonts
 wget https://dtinth.github.io/comic-mono-font/ComicMono.ttf -P .local/share/fonts
 
-wget -O ~/.local/share/fonts https://use.fontawesome.com/releases/v6.3.0/fontawesome-free-6.3.0-desktop.zip
-unzip fontawesome-free-6.3.0-desktop.zip
+curl https://use.fontawesome.com/releases/v6.3.0/fontawesome-free-6.3.0-desktop.zip -o ~/.local/share/fonts
+unzip ~/.local/share/fonts/fontawesome-free-6.3.0-desktop.zip $HOME/.local/share/fonts
 
 mkdir -p Pictures/wallpapers
-wget -O ~/Pictures/wallpapers/factorio.jpg https://wallpapercave.com/wp/wp4616344.jpg
-wget -O ~/Pictures/wallpapers/nausicaa.jpg https://i.imgur.com/Jj0zk7c.jpeg
+curl https://wallpapercave.com/wp/wp4616344.jpg --create-dirs -o ~/Pictures/wallpapers/factorio.jpg
+curl https://i.imgur.com/Jj0zk7c.jpeg --create-dirs -o ~/Pictures/wallpapers/nausicaa.jpg

@@ -2,7 +2,6 @@
 
 set -e
 
-INSTALL=''
 declare -A osInfo;
 osInfo[/etc/debian_version]=debian
 osInfo[/etc/arch-release]=arch
@@ -12,9 +11,11 @@ osInfo[/etc/arch-release]=arch
 # osInfo[/etc/alpine-release]=apk
 
 declare -A Install;
-osInfo[debian]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol neovim curl playerctl nala '
-osInfo[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch'
+Install[debian]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol neovim curl playerctl nala '
+Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch'
 
+INSTALL=''
+OS_NAME=''
 for f in ${!osInfo[@]}
 do
     if [[ -f $f ]];then
@@ -22,6 +23,7 @@ do
         INSTALL=${Install[$OS_NAME]}
     fi
 done
+echo $INSTALL
 
 sudo $INSTALL
 sudo systemctl enable gdm

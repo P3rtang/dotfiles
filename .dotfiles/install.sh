@@ -43,7 +43,7 @@ if [[ $OS_NAME = "debian" ]];then
     rm -rf $HOME/.packages/neovim
     git clone --depth 1 https://github.com/neovim/neovim $HOME/.packages/neovim 
     cd $HOME/.packages/neovim
-    make CMAKE_BUILD_TYPE=RelWithDebInfo | xargs echo "{}\r"
+    make CMAKE_BUILD_TYPE=RelWithDebInfo 
     sudo make install
     cd
 fi

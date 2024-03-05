@@ -11,8 +11,8 @@ osInfo[/etc/arch-release]=arch
 # osInfo[/etc/alpine-release]=apk
 
 declare -A Install;
-Install[debian]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol curl playerctl nala sway-notification-center make cmake ninja-build gettext npm golang'
-Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch make cmake npm go'
+Install[debian]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol curl playerctl nala sway-notification-center make cmake ninja-build gettext npm golang gawk'
+Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch make cmake npm go gawk'
 
 INSTALL=''
 OS_NAME=''
@@ -95,8 +95,7 @@ echo "---------------------------------"
 echo "> INSTALLING ble.sh"
 echo "---------------------------------"
 git clone --recursive --depth 1 --shallow-submodules https://github.com/akinomyoga/ble.sh.git $HOME/.packages/blesh
-cd $HOME/.packages/blesh
-make -C ble.sh install PREFIX=$HOME/.local
+make -C $HOME/.packages/blesh install PREFIX=$HOME/.local
 
 echo "---------------------------------"
 echo "> INSTALLING fonts"

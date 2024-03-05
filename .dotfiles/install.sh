@@ -94,7 +94,11 @@ fi
 echo "---------------------------------"
 echo "> INSTALLING ble.sh"
 echo "---------------------------------"
-git clone --recursive --depth 1 --shallow-submodules https://github.com/akinomyoga/ble.sh.git $HOME/.packages/blesh
+if [[ -d $HOME/.packages/blesh ]]; then
+    git -C $HOME/.packages/blesh pull
+else
+    git clone --recursive --depth 1 --shallow-submodules https://github.com/akinomyoga/ble.sh.git $HOME/.packages/blesh
+fi
 make -C $HOME/.packages/blesh install PREFIX=$HOME/.local
 
 echo "---------------------------------"

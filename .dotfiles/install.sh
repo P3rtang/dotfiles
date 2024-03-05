@@ -37,7 +37,7 @@ git remote add origin https://github.com/p3rtang/dotfiles || true
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
 
 if [[ $OS_NAME = "debian" ]];then
-    if [[ -f $HOME/.packages/neovim/.git ]]; then
+    if [[ -d $HOME/.packages/neovim/.git ]]; then
         echo "---------------------------------"
         echo "> UPDATE neovim"
         echo "---------------------------------"

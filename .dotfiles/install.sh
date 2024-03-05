@@ -11,8 +11,8 @@ osInfo[/etc/arch-release]=arch
 # osInfo[/etc/alpine-release]=apk
 
 declare -A Install;
-Install[debian]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol curl playerctl nala sway-notification-center make cmake ninja-build gettext npm'
-Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch make cmake npm'
+Install[debian]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol curl playerctl nala sway-notification-center make cmake ninja-build gettext npm golang'
+Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch make cmake npm go'
 
 INSTALL=''
 OS_NAME=''
@@ -37,15 +37,25 @@ git remote add origin https://github.com/p3rtang/dotfiles || true
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
 
 if [[ $OS_NAME = "debian" ]];then
-    echo "---------------------------------"
-    echo "> INSTALL neovim"
-    echo "---------------------------------"
-    rm -rf $HOME/.packages/neovim
-    git clone --depth 1 https://github.com/neovim/neovim $HOME/.packages/neovim 
-    cd $HOME/.packages/neovim
-    make CMAKE_BUILD_TYPE=RelWithDebInfo 
-    sudo make install
-    cd
+    if [[ -f $HOME/.packages/neovim/.git ]]; then
+        echo "---------------------------------"
+        echo "> UPDATE neovim"
+        echo "---------------------------------"
+        cd $HOME/.packages/neovim
+        make CMAKE_BUILD_TYPE=RelWithDebInfo 
+        sudo make install
+        cd
+    else
+        echo "---------------------------------"
+        echo "> INSTALL neovim"
+        echo "---------------------------------"
+        rm -rf $HOME/.packages/neovim
+        git clone --depth 1 https://github.com/neovim/neovim $HOME/.packages/neovim 
+        cd $HOME/.packages/neovim
+        make CMAKE_BUILD_TYPE=RelWithDebInfo 
+        sudo make install
+        cd
+    fi
 fi
 
 echo "---------------------------------"
@@ -80,6 +90,13 @@ if [[ $OS_NAME = "arch" ]];then
     git clone https://aur.archlinux.org/swaync.git ~/.packages
     makepkg -si ~/.packages/swaync/PKGBUILD
 fi
+
+echo "---------------------------------"
+echo "> INSTALLING ble.sh"
+echo "---------------------------------"
+git clone --recursive --depth 1 --shallow-submodules https://github.com/akinomyoga/ble.sh.git $HOME/.packages/blesh
+cd $HOME/.packages/blesh
+make -C ble.sh install PREFIX=$HOME/.local
 
 echo "---------------------------------"
 echo "> INSTALLING fonts"

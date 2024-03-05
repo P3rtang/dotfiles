@@ -11,8 +11,8 @@ osInfo[/etc/arch-release]=arch
 # osInfo[/etc/alpine-release]=apk
 
 declare -A Install;
-Install[debian]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol neovim curl playerctl nala sway-notification-center'
-Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch'
+Install[debian]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol curl playerctl nala sway-notification-center make cmake'
+Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch make cmake'
 
 INSTALL=''
 OS_NAME=''
@@ -40,6 +40,18 @@ git remote add origin https://github.com/p3rtang/dotfiles || true
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout -f desktop
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
 
+if [[ $OS_NAME = "debian" ]];then
+    echo "---------------------------------"
+    echo "> INSTALL neovim"
+    echo "---------------------------------"
+    rm -rf $HOME/.packages/neovim
+    git clone --depth=1 https://github.com/neovim/neovim $HOME/.packages/neovim 
+    cd $HOME/.packages/neovim
+    make CMAKE_BUILD_TYPE=RelWithDebInfo
+    sudo make install
+    cd
+fi
+
 echo "---------------------------------"
 echo "> CONFIGURE neovim"
 echo "---------------------------------"
@@ -47,10 +59,10 @@ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 cd
 # on debian get fastfetch from github
-echo "---------------------------------"
-echo "> INSTALLING fastfetch"
-echo "---------------------------------"
 if [[ $OS_NAME = "debian" ]];then
+    echo "---------------------------------"
+    echo "> INSTALLING fastfetch"
+    echo "---------------------------------"
     curl -L --create-dirs -o $HOME/.packages/fastfetch/fastfetch.deb \
     $(curl -L \
         -H "Accept: application/vnd.github+json" \
@@ -62,10 +74,10 @@ if [[ $OS_NAME = "debian" ]];then
 fi
 
 # on arch get swaync from aur
-echo "---------------------------------"
-echo "> INSTALLING swaync"
-echo "---------------------------------"
 if [[ $OS_NAME = "arch" ]];then
+    echo "---------------------------------"
+    echo "> INSTALLING swaync"
+    echo "---------------------------------"
     git clone https://aur.archlinux.org/swaync.git ~/.packages
     makepkg -si ~/.packages/swaync/PKGBUILD
 fi

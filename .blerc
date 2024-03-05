@@ -11,5 +11,8 @@ function blerc/vim-mode-hook {
     ble-bind -m vi_omap --cursor 4
     ble-bind -m vi_xmap --cursor 2
     ble-bind -m vi_cmap --cursor 0
+
+    # enable multiline mode with ctrl+m
+    ble-bind -m vi_imap -f 'C-m' accept-line
 }
 blehook/eval-after-load keymap_vi blerc/vim-mode-hook

@@ -127,8 +127,11 @@ export EDITOR=vim
 # PS1='[\u@\h \W]\$ '
 # LS_COLORS=$LS_COLORS:'di=0;35:' ; export LS_COLORS
 
+if [[ -f $HOME/.cargo/env ]]; then
+    . "$HOME/.cargo/env"
+fi
+
 fastfetch
-. "$HOME/.cargo/env"
 
 # [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
 # eval "$(atuin init bash)"

@@ -11,8 +11,15 @@ osInfo[/etc/arch-release]=arch
 # osInfo[/etc/alpine-release]=apk
 
 declare -A Install;
-Install[debian]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol curl playerctl nala sway-notification-center make cmake ninja-build gettext npm golang gawk bat'
-Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch make cmake npm go gawk bat atuin'
+Install[debian]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol curl playerctl nala sway-notification-center make cmake ninja-build gettext npm golang gawk bat jq'
+Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch make cmake npm go gawk bat atuin jq'
+
+message () {
+    echo ""
+    echo "---------------------------------"
+    echo "> $1 $2"
+    echo "---------------------------------"
+}
 
 INSTALL=''
 OS_NAME=''
@@ -26,8 +33,16 @@ done
 echo $INSTALL
 
 sudo $INSTALL
-sudo systemctl enable gdm
 
+message "CONFIGURE" "display manager"
+case $OS_NAME in
+    debian)
+        sudo systemctl enable gdm3;;
+    arch)
+        sudo systemctl enable gdm;;
+esac
+
+message "CONFIGURE" "dotfiles repo"
 mkdir -p $HOME/.local/bin
 mkdir -p $HOME/.dotfiles
 git --git-dir=$HOME/.dotfiles/ init --bare
@@ -39,17 +54,13 @@ git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull
 
 if [[ $OS_NAME = "debian" ]];then
     if [[ -d $HOME/.packages/neovim/.git ]]; then
-        echo "---------------------------------"
-        echo "> UPDATE neovim"
-        echo "---------------------------------"
+        message "UPDATE" "neovim"
         cd $HOME/.packages/neovim
         make CMAKE_BUILD_TYPE=RelWithDebInfo 
         sudo make install
         cd
     else
-        echo "---------------------------------"
-        echo "> INSTALL neovim"
-        echo "---------------------------------"
+        message "INSTALL" "neovim"
         rm -rf $HOME/.packages/neovim
         git clone --depth 1 https://github.com/neovim/neovim $HOME/.packages/neovim 
         cd $HOME/.packages/neovim
@@ -59,9 +70,7 @@ if [[ $OS_NAME = "debian" ]];then
     fi
 fi
 
-echo "---------------------------------"
-echo "> CONFIGURE neovim"
-echo "---------------------------------"
+message "CONFIGURE" "neovim"
 # install packer nvim
 rm -rf $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
 git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
@@ -70,9 +79,7 @@ nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 cd
 # on debian get fastfetch from github
 if [[ $OS_NAME = "debian" ]];then
-    echo "---------------------------------"
-    echo "> INSTALLING fastfetch"
-    echo "---------------------------------"
+    message "INSTALLING" "fastfetch"
     curl -L --create-dirs -o $HOME/.packages/fastfetch/fastfetch.deb \
     $(curl -L \
         -H "Accept: application/vnd.github+json" \
@@ -85,16 +92,12 @@ fi
 
 # on arch get swaync from aur
 if [[ $OS_NAME = "arch" ]];then
-    echo "---------------------------------"
-    echo "> INSTALLING swaync"
-    echo "---------------------------------"
+    message "INSTALLING" "swaync"
     git clone https://aur.archlinux.org/swaync.git ~/.packages
     makepkg -si ~/.packages/swaync/PKGBUILD
 fi
 
-echo "---------------------------------"
-echo "> INSTALLING ble.sh"
-echo "---------------------------------"
+message "INSTALLING" "ble.sh"
 if [[ -d $HOME/.packages/blesh ]]; then
     git -C $HOME/.packages/blesh pull
 else
@@ -103,26 +106,20 @@ fi
 make -C $HOME/.packages/blesh install PREFIX=$HOME/.local
 
 if [[ $OS_NAME = "debian" ]];then
-    echo "---------------------------------"
-    echo "> INSTALLING atuin"
-    echo "---------------------------------"
+    message "INSTALLING" "atuin"
     cd $HOME/.packages
     /bin/bash -c "$(curl --proto '=https' --tlsv1.2 -sSf https://setup.atuin.sh)"
     cd
 fi
 
-echo "---------------------------------"
-echo "> INSTALLING fonts"
-echo "---------------------------------"
+message "INSTALLING" "fonts"
 mkdir -p ~/.local/share/fonts
 wget https://dtinth.github.io/comic-mono-font/ComicMono.ttf -P .local/share/fonts
 
 curl https://use.fontawesome.com/releases/v6.3.0/fontawesome-free-6.3.0-desktop.zip -o ~/.local/share/fonts/fontawesome-free-6.3.0-desktop.zip
 unzip -qq -o ~/.local/share/fonts/fontawesome-free-6.3.0-desktop.zip -d $HOME/.local/share/fonts
 
-echo "---------------------------------"
-echo "> INSTALLING wallpapers"
-echo "---------------------------------"
+message "INSTALLING" "wallpapers"
 mkdir -p Pictures/wallpapers
 curl https://wallpapercave.com/wp/wp4616344.jpg --create-dirs -o ~/Pictures/wallpapers/factorio.jpg
 curl https://i.imgur.com/Jj0zk7c.jpeg --create-dirs -o ~/Pictures/wallpapers/nausicaa.jpg

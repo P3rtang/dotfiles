@@ -33,7 +33,7 @@ cd $HOME/.dotfiles
 git init --bare
 git remote add origin https://github.com/p3rtang/dotfiles || true
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch origin
-/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout -f desktop
+# /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout -f desktop
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
 
 if [[ $OS_NAME = "debian" ]];then

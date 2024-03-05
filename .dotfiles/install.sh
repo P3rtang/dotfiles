@@ -28,21 +28,8 @@ echo $INSTALL
 sudo $INSTALL
 sudo systemctl enable gdm
 
-# install packer nvim
-rm -rf ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-
-mkdir -p .aur
-cd .aur
-git clone https://aur.archlinux.org/swaync.git
-cd swaync
-makepkg -si
-git clone https://aur.archlinux.org/fastfetch.git
-cd fastfetch
-makepkg -si
-
-mkdir -p .dotfiles
-cd .dotfiles
+mkdir -p $HOME/.dotfiles
+cd $HOME/.dotfiles
 git init --bare
 git remote add origin https://github.com/p3rtang/dotfiles || true
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch origin
@@ -54,7 +41,7 @@ if [[ $OS_NAME = "debian" ]];then
     echo "> INSTALL neovim"
     echo "---------------------------------"
     rm -rf $HOME/.packages/neovim
-    git clone --depth=1 https://github.com/neovim/neovim $HOME/.packages/neovim 
+    git clone --depth 1 https://github.com/neovim/neovim $HOME/.packages/neovim 
     cd $HOME/.packages/neovim
     make CMAKE_BUILD_TYPE=RelWithDebInfo
     sudo make install
@@ -64,6 +51,9 @@ fi
 echo "---------------------------------"
 echo "> CONFIGURE neovim"
 echo "---------------------------------"
+# install packer nvim
+rm -rf $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
+git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 cd

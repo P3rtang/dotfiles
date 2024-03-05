@@ -1,5 +1,5 @@
 # Add this lines at the top of .bashrc:
-[[ $- == *i* ]] && source $HOME/ble.sh/out/ble.sh --noattach
+[[ $- == *i* ]] && source $HOME/.packages/blesh/out/ble.sh --noattach
 
 alias ls='exa -la --header --icons --git --group-directories-first --color=auto'
 alias ll='exa -la --header --icons --git --group-directories-first --tree --level=2'

@@ -12,7 +12,7 @@ osInfo[/etc/arch-release]=arch
 
 declare -A Install;
 Install[debian]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol curl playerctl nala sway-notification-center make cmake ninja-build gettext npm golang gawk bat'
-Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch make cmake npm go gawk bat'
+Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch make cmake npm go gawk bat atuin'
 
 INSTALL=''
 OS_NAME=''
@@ -101,6 +101,15 @@ else
     git clone --recursive --depth 1 --shallow-submodules https://github.com/akinomyoga/ble.sh.git $HOME/.packages/blesh
 fi
 make -C $HOME/.packages/blesh install PREFIX=$HOME/.local
+
+if [[ $OS_NAME = "debian" ]];then
+    echo "---------------------------------"
+    echo "> INSTALLING atuin"
+    echo "---------------------------------"
+    cd $HOME/.packages
+    /bin/bash -c "$(curl --proto '=https' --tlsv1.2 -sSf https://setup.atuin.sh)"
+    cd
+fi
 
 echo "---------------------------------"
 echo "> INSTALLING fonts"

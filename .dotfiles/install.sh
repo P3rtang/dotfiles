@@ -109,7 +109,7 @@ if [[ $OS_NAME = "arch" ]];then
     else
         git clone https://aur.archlinux.org/swaync.git ~/.packages/swaync/
     fi
-    (cd $HOME/.packages/swaync && makepkg -si ~/.packages/swaync/PKGBUILD)
+    (cd $HOME/.packages/swaync && makepkg -si --noconfirm ~/.packages/swaync/PKGBUILD)
 fi
 
 message "INSTALLING" "ble.sh"

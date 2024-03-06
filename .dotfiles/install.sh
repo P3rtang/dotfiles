@@ -101,7 +101,14 @@ fi
 # on arch get swaync from aur
 if [[ $OS_NAME = "arch" ]];then
     message "INSTALLING" "swaync"
-    git clone https://aur.archlinux.org/swaync.git ~/.packages/swaync/
+    if [[ -f $HOME/.packages/swaync/PKGBUILD ]];then
+        (cd $HOME/.packages/swaync && git pull)
+    elif [[ -d $HOME/.packages/swaync ]];then
+        rm -rf $HOME/.packages/swaync
+        git clone https://aur.archlinux.org/swaync.git ~/.packages/swaync/
+    else
+        git clone https://aur.archlinux.org/swaync.git ~/.packages/swaync/
+    fi
     (cd $HOME/.packages/swaync && makepkg -si ~/.packages/swaync/PKGBUILD)
 fi
 

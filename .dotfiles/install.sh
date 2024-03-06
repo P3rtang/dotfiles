@@ -129,7 +129,7 @@ fi
 
 message "INSTALLING" "fonts"
 mkdir -p ~/.local/share/fonts
-curl --output-dir .local/share/fonts https://dtinth.github.io/comic-mono-font/ComicMono.ttf
+(cd .local/share/fonts && curl -O https://dtinth.github.io/comic-mono-font/ComicMono.ttf) 
 
 curl https://use.fontawesome.com/releases/v6.3.0/fontawesome-free-6.3.0-desktop.zip -o ~/.local/share/fonts/fontawesome-free-6.3.0-desktop.zip
 unzip -qq -o ~/.local/share/fonts/fontawesome-free-6.3.0-desktop.zip -d $HOME/.local/share/fonts

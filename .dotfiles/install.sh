@@ -50,15 +50,15 @@ else
     echo "Gdm already active, skipping..."
 fi
 
-# message "CONFIGURE" "dotfiles repo"
-# mkdir -p $HOME/.local/bin
-# mkdir -p $HOME/.dotfiles
-# git --git-dir=$HOME/.dotfiles/ init --bare
-# git --git-dir=$HOME/.dotfiles/ remote add origin https://github.com/p3rtang/dotfiles || true
-# git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch origin
-# /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout -f master
-# git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
-# git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull
+message "CONFIGURE" "dotfiles repo"
+mkdir -p $HOME/.local/bin
+mkdir -p $HOME/.dotfiles
+git --git-dir=$HOME/.dotfiles/ init --bare
+git --git-dir=$HOME/.dotfiles/ remote add origin https://github.com/p3rtang/dotfiles || true
+git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch origin
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout -f master
+git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
+git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull
 
 if [[ $OS_NAME = "debian" ]];then
     if [[ -d $HOME/.packages/neovim/.git ]]; then

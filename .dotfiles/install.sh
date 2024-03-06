@@ -1,7 +1,17 @@
 #!/bin/bash
 
+message () {
+    echo -e "\
+\033[96m
+---------------------------------
+> $1 $2
+---------------------------------
+\033[0m"
+}
+
 set -e
 
+message "INSTALL" "dependencies"
 declare -A osInfo;
 osInfo[/etc/debian_version]=debian
 osInfo[/etc/arch-release]=arch
@@ -10,16 +20,13 @@ osInfo[/etc/arch-release]=arch
 # osInfo[/etc/redhat-release]=yum
 # osInfo[/etc/alpine-release]=apk
 
-declare -A Install;
-Install[debian]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol curl playerctl nala sway-notification-center make cmake ninja-build gettext npm golang gawk bat jq'
-Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch make cmake npm go gawk bat atuin jq'
+declare -A GdmVersion;
+GdmVersion[debian]='gdm3'
+GdmVersion[arch]='gdm'
 
-message () {
-    echo ""
-    echo "---------------------------------"
-    echo "> $1 $2"
-    echo "---------------------------------"
-}
+declare -A Install;
+Install[debian]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol curl playerctl nala sway-notification-center make cmake ninja-build gettext npm golang gawk bat jq openvpn network-manager-openvpn-gnome'
+Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch make cmake npm go gawk bat atuin jq openvpn network-manager-openvpn-gnome'
 
 INSTALL=''
 OS_NAME=''
@@ -28,6 +35,7 @@ do
     if [[ -f $f ]];then
         OS_NAME=${osInfo[$f]}
         INSTALL=${Install[$OS_NAME]}
+        GDM_VERSION=
     fi
 done
 echo $INSTALL
@@ -35,22 +43,22 @@ echo $INSTALL
 sudo $INSTALL
 
 message "CONFIGURE" "display manager"
-case $OS_NAME in
-    debian)
-        sudo systemctl enable gdm3;;
-    arch)
-        sudo systemctl enable gdm;;
-esac
+if [[ $(systemctl is-active ${GdmVersion[$OS_NAME]}) = "inactive" ]];then
+    sudo systemctl -q enable ${GdmVersion[$OS_NAME]}
+    echo "Gdm enabled"
+else
+    echo "Gdm already active, skipping..."
+fi
 
-message "CONFIGURE" "dotfiles repo"
-mkdir -p $HOME/.local/bin
-mkdir -p $HOME/.dotfiles
-git --git-dir=$HOME/.dotfiles/ init --bare
-git --git-dir=$HOME/.dotfiles/ remote add origin https://github.com/p3rtang/dotfiles || true
-git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch origin
-/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout -f master
-git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
-git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull
+# message "CONFIGURE" "dotfiles repo"
+# mkdir -p $HOME/.local/bin
+# mkdir -p $HOME/.dotfiles
+# git --git-dir=$HOME/.dotfiles/ init --bare
+# git --git-dir=$HOME/.dotfiles/ remote add origin https://github.com/p3rtang/dotfiles || true
+# git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch origin
+# /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout -f master
+# git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
+# git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull
 
 if [[ $OS_NAME = "debian" ]];then
     if [[ -d $HOME/.packages/neovim/.git ]]; then
@@ -93,7 +101,7 @@ fi
 # on arch get swaync from aur
 if [[ $OS_NAME = "arch" ]];then
     message "INSTALLING" "swaync"
-    git clone https://aur.archlinux.org/swaync.git ~/.packages
+    git clone https://aur.archlinux.org/swaync.git ~/.packages/swaync/
     makepkg -si ~/.packages/swaync/PKGBUILD
 fi
 

@@ -132,7 +132,7 @@ if [[ -d $HOME/.packages/rofi-power-menu ]]; then
 else
     git clone --depth 1 https://github.com/jluttine/rofi-power-menu
 fi
-sudo install $HOME/.packages/rofi-power-menu/rofi-power-menu/rofi-power-menu /usr/bin/rofi-power-menu
+sudo install $HOME/.packages/rofi-power-menu/rofi-power-menu /usr/bin/rofi-power-menu
 
 message "INSTALLING" "fonts"
 mkdir -p ~/.local/share/fonts

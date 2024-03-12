@@ -11,8 +11,7 @@
 @define-color purple rgba(189, 147, 249, 1);
 
 * {
-    /* `otf-font-awesome` is required to be installed for icons */
-    font-family: "DejaVu Sans Mono", "Font Awesome 6 Pro Solid";
+    font-family: "p3rtang", "DejaVu Sans Mono", "Font Awesome 6 Free Solid";
     font-size: 18px;
     margin: 1px;
     margin-right: 0px;

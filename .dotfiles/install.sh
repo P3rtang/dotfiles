@@ -11,7 +11,6 @@ message () {
 
 set -e
 
-message "INSTALL" "dependencies"
 declare -A osInfo;
 osInfo[/etc/debian_version]=debian
 osInfo[/etc/arch-release]=arch
@@ -39,6 +38,7 @@ do
     fi
 done
 
+message "INSTALL" "dependencies"
 sudo $INSTALL
 
 message "CONFIGURE" "display manager"
@@ -125,6 +125,14 @@ if [[ $OS_NAME = "debian" ]];then
     /bin/bash -c "$(curl --proto '=https' --tlsv1.2 -sSf https://setup.atuin.sh)"
     cd
 fi
+
+message "INSTALLING" "rofi-power-menu"
+if [[ -d $HOME/.packages/rofi-power-menu ]]; then
+    git -C $HOME/.packages/rofi-power-menu pull
+else
+    git clone --depth 1 https://github.com/jluttine/rofi-power-menu
+fi
+sudo install $HOME/.packages/rofi-power-menu/rofi-power-menu/rofi-power-menu
 
 message "INSTALLING" "fonts"
 mkdir -p ~/.local/share/fonts

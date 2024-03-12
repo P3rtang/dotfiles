@@ -38,7 +38,6 @@ do
         GDM_VERSION=
     fi
 done
-echo $INSTALL
 
 sudo $INSTALL
 

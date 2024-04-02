@@ -11,7 +11,7 @@ alias cat='batcat'
 alias vim='nvim'
 alias vvim='bash -c vim'
 alias go='grc go'
-alias cdf='cd $(find . 2>/dev/null -type d -print | fzf)'
+alias cdf='cd "$(find / 2>/dev/null -type d -print | fzf)"'
 alias hist='atuin search -i'
 
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/p3rtang/.local/share/JetBrains/Toolbox/scripts:/home/p3rtang/local/bin:/home/p3rtang/.local/bin:/sbin:/snap/bin:$HOME/go/bin

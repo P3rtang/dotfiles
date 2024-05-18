@@ -130,7 +130,7 @@ message "INSTALLING" "rofi-power-menu"
 if [[ -d $HOME/.packages/rofi-power-menu ]]; then
     git -C $HOME/.packages/rofi-power-menu pull
 else
-    git clone --depth 1 https://github.com/jluttine/rofi-power-menu
+    (cd $HOME/.packages/ && git clone --depth 1 https://github.com/jluttine/rofi-power-menu)
 fi
 sudo install $HOME/.packages/rofi-power-menu/rofi-power-menu /usr/bin/rofi-power-menu
 

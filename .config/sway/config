@@ -20,7 +20,6 @@ set $term foot
 # on the original workspace that the command was run on.
 set $menu rofi -show drun -theme .config/rofi/launchers/type-1/style-14.rasi
 
-exec distrobox-enter arch &
 exec waybar &
 exec nm-applet --indicator &
 exec distrobox-enter -T arch -- thunderbird

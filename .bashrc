@@ -20,6 +20,11 @@ export HOME=/home/p3rtang
 export LIBVIRT_DEFAULT_URI=qemu:///system
 export HISTSIZE=
 export HISTFILESIZE=
+export EDITOR=nvim
+
+export HISTCONTROL=ignoreboth
+
+export PS1="\[\033[38;5;117m\]\u\[\033[38;5;229m\]@\[\033[38;5;212m\]\h \[\033[38;5;229m\]\w\[\033[80;250;123m\]\$(git_prompt)\[\033[0m\]\n ╰─\$ "
 
 # Adds the current branch to the bash prompt when the working directory is
 # part of a Git repository. Includes color-coding and indicators to quickly
@@ -118,11 +123,6 @@ git_prompt() {
         echo -e " \x01$color\x02[ $branch$state]\x01\033[00m\x02"  # last bit resets color
     fi
 }
-
-export PS1="\[\033[38;5;117m\]\u\[\033[38;5;229m\]@\[\033[38;5;212m\]\h \[\033[38;5;229m\]\w\[\033[80;250;123m\]\$(git_prompt)\[\033[0m\]\n ╰─\$ "
-
-export HISTCONTROL=ignoreboth
-export EDITOR=vim
 
 # PS1='[\u@\h \W]\$ '
 # LS_COLORS=$LS_COLORS:'di=0;35:' ; export LS_COLORS

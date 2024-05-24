@@ -11,30 +11,6 @@ message () {
 
 set -e
 
-#
-$HOME=$(pwd)
-
-set -e
-
-INSTALL=''
-declare -A osInfo;
-osInfo[/etc/debian_version]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol'
-osInfo[/etc/arch-release]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol'
-# osInfo[/etc/gentoo-release]=emerge
-# osInfo[/etc/SuSE-release]=zypp
-# osInfo[/etc/redhat-release]=yum
-# osInfo[/etc/alpine-release]=apk
-
-for f in ${!osInfo[@]}
-do
-    if [[ -f $f ]];then
-        INSTALL=${osInfo[$f]}
-    fi
-done
-
-sudo $INSTALL
-
-message "INSTALL" "dependencies"
 declare -A osInfo;
 osInfo[/etc/debian_version]=debian
 osInfo[/etc/arch-release]=arch
@@ -62,9 +38,7 @@ do
     fi
 done
 
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-
+message "INSTALL" "dependencies"
 sudo $INSTALL
 
 message "CONFIGURE" "display manager"
@@ -151,6 +125,14 @@ if [[ $OS_NAME = "debian" ]];then
     /bin/bash -c "$(curl --proto '=https' --tlsv1.2 -sSf https://setup.atuin.sh)"
     cd
 fi
+
+message "INSTALLING" "rofi-power-menu"
+if [[ -d $HOME/.packages/rofi-power-menu ]]; then
+    git -C $HOME/.packages/rofi-power-menu pull
+else
+    (cd $HOME/.packages/ && git clone --depth 1 https://github.com/jluttine/rofi-power-menu)
+fi
+sudo install $HOME/.packages/rofi-power-menu/rofi-power-menu /usr/bin/rofi-power-menu
 
 message "INSTALLING" "fonts"
 mkdir -p ~/.local/share/fonts

@@ -83,6 +83,14 @@ rm -rf $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
 git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
+if [[ $OS_NAME = "debian" ]];then
+    message "INSTALLING" "golang"
+    mkdir -p $HOME/.packages/golang
+    curl -L https://go.dev/dl/go1.22.2.linux-amd64.tar.gz -o $HOME/.packages/golang/go1.22.2.tar.gz
+    tar -xzf $HOME/.packages/golang/go1.22.2.tar.gz -C $HOME/.packages/golang
+    ln -s $HOME/.packages/golang/go/bin/go $HOME/.local/bin/go
+fi
+
 cd
 # on debian get fastfetch from github
 if [[ $OS_NAME = "debian" ]];then
@@ -130,7 +138,7 @@ message "INSTALLING" "rofi-power-menu"
 if [[ -d $HOME/.packages/rofi-power-menu ]]; then
     git -C $HOME/.packages/rofi-power-menu pull
 else
-    git clone --depth 1 https://github.com/jluttine/rofi-power-menu
+    (cd $HOME/.packages/ && git clone --depth 1 https://github.com/jluttine/rofi-power-menu)
 fi
 sudo install $HOME/.packages/rofi-power-menu/rofi-power-menu /usr/bin/rofi-power-menu
 

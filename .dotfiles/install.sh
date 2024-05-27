@@ -83,7 +83,7 @@ rm -rf $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
 git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
-if [[ $OS_NAME = "debian" ]] && ![[ -f $HOME/.local/bin/go ]];then
+if [[ $OS_NAME = "debian" ]] && [[ ! -f $HOME/.local/bin/go ]];then
     message "INSTALLING" "golang"
     mkdir -p $HOME/.packages/golang
     curl -L https://go.dev/dl/go1.22.2.linux-amd64.tar.gz -o $HOME/.packages/golang/go1.22.2.tar.gz
@@ -91,12 +91,12 @@ if [[ $OS_NAME = "debian" ]] && ![[ -f $HOME/.local/bin/go ]];then
     ln -s $HOME/.packages/golang/go/bin/go $HOME/.local/bin/go
 fi
 
-if [[ $OS_NAME = "debian" ]] && ![[ -f $HOME/.local/bin/zig ]];then
+if [[ $OS_NAME = "debian" ]] && [[ ! -f $HOME/.local/bin/zig ]];then
     message "INSTALLING" "zig"
     mkdir -p $HOME/.packages/zig
-    curl -L https://ziglang.org/builds/zig-linux-x86_64-0.13.0-dev.267+793f820b3.tar.xz -o $HOME/.packages/zig/zig0.13.tar.gz
-    tar -xzf $HOME/.packages/zig0.13.tar.gz
-    ln -s $HOME/.packages/zig/zig $HOME/.local/bin/zig
+    curl -L https://ziglang.org/download/0.12.0/zig-linux-x86_64-0.12.0.tar.xz -o $HOME/.packages/zig/zig-0.12.tar.xz
+    tar -xf $HOME/.packages/zig/zig-0.12.tar.xz -C $HOME/.packages/zig
+    ln -sf $HOME/.packages/zig/zig-linux-x86_64-0.12.0/zig $HOME/.local/bin/zig
 fi
 
 cd

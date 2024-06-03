@@ -24,8 +24,8 @@ GdmVersion[debian]='gdm3'
 GdmVersion[arch]='gdm'
 
 declare -A Install;
-Install[debian]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol curl playerctl nala sway-notification-center make cmake ninja-build gettext npm golang gawk bat jq openvpn network-manager-openvpn-gnome fzf'
-Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch make cmake npm go gawk bat atuin jq openvpn networkmanager-openvpn fzf'
+Install[debian]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol curl playerctl nala sway-notification-center make cmake ninja-build gettext npm gawk bat jq openvpn network-manager-openvpn-gnome fzf ripgrep'
+Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch make cmake npm go gawk bat atuin jq openvpn networkmanager-openvpn fzf ripgrep golang'
 
 INSTALL=''
 OS_NAME=''
@@ -82,6 +82,22 @@ message "CONFIGURE" "neovim"
 rm -rf $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
 git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+
+if [[ $OS_NAME = "debian" ]] && [[ ! -f $HOME/.local/bin/go ]];then
+    message "INSTALLING" "golang"
+    mkdir -p $HOME/.packages/golang
+    curl -L https://go.dev/dl/go1.22.2.linux-amd64.tar.gz -o $HOME/.packages/golang/go1.22.2.tar.gz
+    tar -xzf $HOME/.packages/golang/go1.22.2.tar.gz -C $HOME/.packages/golang
+    ln -s $HOME/.packages/golang/go/bin/go $HOME/.local/bin/go
+fi
+
+if [[ $OS_NAME = "debian" ]] && [[ ! -f $HOME/.local/bin/zig ]];then
+    message "INSTALLING" "zig"
+    mkdir -p $HOME/.packages/zig
+    curl -L https://ziglang.org/download/0.12.0/zig-linux-x86_64-0.12.0.tar.xz -o $HOME/.packages/zig/zig-0.12.tar.xz
+    tar -xf $HOME/.packages/zig/zig-0.12.tar.xz -C $HOME/.packages/zig
+    ln -sf $HOME/.packages/zig/zig-linux-x86_64-0.12.0/zig $HOME/.local/bin/zig
+fi
 
 cd
 # on debian get fastfetch from github

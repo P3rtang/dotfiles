@@ -24,7 +24,6 @@ return require('packer').startup(function(use)
     use "neovim/nvim-lspconfig"
 
     use 'simrat39/rust-tools.nvim'
-    use 'ray-x/go.nvim'
 
     -- Debugging
     use 'nvim-lua/plenary.nvim'
@@ -42,7 +41,7 @@ return require('packer').startup(function(use)
     use 'hrsh7th/vim-vsnip'
     use 'hrsh7th/vim-vsnip-integ'
 
-    use 'nvim-treesitter/nvim-treesitter'
+    use { 'nvim-treesitter/nvim-treesitter', tag = 'v0.9.2' }
 
     use 'junegunn/vim-easy-align'
 
@@ -77,4 +76,6 @@ return require('packer').startup(function(use)
     if packer_bootstrap then
         require('packer').sync()
     end
+
+    use "vim-scripts/AnsiEsc.vim"
 end)

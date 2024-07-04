@@ -1,11 +1,12 @@
 -- Vim keybinds
-vim.keymap.set('n', '<C-s>',      vim.cmd.wa,            {})
-vim.keymap.set('n', '<esc>',      ":noh<CR>",            {})
--- vim.keymap.set('n', '<C-m>',      vim.cmd.make,          {})
-vim.keymap.set('n', '<C-n>',      "<cmd>make tests<CR>", {})
+vim.keymap.set('n', '<C-s>', vim.cmd.wa, {})
+vim.keymap.set('n', '<esc>', ":noh<CR>", {})
+vim.keymap.set('n', '<leader>mm', "<cmd>terminal make<CR>i", {})
+vim.keymap.set('n', '<leader>mt', "<cmd>terminal make test<CR>i", {})
+vim.keymap.set('t', '<esc>', '<cmd>bd!<CR>')
 
 -- copy to clipboard
-vim.keymap.set('v', '<leader>y', '"+y', {noremap = true, remap = false})
+vim.keymap.set('v', '<leader>y', '"+y', { noremap = true, remap = false })
 
 -- navigation
 vim.keymap.set('n', 'gt', vim.cmd.tabnext, {})
@@ -28,7 +29,7 @@ vim.keymap.set('n', '<leader>ft', require "telescope".extensions.file_browser.fi
 vim.keymap.set('n', '<leader>ll', builtin.diagnostics, {})
 
 -- LSP keybinds
-local opts = { noremap=true, silent=true }
+local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)

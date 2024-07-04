@@ -1,4 +1,5 @@
 bleopt default_keymap=vi
+bleopt history_erasedups_limit=0
 
 function blerc/vim-mode-hook {
     # clear line when pressing ctrl+c in insert/normal mode

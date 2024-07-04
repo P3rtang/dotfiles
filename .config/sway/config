@@ -18,7 +18,9 @@ set $term foot
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
+
 set $menu rofi -show drun -theme .config/rofi/launchers/type-1/style-14.rasi
+set $term kitty
 
 exec waybar &
 exec nm-applet --indicator &
@@ -47,11 +49,12 @@ output * bg ~/Pictures/wallpapers/nausicaa.jpg fill
 #
 # Example configuration:
 #
-exec swayidle -w \
-          timeout 300 'swaylock -f -i $HOME/Pictures/wallpapers/factorio.jpg' \
+exec_always killall swayidle
+exec_always swayidle -w \
+          timeout 300 'if [ $(playerctl status) != "Playing" ]; then swaylock -f -i $(find $HOME/Pictures/wallpapers/ -maxdepth 1 | shuf -n 1); fi' \
           resume 'swaymsg "output * dpms on"' \
-          before-sleep 'swaylock -f -i $HOME/Pictures/wallpapers/factorio.jpg' \
-#
+          before-sleep 'swaylock -f -i $(find $HOME/Pictures/wallpapers/ -maxdepth 1 | shuf -n 1)' \
+
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
@@ -75,7 +78,7 @@ exec swayidle -w \
 # Basics:
 #
     # Start a terminal
-    bindsym $mod+Return exec kitty
+    bindsym $mod+Return exec $term
 
     # Kill focused window
     bindsym $mod+q kill

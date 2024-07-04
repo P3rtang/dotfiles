@@ -1,10 +1,9 @@
 # Add this lines at the top of .bashrc:
 [[ $- == *i* ]] && source $HOME/.packages/blesh/out/ble.sh --noattach
 
-alias ls='exa -la --header --icons --git --group-directories-first --color=auto'
+alias ls='exa -la --header --icons --git --group-directories-first --color=always'
 alias ll='exa -la --header --icons --git --group-directories-first --tree --level=2'
 alias mv='mv -i'
-alias rm='rm -rf'
 alias clear='clear && fastfetch'
 alias gitbare='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias cat='batcat'
@@ -13,16 +12,18 @@ alias vvim='bash -c vim'
 alias go='grc go'
 alias cdf='cd $(find . 2>/dev/null -type d -print | fzf)'
 alias hist='atuin search -i'
+alias top=btop
+alias htop=btop
 
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/p3rtang/.local/share/JetBrains/Toolbox/scripts:/home/p3rtang/local/bin:/home/p3rtang/.local/bin:/sbin:/snap/bin:$HOME/go/bin
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/p3rtang/.local/share/JetBrains/Toolbox/scripts:/home/p3rtang/local/bin:/home/p3rtang/.local/bin:/sbin:/snap/bin:$HOME/go/bin:$PATH
 export TERM=kitty
 export HOME=/home/p3rtang
 export LIBVIRT_DEFAULT_URI=qemu:///system
 export HISTSIZE=
-export HISTFILESIZE=
+export HISTFILESIZE=10000
 export EDITOR=nvim
 
-export HISTCONTROL=ignoreboth
+export HISTCONTROL=erasedups
 
 export PS1="\[\033[38;5;117m\]\u\[\033[38;5;229m\]@\[\033[38;5;212m\]\h \[\033[38;5;229m\]\w\[\033[80;250;123m\]\$(git_prompt)\[\033[0m\]\n ╰─\$ "
 
@@ -137,3 +138,5 @@ eval "$(atuin init bash)"
 
 # Add this line at the end of .bashrc:
 [[ ${BLE_VERSION-} ]] && ble-attach
+
+. "$HOME/.atuin/bin/env"

@@ -1,14 +1,12 @@
-local vim = vim
 local lspconfig = require("lspconfig")
 
 vim.filetype.add({ extension = { templ = "templ" } })
 
 local on_attach = function(_, bufnr)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
     -- Enable function signatures
+    require("lsp_signature").setup()
     require "lsp_signature".on_attach(signature_setup, bufnr)
+    vim.lsp.inlay_hint.enable(bufnr, false)
 
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -81,6 +79,35 @@ require("mason-lspconfig").setup {
                         },
                     },
                 },
+            }
+        end,
+        ["lua_ls"] = function ()
+            lspconfig["lua_ls"].setup {
+                on_init = function(client)
+                    if (client.config.settings.Lua == nil) then
+                        client.config.settings.Lua = {}
+                    end
+
+                    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+                        runtime = {
+                            -- Tell the language server which version of Lua you're using
+                            -- (most likely LuaJIT in the case of Neovim)
+                            version = 'LuaJIT'
+                        },
+                        -- Make the server aware of Neovim runtime files
+                        workspace = {
+                            checkThirdParty = false,
+                            library = {
+                                vim.env.VIMRUNTIME
+                                -- Depending on the usage, you might want to add additional paths here.
+                                -- "${3rd}/luv/library"
+                                -- "${3rd}/busted/library",
+                            }
+                            -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+                            -- library = vim.api.nvim_get_runtime_file("", true)
+                        }
+                    })
+                end
             }
         end
     }

@@ -24,8 +24,8 @@ GdmVersion[debian]='gdm3'
 GdmVersion[arch]='gdm'
 
 declare -A Install;
-Install[debian]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol curl playerctl nala sway-notification-center make cmake ninja-build gettext npm gawk bat jq openvpn network-manager-openvpn-gnome fzf ripgrep'
-Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch make cmake npm go gawk bat atuin jq openvpn networkmanager-openvpn fzf ripgrep golang'
+Install[debian]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol curl playerctl nala sway-notification-center make cmake ninja-build gettext npm gawk bat jq openvpn network-manager-openvpn-gnome fzf ripgrep gdb libx11-dev'
+Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch make cmake npm go gawk bat atuin jq openvpn networkmanager-openvpn fzf ripgrep golang gdb'
 
 INSTALL=''
 OS_NAME=''
@@ -55,25 +55,27 @@ mkdir -p $HOME/.dotfiles
 git --git-dir=$HOME/.dotfiles/ init --bare
 git --git-dir=$HOME/.dotfiles/ remote add origin https://github.com/p3rtang/dotfiles || true
 git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch origin
-/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout -f master
+# /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout -f master
 git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
-git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull
+# git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull
 
 if [[ $OS_NAME = "debian" ]];then
     if [[ -d $HOME/.packages/neovim/.git ]]; then
         message "UPDATE" "neovim"
-        cd $HOME/.packages/neovim
-        make CMAKE_BUILD_TYPE=RelWithDebInfo 
-        sudo make install
-        cd
+        (
+            cd $HOME/.packages/neovim
+            make CMAKE_BUILD_TYPE=RelWithDebInfo 
+            sudo make install
+        )
     else
         message "INSTALL" "neovim"
         rm -rf $HOME/.packages/neovim
         git clone --depth 1 https://github.com/neovim/neovim $HOME/.packages/neovim 
-        cd $HOME/.packages/neovim
-        make CMAKE_BUILD_TYPE=RelWithDebInfo 
-        sudo make install
-        cd
+        (
+            cd $HOME/.packages/neovim
+            make CMAKE_BUILD_TYPE=RelWithDebInfo 
+            sudo make install
+        )
     fi
 fi
 
@@ -83,7 +85,7 @@ rm -rf $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
 git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
-if [[ $OS_NAME = "debian" ]] && [[ ! -f $HOME/.local/bin/go ]];then
+if [[ $OS_NAME = "debian" ]] && [[ ! -L $HOME/.local/bin/go ]];then
     message "INSTALLING" "golang"
     mkdir -p $HOME/.packages/golang
     curl -L https://go.dev/dl/go1.22.2.linux-amd64.tar.gz -o $HOME/.packages/golang/go1.22.2.tar.gz
@@ -91,7 +93,7 @@ if [[ $OS_NAME = "debian" ]] && [[ ! -f $HOME/.local/bin/go ]];then
     ln -s $HOME/.packages/golang/go/bin/go $HOME/.local/bin/go
 fi
 
-if [[ $OS_NAME = "debian" ]] && [[ ! -f $HOME/.local/bin/zig ]];then
+if [[ $OS_NAME = "debian" ]] && [[ ! -L $HOME/.local/bin/zig ]];then
     message "INSTALLING" "zig"
     mkdir -p $HOME/.packages/zig
     curl -L https://ziglang.org/download/0.12.0/zig-linux-x86_64-0.12.0.tar.xz -o $HOME/.packages/zig/zig-0.12.tar.xz
@@ -99,7 +101,17 @@ if [[ $OS_NAME = "debian" ]] && [[ ! -f $HOME/.local/bin/zig ]];then
     ln -sf $HOME/.packages/zig/zig-linux-x86_64-0.12.0/zig $HOME/.local/bin/zig
 fi
 
-cd
+message "INSTALLING" "gf"
+if [[ ! -d $HOME/.packages/gf2 ]];then
+    git clone --depth 1 https://github.com/nakst/gf.git ~/.packages/gf2/
+fi
+(
+    cd $HOME/.packages/gf2
+    git pull
+    ./build.sh
+    ln -sf gf2 $HOME/.local/bin/gf2
+)
+
 # on debian get fastfetch from github
 if [[ $OS_NAME = "debian" ]];then
     message "INSTALLING" "fastfetch"

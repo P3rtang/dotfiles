@@ -100,7 +100,7 @@ exec_always swayidle -w \
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec rofi -show power-menu -modi power-menu:"rofi-power-menu --no-symbols --choices suspend/lockscreen/logout/reboot/shutdown" -theme .config/rofi/launchers/type-1/style-14.rasi
+    bindsym $mod+Shift+e exec rofi -show power-menu -modi power-menu:"rofi-power-menu --no-symbols --choices suspend/hibernate/lockscreen/logout/reboot/shutdown" -theme .config/rofi/launchers/type-1/style-14.rasi
 #
 # Moving around:
 #

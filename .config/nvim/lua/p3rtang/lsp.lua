@@ -6,7 +6,6 @@ local on_attach = function(_, bufnr)
     -- Enable function signatures
     require("lsp_signature").setup()
     require "lsp_signature".on_attach(signature_setup, bufnr)
-    vim.lsp.inlay_hint.enable(bufnr, false)
 
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions

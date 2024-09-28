@@ -27,6 +27,7 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>ft', require "telescope".extensions.file_browser.file_browser, {})
 vim.keymap.set('n', '<leader>ll', builtin.diagnostics, {})
+vim.keymap.set('n', '<leader>lt', vim.cmd.TodoTelescope, {})
 
 -- LSP keybinds
 local opts = { noremap = true, silent = true }

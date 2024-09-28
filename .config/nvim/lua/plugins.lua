@@ -78,4 +78,5 @@ return require('packer').startup(function(use)
     end
 
     use "vim-scripts/AnsiEsc.vim"
+    use { "folke/todo-comments.nvim", requires = 'nvim-lua/plenary.nvim' }
 end)

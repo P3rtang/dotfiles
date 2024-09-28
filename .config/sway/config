@@ -33,7 +33,9 @@ exec --no-startup-id gnome-keyring-daemon --start --components=pkcs11,secrets,ss
 
 assign [class="thunderbird"] 5
 
-output * bg ~/Pictures/wallpapers/nausicaa.jpg fill
+set $wallpaper $(find $HOME/Pictures/wallpapers/* -maxdepth 1 | shuf -n 1)
+
+output * bg $wallpaper fill
 
 ### Output configuration
 #
@@ -51,9 +53,9 @@ output * bg ~/Pictures/wallpapers/nausicaa.jpg fill
 #
 exec_always killall swayidle
 exec_always swayidle -w \
-          timeout 300 'if [ $(playerctl status) != "Playing" ]; then swaylock -f -i $(find $HOME/Pictures/wallpapers/ -maxdepth 1 | shuf -n 1); fi' \
+          timeout 300 'if [ $(playerctl status) != "Playing" ]; then swaylock -f -i $wallpaper; fi' \
           resume 'swaymsg "output * dpms on"' \
-          before-sleep 'swaylock -f -i $(find $HOME/Pictures/wallpapers/ -maxdepth 1 | shuf -n 1)' \
+          before-sleep 'swaylock -f -i $wallpaper' \
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when

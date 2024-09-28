@@ -9,6 +9,31 @@ message () {
 \033[0m"
 }
 
+ask_yes_no () {
+    case $3 in
+        "") 
+            prompt="[y/n]"
+            default="echo 'expected y or n as input' && ask_yes_no $1 $2"
+        ;;
+        "no") 
+            prompt="[y/N]"
+            default="echo skipping"
+        ;;
+        "yes")
+            prompt="[Y/n]"
+            default=$2
+        ;;
+    esac
+
+    read -p "$1 $prompt: " ys
+
+    case $ys in
+        [Yy]*) $2;;
+        [Nn]*) echo "skipping";;
+        "") $default
+    esac
+}
+
 set -e
 
 declare -A osInfo;
@@ -26,6 +51,10 @@ GdmVersion[arch]='gdm'
 declare -A Install;
 Install[debian]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol curl playerctl nala sway-notification-center make cmake ninja-build gettext npm gawk bat jq openvpn network-manager-openvpn-gnome fzf ripgrep gdb libx11-dev'
 Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch make cmake npm go gawk bat atuin jq openvpn networkmanager-openvpn fzf ripgrep golang gdb'
+
+declare -A packageManager;
+packageManager[debian]='nala install -y'
+packageManager[arch]='pacman -Sy --needed --noconfirm'
 
 INSTALL=''
 OS_NAME=''
@@ -81,9 +110,17 @@ fi
 
 message "CONFIGURE" "neovim"
 # install packer nvim
-rm -rf $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
-git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+if [[ ! -d $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim ]]; then
+    git clone --depth 1 https://github.com/wbthomason/packer.nvim $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
+else
+    (cd $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim && git pull)
+fi
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+
+message "CONFIGURE" "tmux"
+if [[ ! -d $HOME/.tmux/plugins/tpm ]]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
 
 if [[ $OS_NAME = "debian" ]] && [[ ! -L $HOME/.local/bin/go ]];then
     message "INSTALLING" "golang"
@@ -92,6 +129,43 @@ if [[ $OS_NAME = "debian" ]] && [[ ! -L $HOME/.local/bin/go ]];then
     tar -xzf $HOME/.packages/golang/go1.22.2.tar.gz -C $HOME/.packages/golang
     ln -s $HOME/.packages/golang/go/bin/go $HOME/.local/bin/go
 fi
+
+message "INSTALLING" "virtual machine dependencies"
+
+usermod_libvirt_group () {
+    sudo usermod -aG libvirt p3rtang
+}
+
+install_virt () {
+    case $OS_NAME in
+        "debian") sudo apt-get install -y virt-manager qemu-kvm virt-viewer ;;
+        "arch") ;;
+    esac
+
+    echo ""
+    ask_yes_no "Add user to the libvirt group?" usermod_libvirt_group "yes"
+}
+
+ask_yes_no "Install virtual machine dependencies?" install_virt "no"
+
+install_samba () {
+    case $OS_NAME in
+        "debian") sudo apt-get -y install samba ;;
+        "arch") sudo pacman -Sy --needed --noconfirm samba ;;
+    esac
+
+    sudo systemctl enable smbd && sudo systemctl start smbd
+    sudo systemctl enable nmbd && sudo systemctl start nmbd
+
+    read -p "New samba username?: " smb_username
+    sudo smbpasswd -a $smb_username
+
+    sudo systemctl restart smbd
+    sudo systemctl restart nmbd
+}
+
+message "INSTALLING" "samba"
+ask_yes_no "Set up samba?" install_samba "no"
 
 if [[ $OS_NAME = "debian" ]] && [[ ! -L $HOME/.local/bin/zig ]];then
     message "INSTALLING" "zig"

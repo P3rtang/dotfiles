@@ -4,7 +4,7 @@ message () {
     echo -e "\
 \033[96m
 ---------------------------------
-> $1 $2
+> $1
 ---------------------------------
 \033[0m"
 }
@@ -67,10 +67,10 @@ do
     fi
 done
 
-message "INSTALL" "dependencies"
+message "INSTALL dependencies"
 sudo $INSTALL
 
-message "CONFIGURE" "display manager"
+message "CONFIGURE display manager"
 if [[ $(systemctl is-active ${GdmVersion[$OS_NAME]}) = "inactive" ]];then
     sudo systemctl -q enable ${GdmVersion[$OS_NAME]}
     echo "Gdm enabled"
@@ -78,7 +78,7 @@ else
     echo "Gdm already active, skipping..."
 fi
 
-message "CONFIGURE" "dotfiles repo"
+message "CONFIGURE dotfiles repo"
 mkdir -p $HOME/.local/bin
 mkdir -p $HOME/.dotfiles
 git --git-dir=$HOME/.dotfiles/ init --bare
@@ -90,14 +90,14 @@ git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntra
 
 if [[ $OS_NAME = "debian" ]];then
     if [[ -d $HOME/.packages/neovim/.git ]]; then
-        message "UPDATE" "neovim"
+        message "UPDATING neovim"
         (
             cd $HOME/.packages/neovim
             make CMAKE_BUILD_TYPE=RelWithDebInfo 
             sudo make install
         )
     else
-        message "INSTALL" "neovim"
+        message "INSTALLING neovim"
         rm -rf $HOME/.packages/neovim
         git clone --depth 1 https://github.com/neovim/neovim $HOME/.packages/neovim 
         (
@@ -108,7 +108,7 @@ if [[ $OS_NAME = "debian" ]];then
     fi
 fi
 
-message "CONFIGURE" "neovim"
+message "CONFIGURE neovim"
 # install packer nvim
 if [[ ! -d $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim ]]; then
     git clone --depth 1 https://github.com/wbthomason/packer.nvim $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
@@ -117,20 +117,20 @@ else
 fi
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
-message "CONFIGURE" "tmux"
+message "CONFIGURE tmux"
 if [[ ! -d $HOME/.tmux/plugins/tpm ]]; then
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
 if [[ $OS_NAME = "debian" ]] && [[ ! -L $HOME/.local/bin/go ]];then
-    message "INSTALLING" "golang"
+    message "INSTALLING golang"
     mkdir -p $HOME/.packages/golang
     curl -L https://go.dev/dl/go1.22.2.linux-amd64.tar.gz -o $HOME/.packages/golang/go1.22.2.tar.gz
     tar -xzf $HOME/.packages/golang/go1.22.2.tar.gz -C $HOME/.packages/golang
     ln -s $HOME/.packages/golang/go/bin/go $HOME/.local/bin/go
 fi
 
-message "INSTALLING" "virtual machine dependencies"
+message "INSTALLING virtual machine dependencies"
 
 usermod_libvirt_group () {
     sudo usermod -aG libvirt p3rtang
@@ -164,18 +164,18 @@ install_samba () {
     sudo systemctl restart nmbd
 }
 
-message "INSTALLING" "samba"
+message "INSTALLING samba"
 ask_yes_no "Set up samba?" install_samba "no"
 
 if [[ $OS_NAME = "debian" ]] && [[ ! -L $HOME/.local/bin/zig ]];then
-    message "INSTALLING" "zig"
+    message "INSTALLING zig"
     mkdir -p $HOME/.packages/zig
     curl -L https://ziglang.org/download/0.12.0/zig-linux-x86_64-0.12.0.tar.xz -o $HOME/.packages/zig/zig-0.12.tar.xz
     tar -xf $HOME/.packages/zig/zig-0.12.tar.xz -C $HOME/.packages/zig
     ln -sf $HOME/.packages/zig/zig-linux-x86_64-0.12.0/zig $HOME/.local/bin/zig
 fi
 
-message "INSTALLING" "gf"
+message "INSTALLING gf"
 if [[ ! -d $HOME/.packages/gf2 ]];then
     git clone --depth 1 https://github.com/nakst/gf.git ~/.packages/gf2/
 fi
@@ -188,7 +188,7 @@ fi
 
 # on debian get fastfetch from github
 if [[ $OS_NAME = "debian" ]];then
-    message "INSTALLING" "fastfetch"
+    message "INSTALLING fastfetch"
     curl -L --create-dirs -o $HOME/.packages/fastfetch/fastfetch.deb \
     $(curl -L \
         -H "Accept: application/vnd.github+json" \
@@ -201,7 +201,7 @@ fi
 
 # on arch get swaync from aur
 if [[ $OS_NAME = "arch" ]];then
-    message "INSTALLING" "swaync"
+    message "INSTALLING swaync"
     if [[ -f $HOME/.packages/swaync/PKGBUILD ]];then
         (cd $HOME/.packages/swaync && git pull)
     elif [[ -d $HOME/.packages/swaync ]];then
@@ -213,7 +213,7 @@ if [[ $OS_NAME = "arch" ]];then
     (cd $HOME/.packages/swaync && makepkg -si --noconfirm ~/.packages/swaync/PKGBUILD)
 fi
 
-message "INSTALLING" "ble.sh"
+message "INSTALLING ble.sh"
 if [[ -d $HOME/.packages/blesh ]]; then
     git -C $HOME/.packages/blesh pull
 else
@@ -222,13 +222,13 @@ fi
 make -C $HOME/.packages/blesh install PREFIX=$HOME/.local
 
 if [[ $OS_NAME = "debian" ]];then
-    message "INSTALLING" "atuin"
+    message "INSTALLING atuin"
     cd $HOME/.packages
     /bin/bash -c "$(curl --proto '=https' --tlsv1.2 -sSf https://setup.atuin.sh)"
     cd
 fi
 
-message "INSTALLING" "rofi-power-menu"
+message "INSTALLING rofi-power-menu"
 if [[ -d $HOME/.packages/rofi-power-menu ]]; then
     git -C $HOME/.packages/rofi-power-menu pull
 else
@@ -236,14 +236,14 @@ else
 fi
 sudo install $HOME/.packages/rofi-power-menu/rofi-power-menu /usr/bin/rofi-power-menu
 
-message "INSTALLING" "fonts"
+message "INSTALLING fonts"
 mkdir -p ~/.local/share/fonts
 (cd .local/share/fonts && curl -O https://dtinth.github.io/comic-mono-font/ComicMono.ttf) 
 
 curl https://use.fontawesome.com/releases/v6.3.0/fontawesome-free-6.3.0-desktop.zip -o ~/.local/share/fonts/fontawesome-free-6.3.0-desktop.zip
 unzip -qq -o ~/.local/share/fonts/fontawesome-free-6.3.0-desktop.zip -d $HOME/.local/share/fonts
 
-message "INSTALLING" "wallpapers"
+message "INSTALLING wallpapers"
 mkdir -p Pictures/wallpapers
 curl https://wallpapercave.com/wp/wp4616344.jpg --create-dirs -o ~/Pictures/wallpapers/factorio.jpg
 curl https://i.imgur.com/Jj0zk7c.jpeg --create-dirs -o ~/Pictures/wallpapers/nausicaa.jpg

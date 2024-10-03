@@ -268,3 +268,11 @@ message "INSTALLING wallpapers"
 mkdir -p Pictures/wallpapers
 curl https://wallpapercave.com/wp/wp4616344.jpg --create-dirs -o ~/Pictures/wallpapers/factorio.jpg
 curl https://i.imgur.com/Jj0zk7c.jpeg --create-dirs -o ~/Pictures/wallpapers/nausicaa.jpg
+cd
+mkdir -p .local/share/fonts
+wget https://dtinth.github.io/comic-mono-font/ComicMono.ttf -P .local/share/fonts
+cd .local/share/fonts
+unzip fontawesome-free-5.15.4-desktop.zip
+cd ~
+mkdir -p Pictures/wallpapers
+wget -O ~/Pictures/wallpapers/factorio.jpg https://wallpapercave.com/wp/wp4616344.jpg

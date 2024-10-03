@@ -29,6 +29,36 @@ vim.keymap.set('n', '<leader>ft', require "telescope".extensions.file_browser.fi
 vim.keymap.set('n', '<leader>ll', builtin.diagnostics, {})
 vim.keymap.set('n', '<leader>lt', vim.cmd.TodoTelescope, {})
 
+-- make + quickfix
+vim.keymap.set('n', '<C-n>', function ()
+    vim.opt.errorformat = { "%Eerror%m,%C%.%#--> %f:%l:%c,%Z,%A,%-C,%Z" }
+    vim.opt.makeprg = "make"
+    vim.cmd.make()
+
+    local function check_valid_filename(entry)
+        local filename = vim.fn.bufname(entry.bufnr)
+        return filename and #filename > 0 and entry.lnum ~= 0
+    end
+
+    local function filter(func, t)
+        local result = {}
+        for _, v in ipairs(t) do -- Using ipairs for array-like tables
+            if func(v) then
+                table.insert(result, v)
+            end
+        end
+        return result
+    end
+
+    local qflist = vim.fn.getqflist()
+    local filtered_qflist = filter(check_valid_filename, qflist)
+
+    if #filtered_qflist > 0 then
+        vim.cmd.copen()
+    end
+end, { noremap = true })
+
+
 -- LSP keybinds
 local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)

@@ -1,9 +1,13 @@
+package.path = "../../init.lua"
+require("helper_func")
+
 -- Vim keybinds
 vim.keymap.set('n', '<C-s>', vim.cmd.wa, {})
 vim.keymap.set('n', '<esc>', ":noh<CR>", {})
-vim.keymap.set('n', '<leader>mm', "<cmd>terminal make<CR>i", {})
-vim.keymap.set('n', '<leader>mt', "<cmd>terminal make test<CR>i", {})
 vim.keymap.set('t', '<esc>', '<cmd>bd!<CR>')
+vim.keymap.set('n', '<leader>ss', function ()
+    ReloadConfig()
+end, {})
 
 -- copy to clipboard
 vim.keymap.set('v', '<leader>y', '"+y', { noremap = true, remap = false })
@@ -13,6 +17,8 @@ vim.keymap.set('n', 'gt', vim.cmd.tabnext, {})
 vim.keymap.set('n', 'gT', vim.cmd.tabprevious, {})
 vim.keymap.set('n', 'gb', vim.cmd.bn, {})
 vim.keymap.set('n', 'gB', vim.cmd.bp, {})
+vim.keymap.set('n', '<leader>bd', vim.cmd.bd, { noremap = true })
+vim.keymap.set('n', '<leader>bD', "<cmd>bd#<CR>", {})
 
 -- Editing
 vim.keymap.set('n', '<M-j>', "<cmd>m +1<CR>")
@@ -30,34 +36,60 @@ vim.keymap.set('n', '<leader>ll', builtin.diagnostics, {})
 vim.keymap.set('n', '<leader>lt', vim.cmd.TodoTelescope, {})
 
 -- make + quickfix
-vim.keymap.set('n', '<C-n>', function ()
-    vim.opt.errorformat = { "%Eerror%m,%C%.%#--> %f:%l:%c,%Z,%A,%-C,%Z" }
-    vim.opt.makeprg = "make"
+vim.opt.errorformat = {
+    -- rust
+    "%Eerror[E%n]: %m,%Z%.%#--> %f:%l:%c",
+    "%Wwarning: %m,%Z%.%#--> %f:%l:%c",
+
+    -- zig
+    "%f:%l:%c: error: %m",
+
+    -- ignore if file is in zig std lib
+    "%-C%.%#packages%.%#",
+    "%-G%.%#packages%.%#",
+
+    -- zig file in test output
+    "%Z%f:%l:%c: %.%#",
+
+    "%f:%l:%c: %.%#",
+
+
+    "%E%.%# panic: %m",
+
+    -- info
+    "%f:%l:%c: [%tNFO] %m",
+    "%f:%l: [%tNFO] %m",
+}
+
+vim.opt.makeprg = "make"
+
+vim.keymap.set('n', '<leader>mm', function ()
     vim.cmd.make()
-
-    local function check_valid_filename(entry)
-        local filename = vim.fn.bufname(entry.bufnr)
-        return filename and #filename > 0 and entry.lnum ~= 0
-    end
-
-    local function filter(func, t)
-        local result = {}
-        for _, v in ipairs(t) do -- Using ipairs for array-like tables
-            if func(v) then
-                table.insert(result, v)
-            end
-        end
-        return result
-    end
-
-    local qflist = vim.fn.getqflist()
-    local filtered_qflist = filter(check_valid_filename, qflist)
-
-    if #filtered_qflist > 0 then
-        vim.cmd.copen()
-    end
+    CheckQuickfix()
 end, { noremap = true })
 
+vim.keymap.set('n', '<leader>mt', function ()
+    vim.opt.makeprg = "make test"
+    vim.cmd.make()
+    vim.opt.makeprg = "make"
+end)
+
+vim.keymap.set('n', '<leader>mc', function()
+    local old_make = vim.opt.makeprg
+    vim.opt.makeprg = "make check"
+    vim.cmd.make()
+    CheckQuickfix()
+    vim.opt.makeprg = old_make
+end, { noremap = true })
+vim.keymap.set('n', '<leader>co', vim.cmd.copen)
+vim.keymap.set('n', '<leader>cn', function()
+    vim.cmd.cn()
+    vim.cmd.copen()
+end, { noremap = true })
+vim.keymap.set('n', '<leader>cp', function ()
+    vim.cmd.cp()
+    vim.cmd.copen()
+end, { noremap = true })
 
 -- LSP keybinds
 local opts = { noremap = true, silent = true }

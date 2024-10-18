@@ -33,7 +33,7 @@ exec --no-startup-id gnome-keyring-daemon --start --components=pkcs11,secrets,ss
 
 assign [class="thunderbird"] 5
 
-set $wallpaper $(find $HOME/Pictures/wallpapers/* -maxdepth 1 | shuf -n 1)
+set $wallpaper $(find $HOME/Pictures/wallpapers/* -maxdepth 1 -type f | shuf -n 1)
 
 output * bg $wallpaper fill
 

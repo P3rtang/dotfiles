@@ -49,7 +49,11 @@ GdmVersion[debian]='gdm3'
 GdmVersion[arch]='gdm'
 
 declare -A Install;
-Install[debian]='apt-get install -y gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol curl playerctl nala sway-notification-center make cmake ninja-build gettext npm gawk bat jq openvpn network-manager-openvpn-gnome fzf ripgrep gdb libx11-dev'
+Install[debian]='apt-get install -y \
+    gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol curl playerctl \
+    nala sway-notification-center make cmake ninja-build gettext npm gawk bat jq openvpn \
+    network-manager-openvpn-gnome fzf ripgrep gdb libx11-dev swaylock swayidle \
+'
 Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch make cmake npm go gawk bat atuin jq openvpn networkmanager-openvpn fzf ripgrep golang gdb'
 
 declare -A packageManager;
@@ -235,6 +239,23 @@ else
     (cd $HOME/.packages/ && git clone --depth 1 https://github.com/jluttine/rofi-power-menu)
 fi
 sudo install $HOME/.packages/rofi-power-menu/rofi-power-menu /usr/bin/rofi-power-menu
+
+message "INSTALLING zen-browser"
+install_zen_browser () {
+    case $OS_NAME in
+        # TODO: Add install methods for both arch and debian with distrobox
+        # WARN: Dont forget to install base-devel in the distrobox container
+        "debian") echo "TODO! install with distrobox";;
+        "arch") (
+            cd .packages
+            git clone https://aur.archlinux.org/zen-browser-bin.git
+            cd zen-browser-bin
+            makepkg -si
+        ) ;;
+    esac
+}
+
+ask_yes_no "Install zen-browser?" install_zen_browser "no"
 
 message "INSTALLING fonts"
 mkdir -p ~/.local/share/fonts

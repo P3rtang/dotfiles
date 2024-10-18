@@ -1,6 +1,7 @@
 vim.g.mapleader = ' '
 
 require("plugins")
+require("helper_func")
 require("p3rtang.set")
 require("p3rtang.nvim-cmp")
 require("p3rtang.keybinds")

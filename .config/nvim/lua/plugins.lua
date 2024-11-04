@@ -79,4 +79,5 @@ return require('packer').startup(function(use)
 
     use "vim-scripts/AnsiEsc.vim"
     use { "folke/todo-comments.nvim", requires = 'nvim-lua/plenary.nvim' }
+    use { "prettier/vim-prettier", run = "yarn install" }
 end)

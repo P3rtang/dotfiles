@@ -1,6 +1,7 @@
 local lspconfig = require("lspconfig")
 
 vim.filetype.add({ extension = { templ = "templ" } })
+vim.cmd("au BufWritePre *.tsx,*.ts,*.js,*.html,*.css  Prettier")
 
 local on_attach = function(_, bufnr)
     -- Enable function signatures

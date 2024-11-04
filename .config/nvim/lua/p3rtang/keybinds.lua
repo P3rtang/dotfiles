@@ -24,6 +24,13 @@ vim.keymap.set('n', '<leader>bD', "<cmd>bd#<CR>", {})
 vim.keymap.set('n', '<M-j>', "<cmd>m +1<CR>")
 vim.keymap.set('n', '<M-k>', "<cmd>m -2<CR>")
 
+-- Spell Checking
+vim.opt.spelllang = 'en_us'
+vim.opt.spelloptions = 'camel'
+vim.keymap.set('n', '<leader>cs', function ()
+    vim.opt.spell = not(vim.opt.spell:get())
+end, {})
+
 -- Telescope keybinds
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})

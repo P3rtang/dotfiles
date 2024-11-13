@@ -81,4 +81,5 @@ return require('packer').startup(function(use)
     use { "folke/todo-comments.nvim", requires = 'nvim-lua/plenary.nvim' }
     use "nvim-orgmode/orgmode"
     use { "prettier/vim-prettier", run = "yarn install" }
+    use "nvim-orgmode/orgmode"
 end)

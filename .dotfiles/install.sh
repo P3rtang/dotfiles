@@ -52,7 +52,8 @@ declare -A Install;
 Install[debian]='apt-get install -y \
     gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol curl playerctl \
     nala sway-notification-center make cmake ninja-build gettext npm gawk bat jq openvpn \
-    network-manager-openvpn-gnome fzf ripgrep gdb libx11-dev swaylock swayidle \
+    network-manager-openvpn-gnome fzf ripgrep gdb libx11-dev swaylock swayidle grim imagemagick \
+    wl-clipboard \
 '
 Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch make cmake npm go gawk bat atuin jq openvpn networkmanager-openvpn fzf ripgrep golang gdb'
 
@@ -215,6 +216,23 @@ if [[ $OS_NAME = "arch" ]];then
         git clone https://aur.archlinux.org/swaync.git ~/.packages/swaync/
     fi
     (cd $HOME/.packages/swaync && makepkg -si --noconfirm ~/.packages/swaync/PKGBUILD)
+fi
+
+message "INSTALLING wl-color-picker"
+if [[ $OS_NAME = "arch" ]];then
+    (
+        cd $HOME/.packages;
+        git clone https://aur.archlinux.org/wl-color-picker.git;
+        cd wl-color-picker;
+        makepkg -si
+    )
+elif [[ $OS_NAME = "debian" ]];then
+    (
+        cd $HOME/.packages;
+        git clone https://github.com/jgmdev/wl-color-picker 
+        cd wl-color-picker;
+        sudo make install;
+    )
 fi
 
 message "INSTALLING ble.sh"

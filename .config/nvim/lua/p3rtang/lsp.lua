@@ -44,6 +44,13 @@ vim.diagnostic.config{
     float={border="single"}
 }
 
+local format_sync_grp = vim.api.nvim_create_augroup("AutoFormat", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = { "*.go", "*.rs", "*.gleam" },
+    callback = function() vim.lsp.buf.format { async = true } end,
+    group = format_sync_grp,
+})
+
 require("mason").setup()
 require("mason-lspconfig").setup {
     ensure_installed = { "rust_analyzer", "cssls", "cssmodules_ls", "pyright", "gopls" },
@@ -112,3 +119,5 @@ require("mason-lspconfig").setup {
         end
     }
 }
+
+lspconfig.gleam.setup({})

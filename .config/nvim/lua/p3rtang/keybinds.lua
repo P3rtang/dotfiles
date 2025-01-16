@@ -4,7 +4,7 @@ require("helper_func")
 -- Vim keybinds
 vim.keymap.set('n', '<C-s>', vim.cmd.wa, {})
 vim.keymap.set('n', '<esc>', ":noh<CR>", {})
-vim.keymap.set('t', '<esc>', '<cmd>bd!<CR>')
+vim.keymap.set('t', '<C-c>', '<cmd>bd!<CR>')
 vim.keymap.set('n', '<leader>ss', function ()
     ReloadConfig()
 end, {})
@@ -69,9 +69,11 @@ vim.keymap.set('n', '<leader>mm', function ()
 end, { noremap = true })
 
 vim.keymap.set('n', '<leader>mt', function ()
+    local old_make = vim.opt.makeprg
     vim.opt.makeprg = "make test"
     vim.cmd.make()
-    vim.opt.makeprg = "make"
+    CheckQuickfix()
+    vim.opt.makeprg = old_make
 end)
 
 vim.keymap.set('n', '<leader>mc', function()

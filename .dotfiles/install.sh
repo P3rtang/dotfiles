@@ -49,13 +49,13 @@ GdmVersion[debian]='gdm3'
 GdmVersion[arch]='gdm'
 
 declare -A Install;
-Install[debian]='apt-get install -y \
+Install[debian]="apt-get install -y \
     gdm3 sway waybar git exa kitty rofi unzip cifs-utils tmux pavucontrol curl playerctl \
     nala sway-notification-center make cmake ninja-build gettext npm gawk bat jq openvpn \
     network-manager-openvpn-gnome fzf ripgrep gdb libx11-dev swaylock swayidle grim imagemagick \
-    wl-clipboard \
-'
-Install[arch]='pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch make cmake npm go gawk bat atuin jq openvpn networkmanager-openvpn fzf ripgrep golang gdb'
+    wl-clipboard distrobox \
+"
+Install[arch]="pacman -Sy --needed --noconfirm gdm sway swaybg waybar git exa kitty rofi firefox unzip ttf-dejavu cifs-utils tmux npm base-devel pavucontrol neovim curl playerctl fastfetch make cmake npm go gawk bat atuin jq openvpn networkmanager-openvpn fzf ripgrep golang gdb"
 
 declare -A packageManager;
 packageManager[debian]='nala install -y'
@@ -229,9 +229,11 @@ if [[ $OS_NAME = "arch" ]];then
 elif [[ $OS_NAME = "debian" ]];then
     (
         cd $HOME/.packages;
-        git clone https://github.com/jgmdev/wl-color-picker 
-        cd wl-color-picker;
-        sudo make install;
+        if [[ ! -d ./wl-color-picker ]]; then
+            git clone https://github.com/jgmdev/wl-color-picker 
+            cd wl-color-picker;
+            sudo make install;
+        fi
     )
 fi
 

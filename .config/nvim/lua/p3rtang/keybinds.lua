@@ -36,10 +36,12 @@ vim.keymap.set('n', '<leader>ll', builtin.diagnostics, {})
 vim.keymap.set('n', '<leader>lt', vim.cmd.TodoTelescope, {})
 
 -- make + quickfix
+-- TODO: move this to separate onBufEnter functions
 vim.opt.errorformat = {
     -- rust
     "%Eerror[E%n]: %m,%Z%.%#--> %f:%l:%c",
     "%Wwarning: %m,%Z%.%#--> %f:%l:%c",
+    "%.%#--> %f:%l:%c",
 
     -- zig
     "%f:%l:%c: error: %m",
@@ -63,35 +65,26 @@ vim.opt.errorformat = {
 
 vim.opt.makeprg = "make"
 
-vim.keymap.set('n', '<leader>mm', function ()
-    vim.cmd.make()
-    CheckQuickfix()
+local term_channel = 0
+
+vim.keymap.set('n', '<leader>tm', function()
+    vim.cmd.new()
+    vim.cmd.term()
+    vim.cmd.wincmd("J")
+    vim.api.nvim_win_set_height(0, 10)
+
+    term_channel = vim.bo.channel
 end, { noremap = true })
 
-vim.keymap.set('n', '<leader>mt', function ()
-    local old_make = vim.opt.makeprg
-    vim.opt.makeprg = "make test"
-    vim.cmd.make()
-    CheckQuickfix()
-    vim.opt.makeprg = old_make
-end)
-
-vim.keymap.set('n', '<leader>mc', function()
-    local old_make = vim.opt.makeprg
-    vim.opt.makeprg = "make check"
-    vim.cmd.make()
-    CheckQuickfix()
-    vim.opt.makeprg = old_make
+vim.keymap.set('n', '<leader>cb', function ()
+    vim.cmd.cb()
+    vim.cmd.q()
+    vim.cmd.copen()
 end, { noremap = true })
+
 vim.keymap.set('n', '<leader>co', vim.cmd.copen)
-vim.keymap.set('n', '<leader>cn', function()
-    vim.cmd.cn()
-    vim.cmd.copen()
-end, { noremap = true })
-vim.keymap.set('n', '<leader>cp', function ()
-    vim.cmd.cp()
-    vim.cmd.copen()
-end, { noremap = true })
+vim.keymap.set('n', '<leader>cn', vim.cmd.cn, { noremap = true })
+vim.keymap.set('n', '<leader>cp', vim.cmd.cp, { noremap = true })
 
 -- LSP keybinds
 local opts = { noremap = true, silent = true }

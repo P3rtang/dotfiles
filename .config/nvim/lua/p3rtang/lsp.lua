@@ -53,7 +53,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "rust_analyzer", "cssls", "cssmodules_ls", "pyright", "gopls" },
     handlers = {
         function (lsp)
             lspconfig[lsp].setup{ on_attach = on_attach }
@@ -121,3 +120,6 @@ require("mason-lspconfig").setup {
 }
 
 lspconfig.gleam.setup({})
+lspconfig.cssls.setup({
+  capabilities = { textDocument = { completion = { completionItem = { snippetSupport = true } } } },
+})

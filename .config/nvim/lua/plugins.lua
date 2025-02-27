@@ -50,6 +50,11 @@ return require('packer').startup(function(use)
     use 'tpope/vim-fugitive'
     use 'tpope/vim-commentary'
     use 'tpope/vim-surround'
+    use 'tpope/vim-rhubarb'
+
+    -- Database management
+    use 'tpope/vim-dadbod'
+    use 'kristijanhusak/vim-dadbod-ui'
 
     use 'alvan/vim-closetag'
 

@@ -10,6 +10,13 @@ require'nvim-treesitter.configs'.setup {
 }
 
 require('orgmode').setup({
-    org_agenda_files = {'~/Dropbox/org/*', '~/my-orgs/**/*'},
+    org_agenda_files = {'~/Dropbox/org/*'},
     org_default_notes_file = '~/Dropbox/org/refile.org',
+    mappings = {
+        note = {
+            org_toggle_checkbox = 'kk'
+        }
+    }
 })
+
+vim.keymap.set('n', '<leader>cc', '<cmd>lua require("orgmode").action("org_toggle_checkbox")<CR>')

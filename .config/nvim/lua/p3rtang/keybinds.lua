@@ -1,6 +1,3 @@
-package.path = "../../init.lua"
-require("helper_func")
-
 -- Vim keybinds
 vim.keymap.set('n', '<C-s>', vim.cmd.wa, {})
 vim.keymap.set('n', '<esc>', ":noh<CR>", {})
@@ -35,52 +32,13 @@ vim.keymap.set('n', '<leader>ft', require "telescope".extensions.file_browser.fi
 vim.keymap.set('n', '<leader>ll', builtin.diagnostics, {})
 vim.keymap.set('n', '<leader>lt', vim.cmd.TodoTelescope, {})
 
--- make + quickfix
--- TODO: move this to separate onBufEnter functions
-vim.opt.errorformat = {
-    -- rust
-    "%Eerror[E%n]: %m,%Z%.%#--> %f:%l:%c",
-    "%Wwarning: %m,%Z%.%#--> %f:%l:%c",
-    "%.%#--> %f:%l:%c",
-
-    -- zig
-    "%f:%l:%c: error: %m",
-
-    -- ignore if file is in zig std lib
-    "%-C%.%#packages%.%#",
-    "%-G%.%#packages%.%#",
-
-    -- zig file in test output
-    "%Z%f:%l:%c: %.%#",
-
-    "%f:%l:%c: %.%#",
-
-
-    "%E%.%# panic: %m",
-
-    -- info
-    "%f:%l:%c: [%tNFO] %m",
-    "%f:%l: [%tNFO] %m",
-}
-
-vim.opt.makeprg = "make"
-
-local term_channel = 0
-
-vim.keymap.set('n', '<leader>tm', function()
-    vim.cmd.new()
-    vim.cmd.term()
-    vim.cmd.wincmd("J")
-    vim.api.nvim_win_set_height(0, 10)
-
-    term_channel = vim.bo.channel
-end, { noremap = true })
-
 vim.keymap.set('n', '<leader>cb', function ()
     vim.cmd.cb()
-    vim.cmd.q()
-    vim.cmd.copen()
+    vim.cmd("bd!")
 end, { noremap = true })
+
+-- exit terminal mode with ESC
+vim.keymap.set('t', '<ESC>', '<C-\\><C-n>');
 
 vim.keymap.set('n', '<leader>co', vim.cmd.copen)
 vim.keymap.set('n', '<leader>cn', vim.cmd.cn, { noremap = true })

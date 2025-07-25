@@ -113,28 +113,6 @@ if [[ $OS_NAME = "debian" ]];then
     fi
 fi
 
-message "CONFIGURE neovim"
-# install packer nvim
-if [[ ! -d $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim ]]; then
-    git clone --depth 1 https://github.com/wbthomason/packer.nvim $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
-else
-    (cd $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim && git pull)
-fi
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-
-message "CONFIGURE tmux"
-if [[ ! -d $HOME/.tmux/plugins/tpm ]]; then
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi
-
-if [[ $OS_NAME = "debian" ]] && [[ ! -L $HOME/.local/bin/go ]];then
-    message "INSTALLING golang"
-    mkdir -p $HOME/.packages/golang
-    curl -L https://go.dev/dl/go1.22.2.linux-amd64.tar.gz -o $HOME/.packages/golang/go1.22.2.tar.gz
-    tar -xzf $HOME/.packages/golang/go1.22.2.tar.gz -C $HOME/.packages/golang
-    ln -s $HOME/.packages/golang/go/bin/go $HOME/.local/bin/go
-fi
-
 message "INSTALLING virtual machine dependencies"
 
 usermod_libvirt_group () {

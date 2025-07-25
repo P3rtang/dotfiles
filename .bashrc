@@ -1,18 +1,21 @@
-# Add this lines at the top of .bashrc:
-[[ $- == *i* ]] && source $HOME/.packages/blesh/out/ble.sh --noattach
+[[ $- == *i* ]] && source ~/.local/share/blesh/ble.sh --noattach
 
-alias ls='exa -la --header --icons --git --group-directories-first --color=always'
-alias ll='exa -la --header --icons --git --group-directories-first --tree --level=2'
+# Add this lines at the top of .bashrc:
+term=$(basename "/"$(ps -o cmd -f -p $(cat /proc/$(echo $$)/stat | cut -d \  -f 4) | tail -1 | sed 's/ .*$//'))
+
+alias ls='eza -la --header --icons --git --group-directories-first --color=always'
+alias ll='eza -la --header --icons --git --group-directories-first --tree --level=2'
 alias mv='mv -i'
 alias clear='clear && fastfetch'
 alias gitbare='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias cat='batcat'
+alias cat='bat'
 alias vim='nvim'
 alias go='grc go'
 alias cdf='cd "$(find / 2>/dev/null -type d -print | fzf)"'
 alias hist='atuin search -i'
 alias top=btop
 alias htop=btop
+alias ctop='TERM=screen-256color ctop'
 
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/p3rtang/.local/share/JetBrains/Toolbox/scripts:/home/p3rtang/local/bin:/home/p3rtang/.local/bin:/sbin:/snap/bin:$HOME/go/bin:$PATH
 export TERM=kitty
@@ -142,11 +145,12 @@ fi
 #                              |/                                     
 
 # EOF
-fastfetch
-
 eval "$(atuin init bash)"
 
-# Add this line at the end of .bashrc:
-[[ ${BLE_VERSION-} ]] && ble-attach
-
 . "$HOME/.atuin/bin/env"
+
+# Add this line at the end of .bashrc:
+fastfetch
+echo ""
+
+[[ ! ${BLE_VERSION-} ]] || ble-attach

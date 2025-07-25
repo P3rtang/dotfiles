@@ -8,9 +8,27 @@
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces"],
-    "modules-center": ["sway/window"],
-    "modules-right": ["network", "network#speedup", "network#speeddown", "pulseaudio", "custom/play-pause", "cpu", "memory", "temperature", "idle_inhibitor", "custom/notification", "battery", "clock", "tray"],
+    "modules-left": [
+        "sway/workspaces"
+    ],
+    "modules-center": [
+        "sway/window"
+    ],
+    "modules-right": [
+        "network",
+        "network#speedup",
+        "network#speeddown",
+        "pulseaudio",
+        "custom/play-pause",
+        "cpu",
+        "memory",
+        "temperature",
+        "idle_inhibitor",
+        "custom/notification",
+        "battery",
+        "clock",
+        "tray"
+    ],
     // Modules configuration
     "sway/workspaces": {
         "disable-scroll": true,
@@ -29,7 +47,7 @@
     },
     "sway/window": {
         "max-length": 120,
-        "format": "<span font=\"Comic Mono\">{}</span>",
+        "format": "<span font=\"Comic Mono\">{text}</span>",
     },
     "keyboard-state": {
         "numlock": true,
@@ -70,6 +88,7 @@
         "tooltip-format-disconnected": "MPD (disconnected)"
     },
     "idle_inhibitor": {
+        "on-click": "",
         "format": "{icon}",
         "format-icons": {
             "activated": "",
@@ -101,12 +120,27 @@
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", "", ""]
+        "format-icons": [
+            "",
+            "",
+            "",
+            ""
+        ]
     },
     "backlight": {
         // "device": "acpi_video1",
         "format": "{percent}% {icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
     },
     "battery": {
         "states": {
@@ -122,12 +156,18 @@
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
     },
     "battery#bat2": {
         "bat": "BAT2"
     },
-    "network": { 
+    "network": {
         // "interface": "nm-bridge", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
         "format-ethernet": " {ipaddr}",
@@ -161,7 +201,11 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", "", ""]
+            "default": [
+                "",
+                "",
+                ""
+            ]
         },
         "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
         "on-click-right": "pavucontrol"
@@ -193,22 +237,21 @@
         "on-click": "$HOME/.config/waybar/sway-idle-toggle.py -t",
         "exec": "$HOME/.config/waybar/sway-idle-toggle.py -c",
         "exec-on-event": true,
-     },
-     "custom/notification": {
-            "tooltip": false,
-            "format": "{icon} {}",
-            "format-icons": {
-                 "notification": "",
-                 "none": "",
-                 "dnd-notification": "",
-                 "dnd-none": ""
-            },
-            "return-type": "json",
-            "exec-if": "which swaync-client",
-            "exec": "swaync-client -swb",
-            "on-click": "swaync-client -t -sw",
-            "on-click-right": "swaync-client -d -sw",
-            "escape": true
+    },
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon} {text}",
+        "format-icons": {
+            "notification": "",
+            "none": "",
+            "dnd-notification": "",
+            "dnd-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
     },
 }
-

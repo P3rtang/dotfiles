@@ -1,8 +1,6 @@
 vim.g.mapleader = ' '
-vim.deprecate = function () end
 
 require("config.lazy")
-
 -- require("helper_func")
 require("p3rtang.set")
 -- require("p3rtang.nvim-cmp")
@@ -10,9 +8,9 @@ require("p3rtang.keybinds")
 -- require("p3rtang.telescope")
 -- require("p3rtang.luasnip")
 -- require("p3rtang.commands")
--- require("p3rtang.lsp")
+-- require("p3rtang.fmt")
 -- require("p3rtang.treesitter")
 -- require("p3rtang.llm")
 -- require("p3rtang.org")
 -- require("p3rtang.rust")
--- require("p3rtang.make")
+require("p3rtang.make")

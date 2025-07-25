@@ -37,12 +37,13 @@ window#waybar {
     transition-property: background-color;
     transition-duration: .5s;
 }
-window > box {
+
+window>box {
     padding: 0px;
     margin: 4px;
     padding-bottom: 1px;
     margin-bottom: 0px;
-    background: rgba(40, 42, 54, 0.9);    
+    background: rgba(40, 42, 54, 0.9);
     color: white;
 }
 
@@ -115,10 +116,12 @@ window#waybar.chromium {
 #clock {
     color: #f1fa8c;
 }
+
 #battery,
 #cpu {
     background-color: #f1fa8c;
 }
+
 #memory,
 #disk,
 #temperature,
@@ -139,15 +142,17 @@ window#waybar.chromium {
 }
 
 /* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
+.modules-left>widget:first-child>#workspaces {
     margin-left: 4px;
 }
+
 #clock {
     padding-right: 10px;
     padding-left: 10px;
     color: #8be9fd;
     background-color: #64727D;
 }
+
 #clock:hover {
     color: @background;
     background: @blue;
@@ -160,7 +165,8 @@ window#waybar.chromium {
     background-color: #64727D;
 }
 
-#battery.charging, #battery.plugged {
+#battery.charging,
+#battery.plugged {
     color: #64727d;
     background-color: #50fa7b;
 }
@@ -217,12 +223,13 @@ label:focus {
 
 #network {
     margin-left: 100px;
-    margin-right: 0px; 
+    margin-right: 0px;
     padding-right: 10px;
     padding-left: 10px;
     color: #bd93f9;
     background-color: #64727D;
 }
+
 #network:hover {
     color: @background;
     background: @purple;
@@ -236,6 +243,7 @@ label:focus {
     background-color: #64727D;
 
 }
+
 #network.speeddown {
     margin-left: 0px;
     margin-right: 2px;
@@ -245,6 +253,7 @@ label:focus {
     background-color: #64727D;
 
 }
+
 #network.disconnected {
     background-color: #f53c3c;
 }
@@ -258,6 +267,7 @@ label:focus {
     color: #50fa7b;
     background-color: #64727D;
 }
+
 #pulseaudio:hover {
     background: @green;
     color: @background;
@@ -298,11 +308,11 @@ label:focus {
     margin-right: 3px;
 }
 
-#tray > .passive {
+#tray>.passive {
     -gtk-icon-effect: dim;
 }
 
-#tray > .needs-attention {
+#tray>.needs-attention {
     -gtk-icon-effect: highlight;
     background-color: #eb4d4b;
 }
@@ -349,11 +359,11 @@ label:focus {
     min-width: 16px;
 }
 
-#keyboard-state > label {
+#keyboard-state>label {
     padding: 0 5px;
 }
 
-#keyboard-state > label.locked {
+#keyboard-state>label.locked {
     background: rgba(0, 0, 0, 0.2);
 }
 
@@ -364,6 +374,7 @@ label:focus {
     color: #50fa7b;
     background-color: #64727D;
 }
+
 #custom-play-pause:hover {
     color: @background;
     background: @green;
@@ -375,24 +386,39 @@ label:focus {
     color: #50fa7b;
     background-color: #64727D;
 }
+
 #custom-lock {
     padding-right: 10px;
     padding-left: 10px;
     color: #bd93f9;
     background-color: #64727D;
 }
+
+#custom-lock:hover {
+    background-color: #bd93f9;
+    color: #64727D;
+}
+
 #idle_inhibitor {
     color: @orange;
     background: @background;
 }
+
 #idle_inhibitor.activated {
     color: @green;
     background: @background;
 }
-#idle_inhibitor > box:hover {
+
+#idle_inhibitor:hover {
     color: @background;
-    background: @purple;
+    background: @orange;
 }
+
+#idle_inhibitor.activated:hover {
+    color: @background;
+    background: @green;
+}
+
 #custom-notification {
     margin-left: 2px;
     margin-right: 0px;
@@ -400,4 +426,9 @@ label:focus {
     padding-right: 10px;
     color: @purple;
     background: @background;
+}
+
+#custom-notification:hover {
+    background-color: @purple;
+    color: @background;
 }

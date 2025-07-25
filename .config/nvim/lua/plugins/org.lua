@@ -12,7 +12,7 @@ return {
         "nvim-orgmode/org-bullets.nvim",
         config = function ()
             require('org-bullets').setup({
-                concealcursor = false, -- If false then when the cursor is on a line underlying characters are visible
+                concealcursor = true, -- If false then when the cursor is on a line underlying characters are visible
                 symbols = {
                     -- list symbol
                     list = "•",

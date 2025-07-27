@@ -3,8 +3,8 @@
 # Add this lines at the top of .bashrc:
 term=$(basename "/"$(ps -o cmd -f -p $(cat /proc/$(echo $$)/stat | cut -d \  -f 4) | tail -1 | sed 's/ .*$//'))
 
-alias ls='eza -la --header --icons --git --group-directories-first --color=always'
-alias ll='eza -la --header --icons --git --group-directories-first --tree --level=2'
+alias ls='exa -la --header --icons --git --group-directories-first --color=always'
+alias ll='exa -la --header --icons --git --group-directories-first --tree --level=2'
 alias mv='mv -i'
 alias clear='clear && fastfetch'
 alias gitbare='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'

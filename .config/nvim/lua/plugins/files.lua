@@ -33,7 +33,7 @@ return {
 				-- optionally override the oil buffers window title with custom function: fun(winid: integer): string
 				get_win_title = nil,
 				-- preview_split: Split direction: "auto", "left", "right", "above", "below".
-				preview_split = "right",
+				preview_split = "above",
 			},
 			keymaps = {
 				["q"] = { "actions.close", desc = "Oil: Close" },

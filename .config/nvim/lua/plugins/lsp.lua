@@ -52,21 +52,23 @@ end
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		event = { "VeryLazy" },
-		opts = {
-			auto_install = true,
-			highlight = { enable = true },
-			indent = { enable = true, disable = { "rust" } },
-		},
-		config = function(_, opts)
-			require("nvim-treesitter.configs").setup(opts)
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
+				highlight = { enable = true },
+			})
 		end,
 	},
 	{
 		"neovim/nvim-lspconfig",
 		name = "lspconfig",
 		config = function()
-			vim.lsp.config("gleam", { virtual_text = true })
+			require("lspconfig").gleam.setup({ virtual_text = true })
+			local lspconfig = require("lspconfig")
+			vim.lsp.config("*", { on_attach = on_attach })
+			vim.lsp.enable({
+				"ts_ls",
+			})
 
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				callback = function()
@@ -106,74 +108,27 @@ return {
 				opts = {},
 			},
 		},
-		config = function()
-			require("mason-lspconfig").setup({})
-
-			vim.lsp.config("*", {
-				on_attach = on_attach,
-			})
-
-			vim.lsp.config("rust_analyzer", {
-				on_attach = on_attach,
-				settings = {
-					["rust-analyzer"] = {
-						["cargo"] = {
-							["allFeatures"] = true,
-						},
-					},
-				},
-			})
-
-			vim.lsp.config("gopls", {
-				on_attach = on_attach,
-				filetypes = { "go", "gomod", "gowork", "gotmpl" },
-				settings = {
-					gopls = {
-						completeUnimported = true,
-						usePlaceholders = true,
-						analyses = {
-							unusedparams = true,
-						},
-					},
-				},
-			})
-
-			vim.lsp.config("lua_ls", {
-				on_attach = on_attach,
-				settings = {
-					Lua = {
-						runtime = {
-							version = "LuaJIT",
-						},
-						diagnostics = {
-							globals = { "vim" },
-						},
-						workspace = {
-							library = vim.api.nvim_get_runtime_file("", true),
-							checkThirdParty = false,
-						},
-						telemetry = {
-							enable = false,
-						},
-					},
-				},
-			})
-		end,
-    },
-    {
-        "stevearc/conform.nvim",
-        opts = {
-            format_on_save = {
-                -- These options will be passed to conform.format()
-                timeout_ms = 500,
-                lsp_format = "fallback",
-            },
-            formatters_by_ft = {
-                lua = { "stylua" },
-                javascript = { "prettier", stop_after_first = true },
-                typescript = { "prettier", stop_after_first = true },
-                sql = { "pg_format" },
-            },
-        },
-    }
+		opts = {},
+	},
+	{
+		"stevearc/conform.nvim",
+		opts = {
+			format_on_save = {
+				-- These options will be passed to conform.format()
+				timeout_ms = 500,
+				lsp_format = "fallback",
+			},
+			formatters_by_ft = {
+				lua = { "stylua" },
+				javascript = { "prettier", stop_after_first = true },
+				typescript = { "prettier", stop_after_first = true },
+				sql = { "pg_format" },
+			},
+		},
+	},
+	{
+		"pmizio/typescript-tools.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		opts = {},
+	},
 }

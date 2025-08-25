@@ -19,29 +19,31 @@ end
 local on_attach = function(_, bufnr)
     -- Enable function signatures
     require("lsp_signature").setup()
-    require "lsp_signature".on_attach(signature_setup, bufnr)
+    require("lsp_signature").on_attach(signature_setup, bufnr)
 
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-    vim.keymap.set('n', '<space>wl', function()
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
+    vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
+    vim.keymap.set("n", "<space>wl", function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, bufopts)
-    vim.keymap.set('n', ']g', vim.diagnostic.goto_next, bufopts)
-    vim.keymap.set('n', '[g', vim.diagnostic.goto_prev, bufopts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
-    vim.keymap.set('n', 'E', vim.diagnostic.open_float)
-    vim.keymap.set('n', 'K', function()
+    vim.keymap.set("n", "[g", vim.diagnostic.goto_prev, bufopts)
+    vim.keymap.set("n", "]g", vim.diagnostic.goto_next, bufopts)
+    vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
+    vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+    vim.keymap.set("n", "<space>f", function()
+        vim.lsp.buf.format({ async = true })
+    end, bufopts)
+    vim.keymap.set("n", "E", vim.diagnostic.open_float)
+    vim.keymap.set("n", "K", function()
         vim.lsp.buf.hover()
         vim.lsp.buf.hover()
     end)
@@ -49,29 +51,26 @@ end
 
 return {
     {
-        'nvim-treesitter/nvim-treesitter',
-        config = function()
-            require 'nvim-treesitter.configs'.setup({
-                ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
-                auto_install = true,
-                highlight = { enable = true },
-            })
-        end
+        "nvim-treesitter/nvim-treesitter",
+        opts = {
+            auto_install = true,
+            highlight = { enable = true },
+        },
     },
     {
         "neovim/nvim-lspconfig",
         name = "lspconfig",
         config = function()
-            require("lspconfig").gleam.setup { virtual_text = true }
+            require("lspconfig").gleam.setup({ virtual_text = true })
             vim.api.nvim_create_autocmd("BufWritePre", {
                 callback = function()
                     vim.lsp.buf.format()
                 end,
             })
-        end
+        end,
     },
     {
-        'stevearc/conform.nvim',
+        "stevearc/conform.nvim",
         event = { "BufWritePre" },
         cmd = { "ConformInfo" },
         opts = {
@@ -84,7 +83,7 @@ return {
                 lua = { "stylua" },
                 javascript = { "prettier", stop_after_first = true },
                 typescript = { "prettier", stop_after_first = true },
-                sql = { "pg_format" }
+                sql = { "pg_format" },
             },
         },
     },
@@ -93,7 +92,7 @@ return {
         "williamboman/mason.nvim",
         name = "mason",
         dependencies = "lspconfig",
-        opts = {}
+        opts = {},
     },
     {
         "williamboman/mason-lspconfig.nvim",
@@ -104,21 +103,21 @@ return {
         },
         config = function()
             local lspconfig = require("lspconfig")
-            require("mason-lspconfig").setup {}
+            require("mason-lspconfig").setup({})
 
             vim.lsp.config("*", {
-                on_attach = on_attach
+                on_attach = on_attach,
             })
 
-            vim.lsp.config('rust_analyzer', {
+            vim.lsp.config("rust_analyzer", {
                 on_attach = on_attach,
                 settings = {
                     ["rust-analyzer"] = {
                         ["cargo"] = {
                             ["allFeatures"] = true,
                         },
-                    }
-                }
+                    },
+                },
             })
 
             vim.lsp.config("gopls", {
@@ -138,32 +137,25 @@ return {
             })
 
             vim.lsp.config("lua_ls", {
-                on_init = function(client)
-                    if (client.config.settings.Lua == nil) then
-                        client.config.settings.Lua = {}
-                    end
-
-                    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+                on_attach = on_attach,
+                settings = {
+                    Lua = {
                         runtime = {
-                            -- Tell the language server which version of Lua you're using
-                            -- (most likely LuaJIT in the case of Neovim)
-                            version = 'LuaJIT'
+                            version = "LuaJIT",
                         },
-                        -- Make the server aware of Neovim runtime files
+                        diagnostics = {
+                            globals = { "vim" },
+                        },
                         workspace = {
+                            library = vim.api.nvim_get_runtime_file("", true),
                             checkThirdParty = false,
-                            library = {
-                                vim.env.VIMRUNTIME
-                                -- Depending on the usage, you might want to add additional paths here.
-                                -- "${3rd}/luv/library"
-                                -- "${3rd}/busted/library",
-                            }
-                            -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
-                            -- library = vim.api.nvim_get_runtime_file("", true)
-                        }
-                    })
-                end
+                        },
+                        telemetry = {
+                            enable = false,
+                        },
+                    },
+                },
             })
-        end
-    }
+        end,
+    },
 }

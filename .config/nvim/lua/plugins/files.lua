@@ -51,6 +51,7 @@ return {
 				["<C-l>"] = "actions.refresh",
 				["<C-c>"] = { "actions.close", mode = "n", desc = "Oil: Close" },
 
+				["-"] = { "actions.parent", mode = "n", desc = "Oil: go to parent directory" },
 				["_"] = { "actions.open_cwd", mode = "n", desc = "Oil: open cwd (root directory)" },
 				["`"] = { "actions.cd", mode = "n", desc = "Oil: change directory" },
 				["~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n", desc = "Oil: set temp cwd" },

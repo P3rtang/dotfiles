@@ -3,7 +3,7 @@ vim.keymap.set("n", "<C-s>", vim.cmd.wa, {})
 vim.keymap.set("n", "<esc>", ":noh<CR>", {})
 vim.keymap.set("t", "<C-c>", "<cmd>bd!<CR>")
 vim.keymap.set("n", "<leader>ss", function()
-    ReloadConfig()
+	ReloadConfig()
 end, {})
 
 -- copy to clipboard
@@ -32,8 +32,8 @@ vim.keymap.set("n", "<leader>ll", builtin.diagnostics, {})
 vim.keymap.set("n", "<leader>lt", vim.cmd.TodoTelescope, {})
 
 vim.keymap.set("n", "<leader>cb", function()
-    vim.cmd.cb()
-    vim.cmd("bd!")
+	vim.cmd.cb()
+	vim.cmd("bd!")
 end, { noremap = true })
 
 -- exit terminal mode with ESC

@@ -56,7 +56,7 @@ return {
 		opts = {
 			auto_install = true,
 			highlight = { enable = true },
-			indent = { enable = true },
+			indent = { enable = true, disable = { "rust" } },
 		},
 		config = function(_, opts)
 			require("nvim-treesitter.configs").setup(opts)
@@ -127,9 +127,7 @@ return {
 
 			vim.lsp.config("gopls", {
 				on_attach = on_attach,
-				cmd = { "gopls" },
 				filetypes = { "go", "gomod", "gowork", "gotmpl" },
-				root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
 				settings = {
 					gopls = {
 						completeUnimported = true,

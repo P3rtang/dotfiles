@@ -20,6 +20,8 @@ vim.opt.colorcolumn    = "100"
 vim.opt.termguicolors  = true
 vim.opt.signcolumn     = "yes"
 
+vim.opt.bg             = "dark"
+
 vim.api.nvim_set_hl(0, 'LineNrAbove', { ctermfg = 'darkgrey' })
 vim.api.nvim_set_hl(0, 'LineNrBelow', { ctermfg = 'grey' })
 vim.api.nvim_set_hl(0, 'Normal', { ctermbg = 'none' })

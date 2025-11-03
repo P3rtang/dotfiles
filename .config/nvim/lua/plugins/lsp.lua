@@ -50,7 +50,7 @@ local on_attach = function(_, bufnr)
 end
 
 return {
-	{
+    {
 		"nvim-treesitter/nvim-treesitter",
 		event = { "VeryLazy" },
 		opts = {

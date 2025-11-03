@@ -8,7 +8,7 @@ alias ll='exa -la --header --icons --git --group-directories-first --tree --leve
 alias mv='mv -i'
 alias clear='clear && fastfetch'
 alias gitbare='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias cat='bat'
+alias cat='batcat'
 alias vim='nvim'
 alias go='grc go'
 alias cdf='cd "$(find / 2>/dev/null -type d -print | fzf)"'

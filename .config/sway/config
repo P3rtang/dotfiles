@@ -37,7 +37,7 @@ for_window [title="Bitwarden"] floating enable
 for_window [title="Reminder"] floating enable
 for_window [title="Picture-in-Picture"] floating enable
 
-set $wallpaper $(find $HOME/pictures/wallpapers/* -maxdepth 1 -type f | shuf -n 1)
+set $wallpaper $(find $HOME/Pictures/wallpapers/* -maxdepth 1 -type f | shuf -n 1)
 
 exec_always swaymsg "output * bg $wallpaper fill"
 

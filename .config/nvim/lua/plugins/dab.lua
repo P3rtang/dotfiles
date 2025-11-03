@@ -5,7 +5,7 @@ return {
 		config = function()
 			local dap = require("dap")
 
-			dap.adapters.c = {
+			dap.configurations.c = {
 				{
 					name = "Launch",
 					type = "gdb",
@@ -41,6 +41,8 @@ return {
 					cwd = "${workspaceFolder}",
 				},
 			}
+
+            dap.configurations.zig = dap.configurations.c
 		end,
 	},
 }

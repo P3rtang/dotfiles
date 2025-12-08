@@ -24,7 +24,7 @@ set $term kitty
 
 exec waybar &
 exec nm-applet --indicator &
-exec distrobox-enter -T arch -- thunderbird
+exec thunderbird &
 exec ~/Projects/thunderbird-rss-notifications/venv/bin/python3 ~/Projects/thunderbird-rss-notifications/main.py
 exec ~/.appimages/Nextcloud.AppImage &
 exec lxqt-policykit-agent &

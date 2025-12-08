@@ -66,7 +66,8 @@ return {
 		"neovim/nvim-lspconfig",
 		name = "lspconfig",
 		config = function()
-			require("lspconfig").gleam.setup({ virtual_text = true })
+			vim.lsp.config("gleam", { virtual_text = true })
+
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				callback = function()
 					vim.lsp.buf.format()
@@ -107,7 +108,6 @@ return {
 			"neovim/nvim-lspconfig",
 		},
 		config = function()
-			local lspconfig = require("lspconfig")
 			require("mason-lspconfig").setup({})
 
 			vim.lsp.config("*", {

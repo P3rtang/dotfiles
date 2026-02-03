@@ -11,12 +11,7 @@ return {
 					NEXT = ":foreground orange :weight bold",
 					DELG = ":slant italic",
 				},
-				mappings = {
-					org = {
-						org_todo = "<M-t>",
-						org_todo_prev = "<M-T>",
-					},
-				},
+				mappings = {},
 				win_split_mode = { "float", 0.6 },
 				org_startup_folded = "content",
 			})

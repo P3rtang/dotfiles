@@ -6,7 +6,7 @@ return {
 		opts = {
 			-- add any opts here
 			-- for example
-			provider = "copilot",
+			provider = "gemini",
 			providers = {
 				ollama = {
 					endpoint = "http://192.168.0.58:11434",
@@ -21,6 +21,18 @@ return {
 					proxy = nil,
 					allow_insecure = false,
 					timeout = 30000,
+				},
+				gemini = {
+					endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
+					model = "gemini-3-flash-preview",
+					timeout = 30000, -- Timeout in milliseconds
+					context_window = 1048576,
+					use_ReAct_prompt = true,
+					extra_request_body = {
+						generationConfig = {
+							temperature = 0.75,
+						},
+					},
 				},
 			},
 			auto_suggestions_provider = "copilot",

@@ -1,0 +1,9 @@
+[
+  {
+    "label": "Oil",
+    "command": "exec ~/.local/bin/zed-nvim",
+    "use_new_terminal": true,
+    "reveal_target": "center",
+    "hide": "always",
+  },
+]

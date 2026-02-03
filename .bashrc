@@ -16,6 +16,7 @@ alias hist='atuin search -i'
 alias top=btop
 alias htop=btop
 alias ctop='TERM=screen-256color ctop'
+alias zednvim='NVIM_APPNAME="zed-nvim" nvim'
 
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/p3rtang/.local/share/JetBrains/Toolbox/scripts:/home/p3rtang/local/bin:/home/p3rtang/.local/bin:/sbin:/snap/bin:$HOME/go/bin:$PATH
 export TERM=kitty
@@ -159,3 +160,9 @@ echo ""
 export PATH="$PATH:/home/p3rtang/.lmstudio/bin"
 # End of LM Studio CLI section
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/p3rtang/.packages/gcloud/google-cloud-sdk/path.bash.inc' ]; then . '/home/p3rtang/.packages/gcloud/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/p3rtang/.packages/gcloud/google-cloud-sdk/completion.bash.inc' ]; then . '/home/p3rtang/.packages/gcloud/google-cloud-sdk/completion.bash.inc'; fi

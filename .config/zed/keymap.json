@@ -1,0 +1,57 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      // "shift shift": "file_finder::Toggle"
+    },
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      // "j k": "vim::NormalBefore"
+    },
+  },
+  {
+    "context": "(Workspace || (vim_mode == normal && !menu))",
+    "bindings": {
+      "ctrl-x ctrl-s": "workspace::Save",
+    },
+  },
+  {
+    "context": "BufferSearchBar > Editor",
+    "bindings": {
+      "ctrl-shift-s": "search::SelectNextMatch",
+    },
+  },
+  {
+    "context": "(vim_mode == normal && !menu)",
+    "bindings": {
+      "ctrl-s": "workspace::Save",
+      "-": ["task::Spawn", { "task_name": "Oil", "reveal_target": "center" }],
+      "space f f": "file_finder::Toggle",
+    },
+  },
+  {
+    "context": "(vim_mode == normal && !menu)",
+    "bindings": {},
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-b": "workspace::ToggleLeftDock",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-b": "workspace::ToggleLeftDock",
+    },
+  },
+]

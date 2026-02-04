@@ -63,18 +63,8 @@ return {
 		"neovim/nvim-lspconfig",
 		name = "lspconfig",
 		config = function()
-			require("lspconfig").gleam.setup({ virtual_text = true })
-			local lspconfig = require("lspconfig")
+			vim.lsp.config("ts_ls", { on_attach = on_attach })
 			vim.lsp.config("*", { on_attach = on_attach })
-			vim.lsp.enable({
-				"ts_ls",
-			})
-
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				callback = function()
-					vim.lsp.buf.format()
-				end,
-			})
 		end,
 	},
 	{
@@ -84,14 +74,15 @@ return {
 		opts = {
 			format_on_save = {
 				-- These options will be passed to conform.format()
-				timeout_ms = 200,
+				timeout_ms = 500,
 				lsp_format = true,
 			},
 			formatters_by_ft = {
 				lua = { "stylua" },
 				javascript = { "prettier", stop_after_first = true },
 				typescript = { "prettier", stop_after_first = true },
-				sql = { "pg_format" },
+				json = { "prettier", stop_after_first = true },
+				sql = { "sql_formatter", stop_after_first = true },
 			},
 		},
 	},
@@ -108,27 +99,6 @@ return {
 				opts = {},
 			},
 		},
-		opts = {},
-	},
-	{
-		"stevearc/conform.nvim",
-		opts = {
-			format_on_save = {
-				-- These options will be passed to conform.format()
-				timeout_ms = 500,
-				lsp_format = "fallback",
-			},
-			formatters_by_ft = {
-				lua = { "stylua" },
-				javascript = { "prettier", stop_after_first = true },
-				typescript = { "prettier", stop_after_first = true },
-				sql = { "pg_format" },
-			},
-		},
-	},
-	{
-		"pmizio/typescript-tools.nvim",
-		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 		opts = {},
 	},
 }

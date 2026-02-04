@@ -14,8 +14,21 @@ return {
 				mappings = {
 					issue = {
 						list_issues = { lhs = "<leader>li", desc = "Octo: review | list open issues on current repo" },
+					},
+					pull_request = {
+						add_comment = { lhs = "<leader>om", desc = "Octo: pr | add comment" },
+					},
+					review_thread = {
+						add_comment = { lhs = "<leader>om", desc = "Octo: thread | add comment" },
+					},
+					review_diff = {
+						add_review_suggestion = {
+							lhs = "<leader>os",
+							desc = "add a new review suggestion",
+							mode = { "n", "x" },
+						},
 						add_review_comment = {
-							lhs = "<leader>ca",
+							lhs = "<leader>om",
 							desc = "Octo: review | add a new review comment",
 							mode = { "n", "x" },
 						},

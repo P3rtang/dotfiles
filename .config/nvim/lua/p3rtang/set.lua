@@ -30,5 +30,5 @@ vim.api.nvim_set_hl(0, 'Normal', { ctermbg = 'none' })
 
 vim.diagnostic.enable = true
 vim.diagnostic.config({
-    virtual_lines = true,
+    virtual_text = true,
 })

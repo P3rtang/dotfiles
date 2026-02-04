@@ -18,6 +18,7 @@ cmp.setup({
     {name = 'buffer', keyword_length = 2},
     {name = 'luasnip', keyword_length = 2},
     {name = 'nvim_lua', keyword_length = 2},
+    {name = 'orgmode'}
   },
   window = {
     documentation = cmp.config.window.bordered()

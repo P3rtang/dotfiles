@@ -95,17 +95,16 @@ return {
 	},
 	{ "ray-x/lsp_signature.nvim" },
 	{
-		"williamboman/mason.nvim",
-		name = "mason",
-		dependencies = "lspconfig",
-		opts = {},
-	},
-	{
 		"williamboman/mason-lspconfig.nvim",
 		name = "mason-lspconfig",
 		dependencies = {
-			{ "mason-org/mason.nvim", opts = {} },
 			"neovim/nvim-lspconfig",
+			{
+				"williamboman/mason.nvim",
+				name = "mason",
+				dependencies = "lspconfig",
+				opts = {},
+			},
 		},
 		config = function()
 			require("mason-lspconfig").setup({})

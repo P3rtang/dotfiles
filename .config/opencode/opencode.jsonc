@@ -1,0 +1,111 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "agent": {
+        "analyse": {
+            "mode": "primary",
+            "model": "minimax/MiniMax-M2.7",
+            "color": "info",
+            "prompt": "~/.agents/analyse.md",
+            "permission": {
+                "*": "ask",
+                "write": "deny",
+                "edit": "deny",
+                "bash": "deny",
+                "git *": "ask",
+                "git status *": "allow",
+                "glob": "allow",
+                "grep": "allow",
+                "lsp": "allow",
+                "read": "allow",
+                "list": "allow",
+                "task": "deny",
+                "skill": "allow",
+                "question": "allow",
+                "org-mcp_status_overview": "allow"
+            },
+            "temperature": 0.1,
+            "tools": {
+                // "org-mcp*": true,
+                // "org-mcp_vector_search": false,
+                "github-read-*": true,
+            },
+        },
+        "plan": {
+            "temperature": 0.1
+        },
+    },
+    "provider": {
+        "ollama": {
+            "name": "Ollama",
+            "npm": "@ai-sdk/openai-compatible",
+            "options": {
+                "baseURL": "http://192.168.0.57:11434/v1"
+            },
+            "models": {
+                "qwen3.5:9b": {
+                    "name": "qwen3.5:9b",
+                    "id": "qwen3.5:9b",
+                    "tool_call": true,
+                    "options": {
+                        "temperature": 0.1
+                    }
+                },
+                "gemma4:31b": {
+                    "name": "gemma4:31b",
+                    "id": "gemma4:31b",
+                    "options": {
+                        "temperature": 0.1
+                    },
+                },
+                "gemma4:26b": {
+                    "name": "gemma4:26b",
+                    "id": "gemma4:26b",
+                    "tool_call": true,
+                    "options": {
+                        "temperature": 0.1
+                    },
+                },
+                "gemma4:e4b": {
+                    "name": "gemma4:e4b",
+                    "id": "gemma4:e4b",
+                    "tool_call": true,
+                    "options": {
+                        "temperature": 0.1
+                    },
+                },
+            },
+        },
+    },
+    "tools": {
+        "org-mcp*": true,
+        "github*": false,
+    },
+    "mcp": {
+        "org-mcp": {
+            "type": "local",
+            "command": [
+                "org-mcp",
+                "serve"
+            ],
+            "enabled": true
+        },
+        "github": {
+            "type": "local",
+            "command": [
+                "docker",
+                "run",
+                "-i",
+                "--rm",
+                "-e",
+                "GITHUB_PERSONAL_ACCESS_TOKEN",
+                "-e",
+                "GITHUB_HOST",
+                "ghcr.io/github/github-mcp-server"
+            ],
+            "enabled": false,
+            "environment": {
+                "GITHUB_PERSONAL_ACCESS_TOKEN": "$input:GITHUB_PERSONAL_ACCESS_TOKEN"
+            }
+        }
+    }
+}

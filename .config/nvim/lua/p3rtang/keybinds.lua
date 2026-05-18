@@ -37,7 +37,7 @@ vim.keymap.set("n", "<leader>cb", function()
 end, { noremap = true })
 
 -- exit terminal mode with ESC
-vim.keymap.set("t", "<ESC>", "<C-\\><C-n>")
+-- vim.keymap.set("t", "<ESC>", "<C-\\><C-n>")
 
 vim.keymap.set("n", "<leader>co", vim.cmd.copen)
 vim.keymap.set("n", "<leader>cn", vim.cmd.cn, { noremap = true })

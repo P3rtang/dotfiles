@@ -4,6 +4,7 @@ return {
 		name = "catppuccin",
 		config = function()
 			require("catppuccin").setup({
+				auto_integrations = true,
 				flavour = "macchiato", -- latte, frappe, macchiato, mocha
 				background = { -- :h background
 					light = "latte",
@@ -21,14 +22,10 @@ return {
 		end,
 	},
 	{
-		"vim-airline/vim-airline",
-		config = function()
-			vim.cmd([[
-                let g:airline#extensions#tabline#enabled = 1
-                let g:airline_section_b = airline#section#create(['branch'])
-                let g:airline_theme = 'catppuccin'
-            ]])
-		end,
+		"nvim-lualine/lualine.nvim",
+		opts = {
+			theme = "catppuccin",
+		},
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
-	{ "vim-airline/vim-airline-themes" },
 }

@@ -1,7 +1,24 @@
-[[ $- == *i* ]] && source ~/.local/share/blesh/ble.sh --noattach
+# [[ $- == *i* ]] && source ~/.local/share/blesh/ble.sh --noattach
 
 # Add this lines at the top of .bashrc:
 term=$(basename "/"$(ps -o cmd -f -p $(cat /proc/$(echo $$)/stat | cut -d \  -f 4) | tail -1 | sed 's/ .*$//'))
+
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/p3rtang/.local/share/JetBrains/Toolbox/scripts:/home/p3rtang/local/bin:/home/p3rtang/.local/bin:/sbin:/snap/bin:$HOME/go/bin:$PATH
+export TERM=kitty
+export HOME=/home/p3rtang
+export LIBVIRT_DEFAULT_URI=qemu:///system
+export HISTSIZE=
+export HISTFILESIZE=10000
+export EDITOR=nvim
+export KITTY_SHELL_INTEGRATION="no-rc"
+
+export HISTCONTROL=erasedups
+
+export PS1="\[\033[38;5;117m\]\u\[\033[38;5;229m\]@\[\033[38;5;212m\]\h \[\033[38;5;229m\]\w\[\033[80;250;123m\]\$(git_prompt)\[\033[0m\]\n ╰─\$ "
+
+[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
+eval "$(atuin init bash)"
+
 
 alias ls='eza -la --header --icons --git --group-directories-first --color=always'
 alias ll='eza -la --header --icons --git --group-directories-first --tree --level=2'
@@ -17,18 +34,6 @@ alias top=btop
 alias htop=btop
 alias ctop='TERM=screen-256color ctop'
 alias zednvim='NVIM_APPNAME="zed-nvim" nvim'
-
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/p3rtang/.local/share/JetBrains/Toolbox/scripts:/home/p3rtang/local/bin:/home/p3rtang/.local/bin:/sbin:/snap/bin:$HOME/go/bin:$PATH
-export TERM=kitty
-export HOME=/home/p3rtang
-export LIBVIRT_DEFAULT_URI=qemu:///system
-export HISTSIZE=
-export HISTFILESIZE=10000
-export EDITOR=nvim
-
-export HISTCONTROL=erasedups
-
-export PS1="\[\033[38;5;117m\]\u\[\033[38;5;229m\]@\[\033[38;5;212m\]\h \[\033[38;5;229m\]\w\[\033[80;250;123m\]\$(git_prompt)\[\033[0m\]\n ╰─\$ "
 
 # Adds the current branch to the bash prompt when the working directory is
 # part of a Git repository. Includes color-coding and indicators to quickly
@@ -146,15 +151,11 @@ fi
 #                              |/                                     
 
 # EOF
-eval "$(atuin init bash)"
-
-. "$HOME/.atuin/bin/env"
-
 # Add this line at the end of .bashrc:
 fastfetch
 echo ""
 
-[[ ! ${BLE_VERSION-} ]] || ble-attach
+# [[ ! ${BLE_VERSION-} ]] || ble-attach
 
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/home/p3rtang/.lmstudio/bin"
@@ -166,3 +167,7 @@ if [ -f '/home/p3rtang/.packages/gcloud/google-cloud-sdk/path.bash.inc' ]; then 
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/p3rtang/.packages/gcloud/google-cloud-sdk/completion.bash.inc' ]; then . '/home/p3rtang/.packages/gcloud/google-cloud-sdk/completion.bash.inc'; fi
+
+# opencode
+export PATH=/home/p3rtang/.opencode/bin:$PATH
+PROMPT_COMMAND+=(__atuin_precmd)

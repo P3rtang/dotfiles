@@ -4,10 +4,14 @@ return {
 		opts = {
 			-- add any options here
 			cli = {
+				watch = true,
 				mux = {
 					backend = "zellij",
 					enabled = true,
 				},
+			},
+			nes = {
+				enabled = false,
 			},
 		},
 		cli = {

@@ -52,14 +52,50 @@ end
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		event = { "VeryLazy" },
-		opts = {
-			auto_install = true,
-			highlight = { enable = true },
-			indent = { enable = true, disable = { "rust" } },
-		},
-		config = function(_, opts)
-			require("nvim-treesitter.configs").setup(opts)
+		branch = "main", -- CRITICAL: You must use main on Neovim 0.12+
+		lazy = false,
+		build = ":TSUpdate",
+		config = function()
+			local ts = require("nvim-treesitter")
+
+			-- 1. Explicitly queue and install your language ecosystem
+			local parsers = {
+				"c",
+				"lua",
+				"vim",
+				"vimdoc",
+				"query",
+				"go",
+				"rust",
+				"zig",
+				"markdown",
+				"markdown_inline",
+			}
+			ts.install(parsers) -- Modern main API to register parsers
+
+			-- 2. NATIVE ACTIVATION: The new way to enable features for your languages
+			local ts_group = vim.api.nvim_create_augroup("NativeTreesitterSetup", { clear = true })
+
+			vim.api.nvim_create_autocmd("FileType", {
+				group = ts_group,
+				pattern = parsers,
+				callback = function(args)
+					-- Global Fold Configuration:
+					-- Set the fold level very high so files open fully expanded by default.
+					vim.opt.foldlevel = 99
+					vim.opt.foldlevelstart = 99
+
+					-- Turn on native tree-sitter AST syntax highlighting for this buffer
+					vim.treesitter.start(args.buf)
+
+					-- Optional: Turn on smart language indentation
+					vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+					-- Optional: Map native code-folding using Tree-sitter objects
+					vim.wo.foldmethod = "expr"
+					vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+				end,
+			})
 		end,
 	},
 	{

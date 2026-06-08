@@ -3,7 +3,7 @@
     "agent": {
         "analyse": {
             "mode": "primary",
-            "model": "minimax/MiniMax-M2.7",
+            "model": "openrouter/minimax/minimax-m3",
             "color": "info",
             "prompt": "~/.agents/analyse.md",
             "permission": {
@@ -75,6 +75,44 @@
                 },
             },
         },
+        "openrouter": {
+            "models": {
+                "minimax.io/minimax-m3": {
+                    "id": "minimax/minimax-m3",
+                    "name": "Minimax M3",
+                    "variants": {
+                        "low": {
+                            "options": {
+                                "reasoning": {
+                                    "effort": "low",
+                                }
+                            }
+                        },
+                        "medium": {
+                            "options": {
+                                "reasoning": {
+                                    "effort": "medium",
+                                }
+                            }
+                        },
+                        "high": {
+                            "options": {
+                                "reasoning": {
+                                    "effort": "high",
+                                }
+                            }
+                        },
+                        "xhigh": {
+                            "options": {
+                                "reasoning": {
+                                    "effort": "xhigh",
+                                }
+                            }
+                        },
+                    }
+                },
+            }
+        }
     },
     "tools": {
         "org-mcp*": true,
@@ -84,7 +122,7 @@
         "org-mcp": {
             "type": "local",
             "command": [
-                "org-mcp",
+                "/home/p3rtang/projects/org-mcp/org-mcp",
                 "serve"
             ],
             "enabled": true

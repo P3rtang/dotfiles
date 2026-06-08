@@ -7,24 +7,140 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "edit_predictions": {
+    "ollama": {
+      "model": "minimax-m2.5:cloud",
+    },
+  },
+  "language_models": {
+    "openai_compatible": {
+      "Minimax": {
+        "api_url": "https://api.minimax.io/v1",
+        "available_models": [
+          {
+            "name": "MiniMax-M2.5",
+            "display_name": "Minimax 2.5",
+            "max_tokens": 64000,
+            "max_output_tokens": 32000,
+            "max_completion_tokens": 32000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": true,
+              "prompt_cache_key": false,
+            },
+          },
+        ],
+      },
+    },
+    "ollama": {
+      "api_url": "http://localhost:11434",
+      "available_models": [
+        {
+          "name": "minimax-m2.5:cloud",
+          "display_name": "Minimax 2.5",
+          "max_tokens": 64000,
+          "supports_tools": true,
+          "supports_thinking": true,
+          "supports_images": true,
+        },
+      ],
+    },
+  },
+  "tab_bar": {
+    "show": false,
+  },
+  "buffer_font_family": "Comic Mono",
+  "icon_theme": "Catppuccin Macchiato",
   "context_servers": {
-    "some-remote-server": {
+    "org-mcp": {
       "enabled": true,
-      "url": "https://example.com/mcp"
-    }
+      "command": "/home/p3rtang/projects/org-mcp/org-mcp",
+      "args": ["serve"],
+      "env": {},
+    },
   },
   "agent": {
+    "show_turn_stats": true,
+    "tool_permissions": {
+      "tools": {
+        "mcp:org-mcp:vector_search": {
+          "default_mode": "allow",
+        },
+        "mcp:org-mcp:manage_text": {
+          "default_mode": "allow",
+        },
+        "mcp:org-mcp:status_overview": {
+          "default_mode": "allow",
+        },
+        "mcp:org-mcp:query_items": {
+          "default_mode": "allow",
+        },
+        "mcp:org-mcp:manage_bullet": {
+          "default_mode": "allow",
+        },
+        "mcp:org-mcp:manage_header": {
+          "default_mode": "allow",
+        },
+      },
+    },
+    "use_modifier_to_send": true,
+    "notify_when_agent_waiting": "primary_screen",
+    "profiles": {
+      "organize": {
+        "default_model": {
+          "provider": "google",
+          "model": "gemini-3-flash-preview",
+        },
+        "name": "organize",
+        "tools": {
+          "thinking": true,
+          "read_file": true,
+          "list_directory": true,
+          "grep": true,
+          "find_path": true,
+          "fetch": true,
+          "diagnostics": true,
+          "delete_path": false,
+          "create_directory": false,
+          "copy_path": false,
+        },
+        "enable_all_context_servers": false,
+        "context_servers": {
+          "org-mcp": {
+            "tools": {
+              "vector_search": true,
+              "status_overview": true,
+              "query_items": true,
+              "manage_text": true,
+              "manage_header": true,
+              "manage_bullet": true,
+            },
+          },
+        },
+      },
+    },
+    "default_profile": "write",
+    "always_allow_tool_actions": false,
     "default_model": {
-      "provider": "google",
-      "model": "gemini-3-flash-preview"
+      "provider": "Minimax",
+      "model": "MiniMax-M2.5",
     },
     "favorite_models": [
       {
         "provider": "google",
-        "model": "gemini-3-flash-preview"
-      }
+        "model": "gemini-3-flash-preview",
+      },
+      {
+        "provider": "ollama",
+        "model": "minimax-m2.5:cloud",
+      },
+      {
+        "provider": "Minimax",
+        "model": "MiniMax-M2.5",
+      },
     ],
-    "model_parameters": []
+    "model_parameters": [],
   },
   "base_keymap": "Emacs",
   "vim_mode": true,
@@ -33,6 +149,6 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "One Dark"
-  }
+    "dark": "Catppuccin Macchiato",
+  },
 }
